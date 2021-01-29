@@ -66,7 +66,7 @@ class ArticlesTable extends Table
             'foreignKey' => 'article_id',
             'targetForeignKey' => 'attachment_id',
             'joinTable' => 'attachments_articles',
-            'className' => 'Trois/Cms.Attachments',
+            'className' => 'Trois/Attachment.Attachments',
         ]);
     }
 
