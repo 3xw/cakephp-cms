@@ -1,10 +1,15 @@
 <template lang="html">
   <div class="page">
+
       <!-- controls -->
       <h1>Page Controls :)</h1>
 
       <!-- sections -->
-      <slot></slot>
+      <slot name="sections"></slot>
+
+      <!-- content -->
+      <slot name="content"></slot>
+
   </div>
 </template>
 
@@ -14,11 +19,29 @@ import Page from '../models/Page'
 export default
 {
   name: 'cms-page',
+  props:
+  {
+    id: Number
+  },
+  computed:
+  {
+    page()
+    {
+      let pages = Page.query()
+      //.with('project').with('project.account')
+      .where('id', 1)
+      .get()
+
+      return pages.length? pages[0]: null
+    }
+  },
   created()
   {
-    console.log(Page);
-    console.log(Page.prototype.sayHello());
-    console.log(Page.prototype.save());
+    Page.crud().get('cms/api/pages/1')
   },
+  mounted()
+  {
+    console.log(this.page);
+  }
 }
 </script>

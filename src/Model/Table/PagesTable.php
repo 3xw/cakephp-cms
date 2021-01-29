@@ -7,6 +7,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Core\Configure;
 
 /**
 * Pages Model
@@ -47,18 +48,6 @@ class PagesTable extends Table
     $this->setTable('pages');
     $this->setDisplayField('title');
     $this->setPrimaryKey('id');
-    $this->addBehavior('Search.Search');
-    $this->searchManager()
-    ->add('q', 'Search.Like', [
-      'before' => true,
-      'after' => true,
-      'mode' => 'or',
-      'comparison' => 'LIKE',
-      'wildcardAny' => '*',
-      'wildcardOne' => '?',
-      'fields' => ['title']
-    ]);
-    $this->addBehavior('Tree');
 
     $this->belongsTo('ParentPages', [
       'className' => 'Trois/Cms.Pages',
@@ -78,6 +67,27 @@ class PagesTable extends Table
       'joinTable' => 'attachments_pages',
       'className' => 'Trois/Attachment.Attachments',
     ]);
+
+    // native behaviors
+    $this->addBehavior('Timestamp');
+    $this->addBehavior('Tree');
+
+    // vendor behaviors
+    $this->addBehavior('Search.Search');
+    $this->searchManager()
+    ->add('q', 'Search.Like', [
+      'before' => true,
+      'after' => true,
+      'mode' => 'or',
+      'comparison' => 'LIKE',
+      'wildcardAny' => '*',
+      'wildcardOne' => '?',
+      'fields' => ['title','meta','header','body']
+    ]);
+
+    // custom behaviors
+    $this->addBehavior('Trois\Utils\ORM\Behavior\SluggableBehavior', ['field' => 'title','translate' => Configure::check('Trois/Attachment.translate')]);
+    if(Configure::read('Trois/Attachment.translate')) $this->addBehavior('Trois\Utils\ORM\Behavior\TranslateBehavior',['fields' => ['title','slug','meta','header','body']]);
   }
 
   /**

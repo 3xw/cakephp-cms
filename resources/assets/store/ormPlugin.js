@@ -1,6 +1,6 @@
 // VUEX ORM
 import VuexORM from '@vuex-orm/core'
-import VuexORMCRUD from '@wgr/vuex-orm-crud'
+import VuexORMCRUD from '@wgr-sa/vuex-orm-crud'
 import database from '../database'
 import client from '../http/client'
 

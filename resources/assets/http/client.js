@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const
 Http = axios.create({
+  baseURL: BASE_URL,
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
