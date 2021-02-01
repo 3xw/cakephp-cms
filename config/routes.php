@@ -11,6 +11,9 @@ $resources = [
 // Plugin routes
 Router::plugin('Trois/Cms', ['path' => '/cms'], function (RouteBuilder $builder) use ($resources)
 {
+  // FRONT
+  $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'view']);
+
   // Plugin's Api routes
   $builder->prefix('Api', function (RouteBuilder $builder) use ($resources)
   {

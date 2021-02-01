@@ -1,9 +1,10 @@
 import ormPlugin from './store/ormPlugin'
-import Page from './components/Page.vue'
+import Page from './components/Page'
+import Scetion from './components/Section'
 
 const
 components = [
-  Page
+  Page, Scetion
 ],
 install = function(Vue, { store })
 {
@@ -22,4 +23,5 @@ export default
 
   // export compo individually
   Page,
+  Scetion,
 }

@@ -2,10 +2,22 @@
   <div class="page">
 
       <!-- controls -->
-      <h1>Page Controls :)</h1>
+      <div class="container">
+        <section class="cms-page-controls">
+          Page controls here<br>
+          <button type="button" name="button" @click="sectionDrawer = true">Add new section</button>
+        </section>
+      </div>
 
-      <!-- sections -->
-      <slot name="sections"></slot>
+      <!-- section modal -->
+      <el-drawer title="Ajouter une section à la page" :visible.sync="sectionDrawer" direction="ltr" >
+        <p>
+          Choissiez le type de section que vous souhaitez ajouter à a page courante.
+        </p>
+        <p>
+          
+        </p>
+      </el-drawer>
 
       <!-- content -->
       <slot name="content"></slot>
@@ -21,7 +33,14 @@ export default
   name: 'cms-page',
   props:
   {
-    id: Number
+    originalPage: Object,
+    settings: Object
+  },
+  data()
+  {
+    return {
+      sectionDrawer: false
+    }
   },
   computed:
   {
@@ -39,9 +58,7 @@ export default
   {
     Page.crud().get('cms/api/pages/1')
   },
-  mounted()
-  {
-    console.log(this.page);
-  }
+  mounted() {},
+  methods: {}
 }
 </script>
