@@ -5,7 +5,9 @@ use Trois\Utils\Routing\Mapper;
 
 // Api's Ressources
 $resources = [
-  'Pages',
+  'Pages' => [
+    'Sections'
+  ],
 ];
 
 // Plugin routes

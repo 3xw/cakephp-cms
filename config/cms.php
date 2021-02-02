@@ -1,5 +1,4 @@
 <?php
-
 return [
   'Trois/Cms' => [
     'Pages' =>
@@ -13,6 +12,14 @@ return [
     [
       'default' => [
         'template' => 'Trois/Cms.sections/default',
+        'modules' => ['default'],
+        'articles' => ['default']
+      ]
+    ],
+    'Articles' =>
+    [
+      'default' => [
+        'template' => 'Trois/Cms.articles/default',
         'modules' => ['default']
       ]
     ],

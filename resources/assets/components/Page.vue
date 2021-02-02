@@ -1,32 +1,31 @@
 <template lang="html">
   <div class="page">
 
-      <!-- controls -->
-      <div class="container">
-        <section class="cms-page-controls">
-          Page controls here<br>
-          <button type="button" name="button" @click="sectionDrawer = true">Add new section</button>
-        </section>
-      </div>
+    <!-- controls -->
+    <div class="container">
+      <section class="cms-page-controls">
+        Page controls here<br>
+        <button type="button" name="button" @click="section.drawer = true">Ajouter une section</button>
+      </section>
+    </div>
 
-      <!-- section modal -->
-      <el-drawer title="Ajouter une section à la page" :visible.sync="sectionDrawer" direction="ltr" >
-        <p>
-          Choissiez le type de section que vous souhaitez ajouter à a page courante.
-        </p>
-        <p>
-          
-        </p>
-      </el-drawer>
+    <!-- section modal -->
+    <el-dialog title="Nouvelle section" :visible.sync="section.drawer" width="60%" >
+      <el-select v-model="section.item.template" placeholder="Choisir un type de section" :default-first-option="true">
+        <el-option v-for="(section, name) in settings.Sections" :key="name" :label="name" :value="section.template"></el-option>
+      </el-select><br/>
+      <el-button type="primary" @click="createSection(); section.drawer = false">Créer la section</el-button>
+    </el-dialog>
 
-      <!-- content -->
-      <slot name="content"></slot>
+    <!-- content -->
+    <slot name="content"></slot>
 
   </div>
 </template>
 
 <script>
 import Page from '../models/Page'
+import Section from '../models/Section'
 
 export default
 {
@@ -39,26 +38,26 @@ export default
   data()
   {
     return {
-      sectionDrawer: false
+      section: {
+        drawer: false,
+        item: {template: null}
+      },
+      sections: []
     }
   },
-  computed:
+  mounted()
   {
-    page()
+    //this.$slots.content[0].context.$refs.map((ref, name) => console.log(name) )
+  },
+  methods:
+  {
+    createSection()
     {
-      let pages = Page.query()
-      //.with('project').with('project.account')
-      .where('id', 1)
-      .get()
-
-      return pages.length? pages[0]: null
+      let section = new Section(this.section.item)
+      .save('cms/api/pages/'+this.originalPage.id+'/sections')
+      .then(data => window.location.reload())
+      .catch(error => console.log(error))
     }
-  },
-  created()
-  {
-    Page.crud().get('cms/api/pages/1')
-  },
-  mounted() {},
-  methods: {}
+  }
 }
 </script>

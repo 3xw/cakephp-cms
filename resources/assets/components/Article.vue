@@ -1,8 +1,8 @@
 <template lang="html">
-  <div class="cms-section">
+  <div class="cms-article">
 
       <!-- controls -->
-      <h1>Sections Controls :)</h1>
+      <h1>Article Controls :)</h1>
 
       <!-- content -->
       <slot name="content"></slot>
@@ -13,10 +13,10 @@
 <script>
 export default
 {
-  name: 'cms-section',
+  name: 'cms-article',
   props:
   {
-    originalSection: Object
+    originalArtcile: Object
   }
 }
 </script>

@@ -30,13 +30,15 @@ class PagesController extends AppController
       'ChildPages',
       'Attachments',
       'Sections' => [
-        'Articles' => 'Attachments',
-        /*'Modules' => [
-          'Articles' => 'Attachments'
-        ]*/
+        'SectionItems' => [
+          'Articles' => ['Attachments'],
+          'Modules'
+        ]
       ]
     ])
     ->first();
+
+    debug($page);
 
     $this->set('title', $page->title);
     $this->set('description', $page->meta);

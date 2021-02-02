@@ -1,10 +1,18 @@
+import './assets/scss/theme.scss'
+
 import ormPlugin from './store/ormPlugin'
+
+// COMPONENTS
+import draggable from 'vuedraggable'
 import Page from './components/Page'
-import Scetion from './components/Section'
+import Sections from './components/Sections'
+import Section from './components/Section'
+import SectionItems from './components/SectionItems'
+import Article from './components/Article'
 
 const
 components = [
-  Page, Scetion
+  draggable, Page, Sections, Section, SectionItems, Article
 ],
 install = function(Vue, { store })
 {
@@ -23,5 +31,8 @@ export default
 
   // export compo individually
   Page,
-  Scetion,
+  Sections,
+  Section,
+  SectionItems,
+  Article
 }

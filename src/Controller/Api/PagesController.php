@@ -21,9 +21,6 @@ class PagesController extends AppController
     parent::initialize();
     $this->loadComponent('Crud.Crud', [
       'actions' => [
-        'index' => [
-          'className' => 'Crud.Index',
-        ],
         'view' => [
           'className' => 'Crud.View',
         ],

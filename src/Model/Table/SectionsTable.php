@@ -80,7 +80,6 @@ class SectionsTable extends Table
       'foreignKey' => 'section_id',
       'targetForeignKey' => 'foreign_key',
       'joinTable' => 'section_items',
-      'className' => 'Trois/Cms.Modules',
       'conditions' => [
         'SectionItems.model' => 'Modules'
       ],
