@@ -2,10 +2,9 @@
   <div class="cms-section">
 
       <!-- controls -->
-      <h1>Sections Controls :)</h1>
-
-      <!-- content -->
-      <slot name="content"></slot>
+      <div class="controls">
+        <h1>Sections Controls :)</h1>
+      </div>
 
   </div>
 </template>

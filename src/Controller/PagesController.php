@@ -38,7 +38,7 @@ class PagesController extends AppController
     ])
     ->first();
 
-    debug($page);
+    //debug($page);
 
     $this->set('title', $page->title);
     $this->set('description', $page->meta);

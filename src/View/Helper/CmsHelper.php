@@ -5,6 +5,7 @@ use Cake\View\Helper;
 use Cake\View\View;
 use Cake\Core\Configure;
 use Cake\Routing\Router;
+use Cake\Utility\Inflector;
 
 class CmsHelper extends Helper
 {
@@ -21,45 +22,32 @@ class CmsHelper extends Helper
     return true;
   }
 
+  public function controls($type, $item)
+  {
+    if(!$this->isEditable()) return '';
+    $settings = Configure::read('Trois/Cms');
+    return  $this->getView()->Html->tag('cms-'.$type,' ', [':original'.Inflector::dasherize($type) => json_encode($item),':settings' => json_encode($settings)]);
+  }
+
   public function sections($sections = [])
   {
     $html = '';
-    if(!$this->isEditable()) foreach($sections as $section) $html .= $this->getView()->element($section->template, ['ref' => 'section-'.$section->id, 'section' => $section]);
-    else
-    {
-      $settings = Configure::read('Trois/Cms');
-      foreach($sections as $section)
-      {
-        $sHtml = $this->getView()->element($section->template, ['ref' => 'section-'.$section->id, 'section' => $section]);
-        $html .= $this->getView()->Html->tag('cms-section', $this->getView()->Html->tag('template', $sHtml, ['v-slot:content' => '']), [':original-section' => $this->jsonEncode($section), ':settings' => $this->jsonEncode($settings)]);
-      }
-      $html = $this->getView()->Html->tag('cms-sections', $html, [':original-sections' => $this->jsonEncode($sections)]);
-    }
-
-    return $html;
+    foreach ($sections as $section) $html .= $this->getView()->element($section->template, ['ref' => 'section-'.$section->id, 'section' => $section]);
+    if(!$this->isEditable()) return $html;
+    return $this->getView()->Html->tag('cms-sections', $html);
   }
 
   public function sectionItems($items = [])
   {
     $html = '';
     foreach($items as $item) $html .= $this->articleOrModule($item);
-    if($this->isEditable())
-    {
-      $settings = Configure::read('Trois/Cms');
-      $html = $this->getView()->Html->tag('cms-section-items', $html, [':original-section-items' => $this->jsonEncode($items)]);
-    }
-    return $html;
+    if(! $this->isEditable()) return $html;
+    return $this->getView()->Html->tag('cms-section-items', $html);
   }
 
   public function articleOrModule($item)
   {
-    if($item->article)
-    {
-      $eHtml = $this->getView()->element($item->template, ['ref' => 'artcile-'.$item->article->id, 'article' => $item->article]);
-      if(!$this->isEditable()) return $eHtml;
-      return $this->getView()->Html->tag('cms-article', $this->getView()->Html->tag('template', $eHtml, ['v-slot:content' => '']), [':original-article' => $this->jsonEncode($item->article)]);
-    }
-
+    if($item->article) return $this->getView()->element($item->template, ['ref' => 'artcile-'.$item->article->id, 'article' => $item->article]);
     return $this->getView()->cell($item->module->cell, [$item->module->id]);
   }
 }

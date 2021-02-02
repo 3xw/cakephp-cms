@@ -1,28 +1,32 @@
-<template lang="html">
-
-  <draggable v-model="sectionItems">
-    <slot />
-  </draggable>
-
-</template>
-
 <script>
+import draggable from 'vuedraggable'
+
 export default
 {
   name: 'cms-section-items',
-  props:
+  components: { draggable }
+  data: () => ({
+    list: [] // You can name this whatever you want
+  }),
+  mounted ()
   {
-    originalSectionItems: Array
+    // You can change this `key` variable to whatever you want,
+    // but it must be unique.
+    let key = 0
+    const filtered = this.$slots.default.filter(
+      vnode => vnode.tag !== undefined
+    )
+    this.list = filtered.map(vnode => ({ id: key++, vnode }))
   },
-  data()
+  render (h)
   {
-    return {
-      sections: []
-    }
-  },
-  created()
-  {
-    this.sectionItems = this.originalSectionItems
+    return h('draggable', {
+      props: { ...this.$attrs, value: this.list },
+      on: { input: ($event) => { this.list = $event } }
+    }, this.list.map(el => {
+      el.vnode.key = el.id
+      return el.vnode
+    }))
   }
 }
 </script>

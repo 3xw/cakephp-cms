@@ -1,12 +1,10 @@
 <template lang="html">
-  <div class="page">
+  <div class="cms-page">
 
     <!-- controls -->
-    <div class="container">
-      <section class="cms-page-controls">
-        Page controls here<br>
-        <button type="button" name="button" @click="section.drawer = true">Ajouter une section</button>
-      </section>
+    <div class="controls">
+      Page controls here<br>
+      <button type="button" name="button" @click="section.drawer = true">Ajouter une section</button>
     </div>
 
     <!-- section modal -->
@@ -16,9 +14,6 @@
       </el-select><br/>
       <el-button type="primary" @click="createSection(); section.drawer = false">Créer la section</el-button>
     </el-dialog>
-
-    <!-- content -->
-    <slot name="content"></slot>
 
   </div>
 </template>
@@ -45,12 +40,12 @@ export default
       sections: []
     }
   },
-  mounted()
-  {
-    //this.$slots.content[0].context.$refs.map((ref, name) => console.log(name) )
-  },
   methods:
   {
+    onEdn()
+    {
+      console.log('yo');
+    },
     createSection()
     {
       let section = new Section(this.section.item)
