@@ -15,7 +15,7 @@ export default
   name: 'cms-section',
   props:
   {
-    originalSection: Object
+    //originalSection: Object
   }
 }
 </script>

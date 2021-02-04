@@ -15,7 +15,7 @@ export default
   name: 'cms-article',
   props:
   {
-    originalArtcile: Object
+    //originalArtcile: Object
   }
 }
 </script>
