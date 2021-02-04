@@ -36,16 +36,16 @@ export default
       section: {
         drawer: false,
         item: {template: null}
-      },
-      sections: []
+      }
     }
+  },
+  created()
+  {
+    // load page content!!
+    Page.crud().get('cms/api/pages/'+this.originalPage.id)
   },
   methods:
   {
-    onEdn()
-    {
-      console.log('yo');
-    },
     createSection()
     {
       let section = new Section(this.section.item)

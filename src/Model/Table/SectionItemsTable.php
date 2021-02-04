@@ -70,6 +70,7 @@ class SectionItemsTable extends Table
       'conditions' => [
         'SectionItems.model' => 'Articles'
       ],
+      'sort' => ['SectionItems.order' => 'ASC']
     ]);
 
     $this->HasOne('Modules', [
@@ -78,6 +79,7 @@ class SectionItemsTable extends Table
       'conditions' => [
         'SectionItems.model' => 'Modules'
       ],
+      'sort' => ['SectionItems.order' => 'ASC']
     ]);
   }
 

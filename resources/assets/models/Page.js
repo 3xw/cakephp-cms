@@ -1,4 +1,5 @@
 import { Model } from '@vuex-orm/core'
+import Section from './Section'
 
 export default class Page extends Model
 {
@@ -9,6 +10,8 @@ export default class Page extends Model
     return {
       id: this.attr(null).nullable(),
       title: this.attr(null),
+
+      sections: this.hasMany(Section, 'page_id'),
     }
   }
 }

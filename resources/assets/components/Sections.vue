@@ -1,6 +1,7 @@
 <script>
 // https://dev.to/athif23/how-to-make-vue-draggable-work-with-different-structure-of-elements-components-1729
 import draggable from 'vuedraggable'
+import Section from '../models/Section'
 
 export default
 {
@@ -10,14 +11,8 @@ export default
     sections: Array
   },
   data: () => ({
-    items: [],
     list: [] // You can name this whatever you want
   }),
-  created()
-  {
-    this.items = this.sections
-    //this.$attrs['v-model'] = 'items'
-  },
   mounted ()
   {
     if(!this.$slots.default) return
@@ -28,14 +23,19 @@ export default
     const filtered = this.$slots.default.filter(
       vnode => vnode.tag !== undefined
     )
-    console.log(filtered);
-    this.list = filtered.map(vnode => ({ id: key++, vnode }))
+    this.list = filtered.map((vnode, index) => ({ id: this.sections[index].id, vnode }))
   },
   methods:
   {
     dragEnd()
     {
       console.log(this.list)
+      // synch id and count with store and update items!!
+      this.list.map((item, index) => {
+        let section = Section.find(item.id)
+        section.order = index
+        section.update('cms/api/pages/'+section.page_id+'/sections/'+section.id,['order'])
+      })
     }
   },
   render (h)

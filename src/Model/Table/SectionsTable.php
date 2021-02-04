@@ -66,6 +66,7 @@ class SectionsTable extends Table
     $this->hasMany('SectionItems', [
       'foreignKey' => 'section_id',
       'className' => 'Trois/Cms.SectionItems',
+      'sort' => ['SectionItems.order' => 'ASC']
     ]);
     $this->belongsToMany('Articles', [
       'foreignKey' => 'section_id',
