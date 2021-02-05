@@ -3,7 +3,7 @@ import Page from './Page'
 
 export default class Section extends Model
 {
-  static entity = 'section'
+  static entity = 'sections'
 
   static fields ()
   {

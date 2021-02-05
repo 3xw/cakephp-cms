@@ -43,7 +43,9 @@ export default
     return {
       section: {
         drawer: false,
-        item: {template: null}
+        item: {
+          template: null
+        }
       }
     }
   },
@@ -59,19 +61,34 @@ export default
     // load page content!!
     Page.crud().getOne(this.originalPage.id)
     .then(this.test)
+
   },
   methods:
   {
+    test2()
+    {
+      console.log('yo');
+    },
     test()
     {
+
+      Section.crud().get(null, {relations:[this.page]})
+      .then(this.test2)
+      /*
       console.log(Page.apiPath);
       console.log(this.page.apiPath());
       console.log(this.page.$id);
+
+      let section = new Section(this.section.item)
+      console.log(section.apiPath(this.page.apiPath()));
+      */
     },
     createSection()
     {
       let section = new Section(this.section.item)
-      .save('cms/api/pages/'+this.originalPage.id+'/sections')
+      section.order = this.originalPage.sections.length
+      section
+      .save(null, null, {relations:[this.page]})
       .then(data => window.location.reload())
       .catch(error => console.log(error))
     }

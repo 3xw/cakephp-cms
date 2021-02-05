@@ -33,7 +33,7 @@ export default
       this.list.map((item, index) => {
         let section = Section.find(item.id)
         section.order = index
-        section.update('cms/api/pages/'+section.page_id+'/sections/'+section.id,['order'])
+        section.update('pages/'+section.page_id+'/sections/'+section.id,['order'])
         .catch(err => console.log(err))
       })
     }

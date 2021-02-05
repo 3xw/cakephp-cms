@@ -51,6 +51,12 @@ class SectionsController extends AppController
       $event->getSubject()->data['page_id'] = $this->request->getParam('page_id');
     });
 
+    /*
+    $this->Crud->on('afterSave', function(\Cake\Event\Event $event) {
+      debug($event->getSubject());
+    });
+    */
+    
     return $this->Crud->execute();
   }
 
