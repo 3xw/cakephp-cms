@@ -57,10 +57,17 @@ export default
   created()
   {
     // load page content!!
-    Page.crud().get('cms/api/pages/'+this.originalPage.id)
+    Page.crud().getOne(this.originalPage.id)
+    .then(this.test)
   },
   methods:
   {
+    test()
+    {
+      console.log(Page.apiPath);
+      console.log(this.page.apiPath());
+      console.log(this.page.$id);
+    },
     createSection()
     {
       let section = new Section(this.section.item)
