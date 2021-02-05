@@ -15,16 +15,24 @@
       <el-button type="primary" @click="createSection(); section.drawer = false">Créer la section</el-button>
     </el-dialog>
 
+    <!-- add dialog -->
+    <add :mi="page"></add>
+
   </div>
 </template>
 
 <script>
+import ui from '@wgr-sa/vuex-orm-crud-ui'
 import Page from '../models/Page'
 import Section from '../models/Section'
 
 export default
 {
   name: 'cms-page',
+  components:
+  {
+    add: ui.Add
+  },
   props:
   {
     originalPage: Object,
@@ -37,6 +45,13 @@ export default
         drawer: false,
         item: {template: null}
       }
+    }
+  },
+  computed:
+  {
+    page()
+    {
+      return Page.query().with('sections').where(this.originalPage.id).first()
     }
   },
   created()

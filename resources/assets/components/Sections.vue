@@ -29,12 +29,12 @@ export default
   {
     dragEnd()
     {
-      console.log(this.list)
       // synch id and count with store and update items!!
       this.list.map((item, index) => {
         let section = Section.find(item.id)
         section.order = index
         section.update('cms/api/pages/'+section.page_id+'/sections/'+section.id,['order'])
+        .catch(err => console.log(err))
       })
     }
   },
