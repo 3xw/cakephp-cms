@@ -6,6 +6,8 @@
         <h1>Sections Controls :)</h1>
       </div>
 
+      <slot></slot>
+
   </div>
 </template>
 

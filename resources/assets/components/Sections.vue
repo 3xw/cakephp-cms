@@ -1,6 +1,7 @@
 <script>
 // https://dev.to/athif23/how-to-make-vue-draggable-work-with-different-structure-of-elements-components-1729
 import draggable from 'vuedraggable'
+import Page from '../models/Page'
 import Section from '../models/Section'
 
 export default
@@ -30,10 +31,15 @@ export default
     dragEnd()
     {
       // synch id and count with store and update items!!
-      this.list.map((item, index) => {
+      this.list.map((item, index) =>
+      {
+        // what we need
         let section = Section.find(item.id)
+        let page = Page.find(section.page_id)
+
+        // set & update
         section.order = index
-        section.update('pages/'+section.page_id+'/sections/'+section.id,['order'])
+        section.update(null,['order'],{relations:[page]})
         .catch(err => console.log(err))
       })
     }

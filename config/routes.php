@@ -6,7 +6,9 @@ use Trois\Utils\Routing\Mapper;
 // Api's Ressources
 $resources = [
   'Pages' => [
-    'Sections'
+    'Sections' => [
+      'SectionItems'
+    ]
   ],
 ];
 

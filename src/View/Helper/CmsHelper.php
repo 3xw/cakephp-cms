@@ -9,55 +9,72 @@ use Cake\Utility\Inflector;
 
 class CmsHelper extends Helper
 {
-  /*
-  public function jsonEncode($data)
-  {
-    $escaped_data = json_encode( $data, JSON_HEX_QUOT|JSON_HEX_APOS );
-    $escaped_data = str_replace("\u0022", "\\\"", $escaped_data );
-    $escaped_data = str_replace("\u0027", "\\'",  $escaped_data );
-    return $escaped_data;
-  }
-  */
 
   public function isEditable($what = 'page')
   {
     return true;
   }
 
-  public function controls($type, $item)
+  public function page($page)
   {
-    if(!$this->isEditable()) return '';
-    $settings = Configure::read('Trois/Cms');
-    return  $this->getView()->Html->tag('cms-'.$type,' ', [':original-'.Inflector::dasherize($type) => json_encode($item),':settings' => json_encode($settings)]);
-  }
-
-  public function sections($sections = [], $tag, $classes)
-  {
-    $html = '';
-    foreach ($sections as $section) $html .= $this->getView()->element($section->template, ['key' => 'section-'.$section->id, 'section' => $section]);
+    $html = $this->elem($page, 'page');
 
     // regular
-    if(!$this->isEditable()) return $this->getView()->Html->tag( $tag, $html, ['class' => $classes]);
+    if(! $this->isEditable()) return $html;
 
     // draggable
-    return $this->getView()->Html->tag('cms-sections', $html, [
-      ':sections' => json_encode($sections),
-      'tag' => $tag,
-      'class' => $classes
-    ]);
+    return $this->cmsElem($page, 'page', $html);
   }
 
-  public function sectionItems($items = [])
+  public function sections($sections = [], $classes)
+  {
+    $html = '';
+
+    // regular
+    if(!$this->isEditable())
+    {
+      foreach ($sections as $section) $html .= $this->elem($section, 'section');
+      return $this->getView()->Html->tag('div', $html, ['class' => $classes]);
+    }
+
+    // draggable
+    foreach ($sections as $section) $html .= $this->cmsElem($section, 'section', $this->elem($section, 'section'));
+    return $this->getView()->Html->tag('cms-sections', $html, [':sections' => json_encode($sections), 'class' => $classes]);
+  }
+
+  public function sectionItems($items = [], $classes)
   {
     $html = '';
     foreach($items as $item) $html .= $this->articleOrModule($item);
+
+    // regular
     if(! $this->isEditable()) return $html;
-    return $this->getView()->Html->tag('cms-section-items', $html);
+
+    // draggable
+    return $this->getView()->Html->tag('cms-section-items', $html, [':section-items' => json_encode($items), 'class' => $classes]);
   }
 
   public function articleOrModule($item)
   {
-    if($item->article) return $this->getView()->element($item->template, ['key' => 'artcile-'.$item->article->id, 'article' => $item->article]);
+    if($item->article)
+    {
+      // regular
+      if(! $this->isEditable())  return $this->elem($item->article, 'article');
+
+      // draggable
+      return $this->cmsElem($item->article, 'article', $this->elem($item, 'article'));
+    }
     return $this->getView()->cell($item->module->cell, [$item->module->id]);
+  }
+
+  public function elem($itm, $kind)
+  {
+    return $this->getView()->element($itm->template, ['key' => "$kind-$itm->id", "$kind" => $itm]);
+  }
+
+  public function cmsElem($itm, $kind, $slot)
+  {
+    $settings = Configure::read('Trois/Cms');
+    return  $this->getView()->Html->tag('cms-'.$kind, $slot, [':original-'.Inflector::dasherize($kind) => json_encode($itm),':settings' => json_encode($settings)]);
   }
 }

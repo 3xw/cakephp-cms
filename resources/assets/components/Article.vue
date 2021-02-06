@@ -6,6 +6,8 @@
         <h1>Article Controls :)</h1>
       </div>
 
+      <slot></slot>
+      
   </div>
 </template>
 

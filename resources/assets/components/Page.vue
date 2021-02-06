@@ -18,6 +18,8 @@
     <!-- add dialog -->
     <add :mi="page"></add>
 
+    <slot></slot>
+
   </div>
 </template>
 
@@ -53,36 +55,17 @@ export default
   {
     page()
     {
-      return Page.query().with('sections').where(this.originalPage.id).first()
+      return Page.query().with('sections.section_items').where(this.originalPage.id).first()
     }
   },
   created()
   {
     // load page content!!
     Page.crud().getOne(this.originalPage.id)
-    .then(this.test)
 
   },
   methods:
   {
-    test2()
-    {
-      console.log('yo');
-    },
-    test()
-    {
-
-      Section.crud().get(null, {relations:[this.page]})
-      .then(this.test2)
-      /*
-      console.log(Page.apiPath);
-      console.log(this.page.apiPath());
-      console.log(this.page.$id);
-
-      let section = new Section(this.section.item)
-      console.log(section.apiPath(this.page.apiPath()));
-      */
-    },
     createSection()
     {
       let section = new Section(this.section.item)
