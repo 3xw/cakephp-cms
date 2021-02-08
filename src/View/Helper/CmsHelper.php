@@ -94,7 +94,9 @@ class CmsHelper extends Helper
     //foreach($types as $type) foreach($xpath->query("//*/@*[name()='cms:$type']") as $key => $oldNode) debug($oldNode->parentNode);
     //foreach($xpath->query("//*/@*[name()='cms:string']") as $key => $oldNode) debug($oldNode->parentNode);
     //die();
-    foreach($types as $type) foreach($xpath->query("//*/@*[name()='cms:$type']") as $domAttr) $this->domReplace($dom, $modelName, $type, $domAttr->ownerElement);
+    $nodes = [];
+    foreach($types as $type) foreach($xpath->query("//*/@*[name()='cms:$type']") as $domAttr) $nodes[] = (object)['type' => $type, 'domAttr' => $domAttr];
+    foreach($nodes as $node) $this->domReplace($dom, $modelName, $node->type, $node->domAttr->ownerElement);
     return $dom->saveHTML($dom->documentElement);
   }
 
@@ -112,10 +114,7 @@ class CmsHelper extends Helper
     $newNode = $dom->createDocumentFragment();
     $newNode->appendXML($this->getView()->element("editables/$type", ['attributes' => $attributes]));
 
-    /*
-    BBBBUUUUGGGGGGGGGGGGG ?????????? OOOOOOOOHHHHH!!!!!
-    */
     // replace
-    //$oldNode->parentNode->replaceChild($newNode, $oldNode);
+    $oldNode->parentNode->replaceChild($newNode, $oldNode);
   }
 }
