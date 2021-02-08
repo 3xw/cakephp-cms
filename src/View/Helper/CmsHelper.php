@@ -89,13 +89,9 @@ class CmsHelper extends Helper
     $dom->loadHTML($this->elem($itm, $modelName));
     $xpath = new DOMXPath($dom);
 
-    $types = ['string','text'];
-
-    //foreach($types as $type) foreach($xpath->query("//*/@*[name()='cms:$type']") as $key => $oldNode) debug($oldNode->parentNode);
-    //foreach($xpath->query("//*/@*[name()='cms:string']") as $key => $oldNode) debug($oldNode->parentNode);
-    //die();
+    $e = (object) Configure::read('Trois/Cms.Editables');
     $nodes = [];
-    foreach($types as $type) foreach($xpath->query("//*/@*[name()='cms:$type']") as $domAttr) $nodes[] = (object)['type' => $type, 'domAttr' => $domAttr];
+    foreach($e->suffixes as $type) foreach($xpath->query("//*/@*[name()='$e->prefix:$type']") as $domAttr) $nodes[] = (object)['type' => $type, 'domAttr' => $domAttr];
     foreach($nodes as $node) $this->domReplace($dom, $modelName, $node->type, $node->domAttr->ownerElement);
     return $dom->saveHTML($dom->documentElement);
   }

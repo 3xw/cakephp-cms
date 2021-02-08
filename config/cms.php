@@ -1,32 +1,38 @@
 <?php
 return [
   'Trois/Cms' => [
-    'Pages' =>
-    [
-      'default' => [
-        'template' => 'Trois/Cms.pages/default',
-        'sections' => ['default']
-      ]
+    'Editables' => [
+      'prefix' => 'cms',
+      'suffixes' => ['string','text']
     ],
-    'Sections' =>
-    [
-      'default' => [
-        'template' => 'Trois/Cms.sections/default',
-        'modules' => ['default'],
-        'articles' => ['default']
-      ]
-    ],
-    'Articles' =>
-    [
-      'default' => [
-        'template' => 'Trois/Cms.articles/default',
-        'modules' => ['default']
-      ]
-    ],
-    'Modules' =>
-    [
-      'default' => [
-        'cell' => 'Trois/Cms.Module::default'
+    'Tree' => [
+      'pages' =>
+      [
+        'default' => [
+          'template' => 'Trois/Cms.pages/default',
+          'sections' => ['default']
+        ]
+      ],
+      'sections' =>
+      [
+        'default' => [
+          'template' => 'Trois/Cms.sections/default',
+          'modules' => ['default'],
+          'articles' => ['default']
+        ]
+      ],
+      'articles' =>
+      [
+        'default' => [
+          'template' => 'Trois/Cms.articles/default',
+          'modules' => ['default']
+        ]
+      ],
+      'modules' =>
+      [
+        'default' => [
+          'cell' => 'Trois/Cms.Module::default'
+        ]
       ]
     ]
   ]
