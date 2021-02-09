@@ -6,13 +6,13 @@ namespace Trois\Cms\Controller\Api;
 use Trois\Cms\Controller\AppController;
 
 /**
-* Articles Controller
+* Sections Controller
 *
-* @property \Trois\Cms\Model\Table\ArticlesTable $Articles
+* @property \Trois\Cms\Model\Table\SectionsTable $Sections
 *
-* @method \Trois\Cms\Model\Entity\Article[] paginate($object = null, array $settings = [])
+* @method \Trois\Cms\Model\Entity\Section[] paginate($object = null, array $settings = [])
 */
-class ArticlesController extends AppController
+class SectionsController extends AppController
 {
   use \Crud\Controller\ControllerTrait;
   
@@ -28,7 +28,7 @@ class ArticlesController extends AppController
           'className' => 'Crud.View',
         ],
         'add' =>[
-          'className' => 'Trois/Utils.Add',
+          'className' => 'Crud.Add',
           //'api.success.data.entity' => ['id','profile','path','type','subtype','name','size','fullpath', 'date'],
           'api.error.exception' => [
             'type' => 'validate',
@@ -36,7 +36,7 @@ class ArticlesController extends AppController
           ],
         ],
         'edit' => [
-          'className' => 'Trois/Utils.Edit',
+          'className' => 'Crud.Edit',
         ],
         'delete' => [
           'className' => 'Crud.Delete',

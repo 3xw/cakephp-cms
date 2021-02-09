@@ -41,20 +41,40 @@ class CmsHelper extends Helper
     }
 
     // draggable
-    foreach ($sections as $section) $html .= $this->cmsControls($section, 'section');
-    return $this->getView()->Html->tag('cms-sections', $html, [':sections' => json_encode($sections), 'class' => $classes]);
+    $ids = [];
+    foreach ($sections as $section)
+    {
+      $ids[] = $section->id;
+      $html .= $this->cmsControls($section, 'section');
+    }
+    $attributes = [];
+    $attributes['class'] = $classes;
+    $attributes['model-store-name'] = 'sections';
+    $attributes['model-field'] = 'order';
+    $attributes[':model-ids'] = json_encode($ids);
+    return $this->getView()->Html->tag('cms-draggable', $html, $attributes);
   }
 
   public function sectionItems($items = [], $classes)
   {
     $html = '';
-    foreach($items as $item) $html .= $this->articleOrModule($item);
+    $ids = [];
+    foreach($items as $item)
+    {
+      $ids[] = $item->id;
+      $html .= $this->articleOrModule($item);
+    }
 
     // regular
     if(! $this->isEditable()) return $html;
 
     // draggable
-    return $this->getView()->Html->tag('cms-section-items', $html, [':section-items' => json_encode($items), 'class' => $classes]);
+    $attributes = [];
+    $attributes['class'] = $classes;
+    $attributes['model-store-name'] = 'sectionItems';
+    $attributes['model-field'] = 'order';
+    $attributes[':model-ids'] = json_encode($ids);
+    return $this->getView()->Html->tag('cms-draggable', $html, $attributes);
   }
 
   public function articleOrModule($item)

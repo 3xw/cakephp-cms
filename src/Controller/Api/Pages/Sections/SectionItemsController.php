@@ -14,6 +14,8 @@ use Trois\Cms\Controller\AppController;
 */
 class SectionItemsController extends AppController
 {
+  use \Crud\Controller\ControllerTrait;
+
   public function initialize():void
   {
     parent::initialize();
@@ -81,11 +83,6 @@ class SectionItemsController extends AppController
       $event->getSubject()->data['section'] = [['id' => $this->request->getParam('section_id')]];
     });
 
-    return $this->Crud->execute();
-  }
-
-  public function edit()
-  {
     return $this->Crud->execute();
   }
 }

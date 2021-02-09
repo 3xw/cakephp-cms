@@ -3,11 +3,9 @@ import './assets/scss/theme.scss'
 import ormPlugin from './store/ormPlugin'
 
 // COMPONENTS
-import draggable from 'vuedraggable'
 import Page from './components/Page'
-import Sections from './components/Sections'
+import Draggable from './components/Draggable'
 import Section from './components/Section'
-import SectionItems from './components/SectionItems'
 import Article from './components/Article'
 import SimpleElement from './components/SimpleElement'
 import InputText from './components/editables/InputText'
@@ -15,7 +13,7 @@ import Textarea from './components/editables/Textarea'
 
 const
 components = [
-  draggable, Page, Sections, Section, SectionItems, Article,SimpleElement,
+  Page, Draggable, Section, Article,SimpleElement,
   InputText, Textarea
 ],
 install = function(Vue, { store })
@@ -35,9 +33,8 @@ export default
 
   // export compo individually
   Page,
-  Sections,
+  Draggable,
   Section,
-  SectionItems,
   Article,
   SimpleElement,
   InputText,
