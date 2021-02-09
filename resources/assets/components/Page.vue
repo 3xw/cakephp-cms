@@ -55,7 +55,7 @@ export default
   {
     page()
     {
-      return Page.query().with('sections.section_items').where(this.originalPage.id).first()
+      return Page.query().with('sections.section_items.article').where(this.originalPage.id).first()
     }
   },
   created()

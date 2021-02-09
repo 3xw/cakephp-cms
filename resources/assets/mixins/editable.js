@@ -13,7 +13,12 @@ export default
   {
     entity()
     {
-      this.$store.$db().model(this.modelStoreName).find(this.modelId)
+      return this.$store.$db().model(this.modelStoreName).find(this.modelId)
+    },
+    field()
+    {
+      if(this.entity) return this.entity[this.modelField]
+      return null
     }
   }
 }

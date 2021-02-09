@@ -1,7 +1,7 @@
 <div class="col-md-4">
   <article class="article article--default">
 
-    <h3 cms:string="title" ><?= $article->title ?></h3>
+    <h1 cms:string="title" class="article__title"><?= $article->title ?></h1>
 
     <div cms:text="header" class="article__header"><?= $article->header ?></div>
 

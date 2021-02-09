@@ -1,26 +1,40 @@
 <template lang="html">
-  <div class="cms-section">
 
-      <!-- controls -->
-      <div class="controls">
-        <h1>Sections Controls :)</h1>
-      </div>
-
-      <slot></slot>
-
+  <div v-if="edit" class="cms-editable-string-input">
+    <!-- edit -->
+    {{field}}
+    <!-- show -->
   </div>
+
+  <component
+  v-else
+  :is="is"
+  :modelStoreName="modelStoreName"
+  :modelField="modelField"
+  :modelId="modelId"
+  >
+  </component>
+
 </template>
 
 <script>
+import edit from '../../mixins/ui/edit.js'
 import editable from '../../mixins/editable.js'
 
 export default
 {
   name: 'cms-editable-string-input',
-  mixins: ['editable'],
+  mixins: [edit,editable],
   props:
   {
-    //originalSection: Object
+    shouldBe: String
+  },
+  computed:
+  {
+    is()
+    {
+      return this.shouldBe
+    }
   }
 }
 </script>

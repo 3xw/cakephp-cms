@@ -1,5 +1,7 @@
 import { Model } from '@vuex-orm/core'
 import Section from './Section'
+import Article from './Article'
+import Module from './Module'
 
 export default class SectionItem extends Model
 {
@@ -15,7 +17,9 @@ export default class SectionItem extends Model
       foreign_key: this.attr(null),
       template: this.attr(null),
 
-      page: this.belongsTo(Section, 'section_id'),
+      section: this.belongsTo(Section, 'section_id'),
+      article: this.hasOne(Article, 'id', 'foreign_key'),
+      module: this.hasOne(Module, 'id', 'foreign_key'),
     }
   }
 }
