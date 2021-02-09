@@ -2,7 +2,7 @@
   <div class="cms-page">
 
     <!-- controls -->
-    <div class="controls">
+    <div class="cms-controls">
       <el-button-group>
         <el-button size="mini" type="primary" >Editer</el-button>
         <el-button size="mini" type="danger">Effacer</el-button>
@@ -18,7 +18,9 @@
       <el-button type="primary" @click="createSection(); section.drawer = false">Créer la section</el-button>
     </el-dialog>
 
-    <slot></slot>
+    <div class="cms-content">
+      <slot></slot>
+    </div>
 
   </div>
 </template>

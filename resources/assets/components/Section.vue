@@ -2,7 +2,7 @@
   <div class="cms-section">
 
     <!-- controls -->
-    <div class="control">
+    <div class="cms-controls cms-controls--section">
       <el-button-group>
         <el-button size="mini" type="primary" >Editer</el-button>
         <el-button size="mini" type="danger">Effacer</el-button>
@@ -10,7 +10,9 @@
       </el-button-group>
     </div>
 
+    <div class="cms-content cms-content--section">
       <slot></slot>
+    </div>
 
   </div>
 </template>
