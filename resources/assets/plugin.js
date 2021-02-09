@@ -9,18 +9,14 @@ import Sections from './components/Sections'
 import Section from './components/Section'
 import SectionItems from './components/SectionItems'
 import Article from './components/Article'
-
-import StringInput from './components/editables/StringInput'
-
-import H3 from './components/elements/h3'
+import SimpleElement from './components/SimpleElement'
+import InputText from './components/editables/InputText'
+import Textarea from './components/editables/Textarea'
 
 const
 components = [
-  draggable, Page, Sections, Section, SectionItems, Article,
-
-  StringInput,
-
-  H3,
+  draggable, Page, Sections, Section, SectionItems, Article,SimpleElement,
+  InputText, Textarea
 ],
 install = function(Vue, { store })
 {
@@ -43,7 +39,7 @@ export default
   Section,
   SectionItems,
   Article,
-  StringInput,
-
-  H3
+  SimpleElement,
+  InputText,
+  Textarea
 }

@@ -2,14 +2,7 @@ export default
 {
   props:
   {
-    shouldBe: String,
+    elem: String,
     edit: Boolean
-  },
-  computed:
-  {
-    is()
-    {
-      return this.shouldBe
-    }
   }
 }

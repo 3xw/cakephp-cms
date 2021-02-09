@@ -130,7 +130,7 @@ class CmsHelper extends Helper
         $attributes['model-store-name'] = Inflector::pluralize(Inflector::underscore($entityName));
         $attributes['model-field'] = "$attr->nodeValue";
         $attributes['model-id'] = $entity->id;
-        $attributes['should-be'] = 'cms-'.$oldNode->nodeName;
+        $attributes['elem'] = strtolower($oldNode->nodeName);
         $attributes[':edit'] = 'sp.edit';
       }
       else $attributes[$attr->nodeName] = "$attr->nodeValue";
