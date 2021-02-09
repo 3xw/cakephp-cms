@@ -1,3 +1,1 @@
-<div class="">
-  STRING
-</div>
+<?= $this->Html->tag('cms-editable-string-input', " ", $attributes) ?>

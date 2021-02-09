@@ -1,1 +1,1 @@
-<?= $this->Html->tag('div', 'TEXT', $attributes) ?>
+<?= $this->Html->tag('div', "{{sp.$field}}",$attributes) ?>
