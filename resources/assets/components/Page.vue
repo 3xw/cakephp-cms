@@ -3,8 +3,11 @@
 
     <!-- controls -->
     <div class="controls">
-      Page controls here<br>
-      <button type="button" name="button" @click="section.drawer = true">Ajouter une section</button>
+      <el-button-group>
+        <el-button size="mini" type="primary" >Editer</el-button>
+        <el-button size="mini" type="danger">Effacer</el-button>
+        <el-button size="mini" type="success" @click="section.drawer = true">Ajouter une section</el-button>
+      </el-button-group>
     </div>
 
     <!-- section modal -->
@@ -15,26 +18,18 @@
       <el-button type="primary" @click="createSection(); section.drawer = false">Créer la section</el-button>
     </el-dialog>
 
-    <!-- add dialog -->
-    <add :mi="page"></add>
-
     <slot></slot>
 
   </div>
 </template>
 
 <script>
-import ui from '@wgr-sa/vuex-orm-crud-ui'
 import Page from '../models/Page'
 import Section from '../models/Section'
 
 export default
 {
   name: 'cms-page',
-  components:
-  {
-    add: ui.Add
-  },
   props:
   {
     pageId: String,
