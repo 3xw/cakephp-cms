@@ -81,7 +81,7 @@ class CmsHelper extends Helper
     $settings = Configure::read('Trois/Cms');
     return  $this->getView()->Html->tag(
       'cms-'.$entityName,
-      $this->getView()->Html->tag('template', $slot,['v-slot:default' => "sp"]),
+      $this->getView()->Html->tag('template', $slot, ['v-slot:default' => "sp"]),
       [':original-'.Inflector::dasherize($entityName) => json_encode($entity),':settings' => json_encode($settings)]
     );
   }
@@ -112,6 +112,7 @@ class CmsHelper extends Helper
         $attributes['model-field'] = "$attr->nodeValue";
         $attributes['model-id'] = $entity->id;
         $attributes['should-be'] = 'cms-h3';
+        $attributes[':edit'] = 'sp.edit';
       }
       else $attributes[$attr->nodeName] = "$attr->nodeValue";
     }

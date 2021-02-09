@@ -15,10 +15,17 @@ export default
     {
       return this.$store.$db().model(this.modelStoreName).find(this.modelId)
     },
-    field()
+    field:
     {
-      if(this.entity) return this.entity[this.modelField]
-      return null
+      get()
+      {
+        if(this.entity) return this.entity[this.modelField]
+        return null
+      },
+      set(value)
+      {
+        console.log(value);
+      }
     }
   }
 }

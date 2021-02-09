@@ -1,4 +1,4 @@
-<div class="col-md-4">
+<div class="col-md-6">
   <article class="article article--default">
 
     <h1 cms:string="title" class="article__title"><?= $article->title ?></h1>

@@ -1,4 +1,4 @@
-<div class="col-md-4">
+<div class="col-12">
   <section class="section section--default">
 
     <?= $this->Cms->sectionItems($section->section_items, 'row') ?>

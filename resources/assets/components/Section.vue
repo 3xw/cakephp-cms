@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="cms-section">
+  <div class="cms-section col-12">
 
       <!-- controls -->
       <div class="controls">

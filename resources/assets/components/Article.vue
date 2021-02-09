@@ -1,12 +1,18 @@
 <template lang="html">
   <div class="cms-article">
 
-      <!-- controls -->
-      <div class="control">
-        <h1>Article Controls :)</h1>
-      </div>
+    <!-- controls -->
+    <div class="control">
+      <el-button-group>
+        <el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>
+        <el-button v-if="!edit" size="mini" type="danger">Effacer</el-button>
 
-      <slot></slot>
+        <el-button v-if="edit" @click="edit = false" size="mini" type="info">Anuler</el-button>
+        <el-button v-if="edit" @click="edit = false" size="mini" type="success">Enrgsiter</el-button>
+      </el-button-group>
+    </div>
+
+    <slot v-bind:edit="edit"></slot>
 
   </div>
 </template>
@@ -17,7 +23,7 @@ import edit from '../mixins/ui/edit'
 export default
 {
   name: 'cms-article',
-  mixins: ['edit'],
+  mixins: [edit],
   props:
   {
     originalArticle: Object

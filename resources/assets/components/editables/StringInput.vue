@@ -1,40 +1,22 @@
 <template lang="html">
 
+  <!-- edit -->
   <div v-if="edit" class="cms-editable-string-input">
-    <!-- edit -->
-    {{field}}
-    <!-- show -->
+    <input type="text" v-model="field">
   </div>
 
-  <component
-  v-else
-  :is="is"
-  :modelStoreName="modelStoreName"
-  :modelField="modelField"
-  :modelId="modelId"
-  >
-  </component>
+  <!-- show -->
+  <component v-else :is="is" :modelStoreName="modelStoreName" :modelField="modelField" :modelId="modelId" />
 
 </template>
 
 <script>
-import edit from '../../mixins/ui/edit.js'
+import mutableInput from '../../mixins/ui/mutableInput.js'
 import editable from '../../mixins/editable.js'
 
 export default
 {
   name: 'cms-editable-string-input',
-  mixins: [edit,editable],
-  props:
-  {
-    shouldBe: String
-  },
-  computed:
-  {
-    is()
-    {
-      return this.shouldBe
-    }
-  }
+  mixins: [mutableInput, editable],
 }
 </script>
