@@ -37,7 +37,7 @@ export default
   },
   props:
   {
-    originalPage: Object,
+    pageId: String,
     settings: Object
   },
   data()
@@ -55,21 +55,20 @@ export default
   {
     page()
     {
-      return Page.query().with('sections.section_items.article').where(this.originalPage.id).first()
+      return Page.query().with('sections.section_items.article').where(this.pageId).first()
     }
   },
   created()
   {
     // load page content!!
-    Page.crud().getOne(this.originalPage.id)
-
+    Page.crud().getOne(this.pageId)
   },
   methods:
   {
     createSection()
     {
       let section = new Section(this.section.item)
-      section.order = this.originalPage.sections.length
+      section.order = this.page.sections.length
       section
       .save(null, null, {relations:[this.page]})
       .then(data => window.location.reload())

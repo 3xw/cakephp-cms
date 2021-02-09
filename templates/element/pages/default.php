@@ -1,4 +1,4 @@
-<div class="page page--default" >
+<div class="page page--default">
 
   <h1><?= $page->title ?></h1>
 

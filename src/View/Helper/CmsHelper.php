@@ -26,7 +26,7 @@ class CmsHelper extends Helper
     if(! $this->isEditable()) return $html;
 
     // draggable
-    return $this->cmsElem($page, 'page', $html);
+    return $this->cmsControls($page, 'page');
   }
 
   public function sections($sections = [], $classes)
@@ -41,7 +41,7 @@ class CmsHelper extends Helper
     }
 
     // draggable
-    foreach ($sections as $section) $html .= $this->cmsElem($section, 'section', $this->elem($section, 'section'));
+    foreach ($sections as $section) $html .= $this->cmsControls($section, 'section');
     return $this->getView()->Html->tag('cms-sections', $html, [':sections' => json_encode($sections), 'class' => $classes]);
   }
 
@@ -66,7 +66,7 @@ class CmsHelper extends Helper
 
       // draggable
       $item->article->set('template', $item->template);
-      return $this->cmsElem($item->article, 'article', $this->cmsEditable($item->article, 'article'));
+      return $this->cmsControls($item->article, 'article');
     }
     return $this->getView()->cell($item->module->cell, [$item->module->id]);
   }
@@ -76,31 +76,50 @@ class CmsHelper extends Helper
     return $this->getView()->element($entity->template, ["$entityName" => $entity]);
   }
 
-  public function cmsElem($entity, $entityName, $slot)
+  public function cmsControls($entity, $entityName)
   {
-    $settings = Configure::read('Trois/Cms');
-    return  $this->getView()->Html->tag(
-      'cms-'.$entityName,
-      $this->getView()->Html->tag('template', $slot, ['v-slot:default' => "sp"]),
-      [':original-'.Inflector::dasherize($entityName) => json_encode($entity),':settings' => json_encode($settings)]
-    );
+    // extract element & attributes
+    $dom = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $html = $entityName == 'article'? $this->cmsEditable($entity, $entityName): $this->elem($entity, $entityName);
+    $dom->loadXML($html);
+    list($node, $attributes) = $this->extractRemoveAttributes($dom->documentElement);
+    $html = $dom->saveHTML($dom->documentElement);
+
+
+    $attributes = array_merge($attributes,[
+      ':settings' => json_encode(Configure::read('Trois/Cms')),
+      "$entityName-id" => $entity->id
+    ]);
+
+    return  $this->getView()->Html->tag('cms-'.$entityName, $this->getView()->Html->tag('template', $html, ['v-slot:default' => "sp"]), $attributes );
+  }
+
+  public function extractRemoveAttributes(\DOMElement $node): Array
+  {
+    $attributes = [];
+    $renamed = $node->ownerDocument->createElement('div');
+    foreach ($node->attributes as $attribute) $attributes[$attribute->nodeName] = $attribute->nodeValue;
+    while ($node->firstChild) $renamed->appendChild($node->firstChild);
+    return [$node->parentNode->replaceChild($renamed, $node), $attributes];
   }
 
   public function cmsEditable($entity, $entityName)
   {
+    // dom stuff
     $dom = new DOMDocument();
     libxml_use_internal_errors(true);
-    $dom->loadHTML($this->elem($entity, $entityName));
+    $dom->loadXML($this->elem($entity, $entityName));
     $xpath = new DOMXPath($dom);
 
     $e = (object) Configure::read('Trois/Cms.Editables');
     $nodes = [];
     foreach($e->suffixes as $type) foreach($xpath->query("//*/@*[name()='$e->prefix:$type']") as $domAttr) $nodes[] = (object)['type' => $type, 'domAttr' => $domAttr];
-    foreach($nodes as $node) $this->domReplace($dom, $entity, $entityName, $node->type, $node->domAttr->ownerElement);
+    foreach($nodes as $node) $this->cmsReplaceEditable($dom, $entity, $entityName, $node->type, $node->domAttr->ownerElement);
     return $dom->saveHTML($dom->documentElement);
   }
 
-  public function domReplace($dom, $entity, $entityName, $type, $oldNode)
+  public function cmsReplaceEditable($dom, $entity, $entityName, $type, $oldNode)
   {
     // copy attributes collect Field
     $attributes = [];
@@ -111,7 +130,7 @@ class CmsHelper extends Helper
         $attributes['model-store-name'] = Inflector::pluralize(Inflector::underscore($entityName));
         $attributes['model-field'] = "$attr->nodeValue";
         $attributes['model-id'] = $entity->id;
-        $attributes['should-be'] = 'cms-h3';
+        $attributes['should-be'] = 'cms-'.$oldNode->nodeName;
         $attributes[':edit'] = 'sp.edit';
       }
       else $attributes[$attr->nodeName] = "$attr->nodeValue";
