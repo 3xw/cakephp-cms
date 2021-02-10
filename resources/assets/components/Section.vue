@@ -6,11 +6,17 @@
       <el-button-group>
         <el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>
         <el-button v-if="!edit" @click="crudDelete()" size="mini" type="danger">Effacer</el-button>
+        <el-button v-if="!edit" @click="add = true" size="mini" type="success">Ajouter une element</el-button>
 
         <el-button v-if="edit" @click="edit = false; crudGetOne()" size="mini" type="info">Anuler</el-button>
         <el-button v-if="edit" @click="edit = false; update()" size="mini" type="success">Enrgsiter</el-button>
       </el-button-group>
     </div>
+
+    <!-- section modal -->
+    <el-dialog title="Nouvel element" :visible.sync="add" width="60%" >
+      <h1>TODO</h1>
+    </el-dialog>
 
     <div class="cms-content cms-content--section">
 
@@ -21,6 +27,7 @@
        modelStoreName="sections" modelField="template" :modelId="modelId"
        />
 
+       <!-- draggable -->
       <slot></slot>
     </div>
 
@@ -29,13 +36,14 @@
 
 <script>
 import edit from '../mixins/ui/edit'
+import add from '../mixins/ui/add'
 import editable from '../mixins/editable'
 import settings from '../mixins/settings'
 
 export default
 {
   name: 'cms-section',
-  mixins: [edit, editable, settings],
+  mixins: [edit, add, editable, settings],
   computed:
   {
     options(){ return this.getAllowedTFP(this.entity.page_id) }

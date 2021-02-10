@@ -89,10 +89,15 @@ class CmsHelper extends Helper
       // regular
       if(! $this->isEditable())  return $this->elem($item->article, 'article');
 
-      // draggable
+      // cmsize
       return $this->cmsControls($item->article, 'article', $item);
     }
-    return $this->getView()->cell($item->module->cell, [$item->module->id]);
+
+    // regular
+    if(! $this->isEditable()) return $this->getView()->cell($item->module->cell, [$item->module->id]);
+
+    // cmsize
+    return $this->cmsControls($item->module, 'module', $item);
   }
 
   public function elem($entity, $entityName)
@@ -106,40 +111,41 @@ class CmsHelper extends Helper
 
   public function cmsControls($entity, $entityName, $sectionItem = null)
   {
+    // create cms inner html
+    $html = $this->getCmsInnerHtml($entity, $entityName);
+
     // extract element & attributes
     $dom = new DOMDocument();
     libxml_use_internal_errors(true);
-    $html = $entityName == 'article'? $this->cmsEditable($entity, $entityName): $this->elem($entity, $entityName);
     $dom->loadXML($html);
     list($node, $attributes) = $this->extractRemoveAttributes($dom->documentElement);
     $html = $dom->saveHTML($dom->documentElement);
 
-    // slot(s)
-    $html = $this->getView()->Html->tag('template', $html, ['v-slot:default' => "sp"]);
-    if($sectionItem)
-    {
-      $attributes['section-item-id'] = $sectionItem->id;
-
-      $attr = [
-        ':settings' => json_encode(Configure::read('Trois/Cms')),
-        'model-store-name' => 'section_items',
-        'model-field' => 'template',
-        'model-id' =>$entity->id,
-        ':edit' => 'sp.edit'
-      ];
-      $slot = $this->getView()->Html->tag('cms-section-item', ' ', $attr);
-      $html .= $this->getView()->Html->tag('template', $slot, ['v-slot:section-item' => "sp"]);
-    }
-
-
+    // attr
     $attributes = array_merge($attributes,[
       ':settings' => json_encode(Configure::read('Trois/Cms')),
       'model-store-name' => Inflector::pluralize(Inflector::underscore($entityName)),
-      'model-field' => 'order',
       'model-id' => $entity->id
     ]);
+    if($sectionItem) $attributes['section-item-id'] = $sectionItem->id;
 
+    $html = $this->getView()->Html->tag('template', $html, ['v-slot:default' => "sp"]);
     return  $this->getView()->Html->tag('cms-'.$entityName, $html, $attributes );
+  }
+
+  public function getCmsInnerHtml($entity, $entityName)
+  {
+    switch($entityName)
+    {
+      case 'article':
+      case 'module';
+      $html =  $this->cmsEditable($entity, $entityName);
+      break;
+
+      default:
+      $html = $this->elem($entity, $entityName);
+    }
+    return $html;
   }
 
   public function extractRemoveAttributes(\DOMElement $node): Array
@@ -153,10 +159,13 @@ class CmsHelper extends Helper
 
   public function cmsEditable($entity, $entityName)
   {
+    // create right elmem
+    $html = $entityName == 'article'? $this->elem($entity, $entityName): $this->getView()->cell($entity->cell, [$entity->id]);
+
     // dom stuff
     $dom = new DOMDocument();
     libxml_use_internal_errors(true);
-    $dom->loadXML($this->elem($entity, $entityName));
+    $dom->loadXML($html);
     $xpath = new DOMXPath($dom);
 
     $e = (object) Configure::read('Trois/Cms.Editables');

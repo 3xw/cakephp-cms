@@ -9,6 +9,7 @@ export default
   methods:
   {
     optsMapperTemplate(elem) { return {label: elem.name, value: elem.template} },
+    optsMapperCell(elem) { return {label: elem.name, value: elem.cell} },
 
     getKeyFromTemplateName(tmpl, type = 'pages')
     {

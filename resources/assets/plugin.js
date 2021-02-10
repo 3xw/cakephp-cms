@@ -7,6 +7,7 @@ import Page from './components/Page'
 import Draggable from './components/Draggable'
 import Section from './components/Section'
 import Article from './components/Article'
+import Module from './components/Module'
 import SimpleElement from './components/SimpleElement'
 import InputText from './components/editables/InputText'
 import Textarea from './components/editables/Textarea'
@@ -14,7 +15,7 @@ import Select from './components/editables/Select'
 
 const
 components = [
-  Page, Draggable, Section, Article, SimpleElement,
+  Page, Draggable, Section, Article, Module, SimpleElement,
   InputText, Textarea, Select
 ],
 install = function(Vue, { store })
@@ -37,6 +38,7 @@ export default
   Draggable,
   Section,
   Article,
+  Module,
   SimpleElement,
   InputText,
   Textarea,

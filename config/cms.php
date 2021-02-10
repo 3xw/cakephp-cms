@@ -33,7 +33,7 @@ return [
       'modules' => [
         'default' => [
           'name' => 'Défault module',
-          'cell' => 'Trois/Cms.Module::default'
+          'cell' => 'Trois/Cms.Default::display'
         ]
       ]
     ]

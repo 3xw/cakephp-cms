@@ -32,7 +32,8 @@ class DefaultCell extends Cell
   *
   * @return void
   */
-  public function display()
+  public function display($id)
   {
+    $this->set(compact('id'));
   }
 }
