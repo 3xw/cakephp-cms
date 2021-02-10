@@ -15,7 +15,24 @@
 
     <!-- section modal -->
     <el-dialog title="Nouvel element" :visible.sync="add" width="60%" >
-      <h1>TODO</h1>
+      <el-select v-model="type">
+        <el-option v-for="(options, index) in optsType" :key="index" :label="options.label" :value="options.value"></el-option>
+      </el-select>
+
+      <div v-if="type == 'articles'">
+        <h3>Choisir le type d'article</h3>
+        <el-select v-model="sectionItem.template">
+          <el-option v-for="(options, index) in optsTemplate" :key="index" :label="options.label" :value="options.value"></el-option>
+        </el-select>
+      </div>
+
+      <div v-if="type == 'modules'">
+        <h3>Choisir le type de module</h3>
+        <el-select v-model="module.cell">
+          <el-option v-for="(options, index) in optsCell" :key="index" :label="options.label" :value="options.value"></el-option>
+        </el-select>
+      </div>
+
     </el-dialog>
 
     <div class="cms-content cms-content--section">
@@ -39,18 +56,46 @@ import edit from '../mixins/ui/edit'
 import add from '../mixins/ui/add'
 import editable from '../mixins/editable'
 import settings from '../mixins/settings'
+import SectionItem from '../models/SectionItem'
+import Article from '../models/Article'
+import Module from '../models/Module'
 
 export default
 {
   name: 'cms-section',
   mixins: [edit, add, editable, settings],
+  data: () => ({
+    type: 'articles',
+    sectionItem: new SectionItem(),
+    article: new Article(),
+    module: new Module()
+  }),
+  mounted()
+  {
+    this.sectionItem.section_id = this.modelId
+  },
   computed:
   {
-    options(){ return this.getAllowedTFP(this.entity.page_id) }
+    SI() { return this.$store.$db().model('section_items') },
+    sItems() { return this.SI.query().where('section_id', this.modelId).get() },
+    siCount() { return this.sItems.length },
+    optsType() { return [{label: 'Nouvel artcile', value: 'articles'}, {label: 'Nouveau module', value: 'modules'}] },
+    optsLayout(){ return this.getAllowedTFP(this.entity.page_id) },
+    optsTemplate()
+    {
+      if(!this.entity) return []
+      return this.getAllowedTFS(this.modelId).filter(this.optsMapperTemplate)
+    },
+    optsCell()
+    {
+      if(!this.entity) return []
+      return this.getAllowedCFS(this.modelId).filter(this.optsMapperCell)
+    },
+    //siModel() { return this.type == 'articles'? 'Article': 'Module' }
   },
   methods:
   {
-    optsProvider() { return this.options },
+    optsProvider() { return this.optsLayout },
     deleted() { window.location.reload()},
   }
 }
