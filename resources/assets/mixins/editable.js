@@ -53,25 +53,26 @@ export default
   },
   methods:
   {
-    changed()
-    {
-      console.log('changed');
-    },
+    // callbacks
+    changed(){},
+    deleted(){},
+
     update()
     {
       this.entity.update()
       .catch(err => console.log(err))
     },
-    reset()
+    crudGetOne()
     {
       this.model.crud().getOne(this.modelId)
       .catch(err => console.log(err))
     },
-    destroy()
+    crudDelete()
     {
       if(!confirm('Voulez-vous vraiement effacer l\'enregistrement ?')) return
       this.entity.delete()
       .catch(err => console.log(err))
+      .then(this.deleted)
     }
   }
 }

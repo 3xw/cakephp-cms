@@ -64,16 +64,7 @@ class ModulesTable extends Table
       'cascadeCallbacks' => true,
     ]);
 
-    $this->HasOne('SectionItems', [
-      'foreignKey' => 'foreign_key',
-      'bindingKey' => 'id',
-      'className' => 'Trois/Cms.SectionItems',
-      'dependent' => true,
-      'cascadeCallbacks' => true,
-      'conditions' => [
-        'SectionItems.model' => 'Articles'
-      ],
-    ]);
+    $this->addBehavior('Trois/Cms.DeleteRelatedSectionItem');
   }
 
   /**

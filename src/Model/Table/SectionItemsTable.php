@@ -3,10 +3,14 @@ declare(strict_types=1);
 
 namespace Trois\Cms\Model\Table;
 
+use ArrayObject;
+
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Event\EventInterface;
+use Cake\Datasource\EntityInterface;
 
 /**
 * SectionItems Model
@@ -67,8 +71,6 @@ class SectionItemsTable extends Table
       'foreignKey' => 'id',
       'bindingKey' => 'foreign_key',
       'className' => 'Trois/Cms.Articles',
-      'dependent' => true,
-      'cascadeCallbacks' => true,
       'conditions' => [
         'SectionItems.model' => 'Articles'
       ],
@@ -77,13 +79,31 @@ class SectionItemsTable extends Table
     $this->HasOne('Modules', [
       'foreignKey' => 'id',
       'bindingKey' => 'foreign_key',
-      'dependent' => true,
-      'cascadeCallbacks' => true,
       'conditions' => [
         'SectionItems.model' => 'Modules'
       ],
     ]);
   }
+
+  /*
+  public function afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+  {
+    foreach([$this->Articles, $this->Modules] as $Model)
+    {
+      $alias = $Model->getAlias();
+      if($m = $Model->find()
+      ->where([ "$alias.id" => $entity->foreign_key])
+      ->first())
+      {
+        if(!$Model->delete($m))
+        {
+          $event->stopPropagation();
+          return;
+        }
+      }
+    }
+  }
+  */
 
   /**
   * Default validation rules.

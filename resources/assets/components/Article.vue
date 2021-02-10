@@ -5,9 +5,9 @@
     <div class="cms-controls cms-controls--article">
       <el-button-group>
         <el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>
-        <el-button v-if="!edit" @click="destroy()" size="mini" type="danger">Effacer</el-button>
+        <el-button v-if="!edit" @click="crudDelete()" size="mini" type="danger">Effacer</el-button>
 
-        <el-button v-if="edit" @click="edit = false; reset()" size="mini" type="info">Anuler</el-button>
+        <el-button v-if="edit" @click="edit = false; crudGetOne()" size="mini" type="info">Anuler</el-button>
         <el-button v-if="edit" @click="edit = false; update()" size="mini" type="success">Enrgsiter</el-button>
       </el-button-group>
     </div>
@@ -29,7 +29,11 @@ export default
   mixins: [edit, editable],
   methods:
   {
-
+    deleted()
+    {
+      console.log('destroy');
+      this.$destroy()
+    }
   }
 }
 </script>

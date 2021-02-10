@@ -6,13 +6,13 @@ namespace Trois\Cms\Controller\Api;
 use Trois\Cms\Controller\AppController;
 
 /**
-* Articles Controller
+* Modules Controller
 *
-* @property \Trois\Cms\Model\Table\ArticlesTable $Articles
+* @property \Trois\Cms\Model\Table\ModulesTable $Modules
 *
-* @method \Trois\Cms\Model\Entity\Article[] paginate($object = null, array $settings = [])
+* @method \Trois\Cms\Model\Entity\Module[] paginate($object = null, array $settings = [])
 */
-class ArticlesController extends AppController
+class ModulesController extends AppController
 {
   use \Crud\Controller\ControllerTrait;
 
@@ -50,16 +50,5 @@ class ArticlesController extends AppController
         'Crud.Search'
       ]
     ]);
-  }
-
-  public function index()
-  {
-    $this->Crud->on('beforePaginate', function(\Cake\Event\Event $event) {
-      $event->getSubject()->query
-      ->contain([
-        'SectionItems'
-      ]);
-    });
-    return $this->Crud->execute();
   }
 }
