@@ -8,29 +8,36 @@ return [
     'Tree' => [
       'pages' =>
       [
-        'default' => [
+        [
+          'name' => 'default',
           'template' => 'Trois/Cms.pages/default',
           'sections' => ['default']
         ]
       ],
       'sections' =>
       [
-        'default' => [
+        [
+          'name' => 'default',
           'template' => 'Trois/Cms.sections/default',
           'modules' => ['default'],
-          'articles' => ['default']
+          'articles' => ['default','test']
         ]
       ],
       'articles' =>
       [
-        'default' => [
+        [
+          'name' => 'default',
           'template' => 'Trois/Cms.articles/default',
-          'modules' => ['default']
+        ],
+        [
+          'name' => 'test',
+          'template' => 'Trois/Cms.articles/test',
         ]
       ],
       'modules' =>
       [
-        'default' => [
+        [
+          'name' => 'default',
           'cell' => 'Trois/Cms.Module::default'
         ]
       ]

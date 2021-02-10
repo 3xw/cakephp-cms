@@ -83,12 +83,14 @@ class CmsHelper extends Helper
   {
     if($item->article)
     {
+      // global
+      $item->article->set('template', $item->template);
+
       // regular
       if(! $this->isEditable())  return $this->elem($item->article, 'article');
 
       // draggable
-      $item->article->set('template', $item->template);
-      return $this->cmsControls($item->article, 'article');
+      return $this->cmsControls($item->article, 'article', $item);
     }
     return $this->getView()->cell($item->module->cell, [$item->module->id]);
   }
@@ -102,7 +104,7 @@ class CmsHelper extends Helper
     return $this->getView()->element($entity->template, ["$entityName" => $entity]);
   }
 
-  public function cmsControls($entity, $entityName)
+  public function cmsControls($entity, $entityName, $sectionItem = null)
   {
     // extract element & attributes
     $dom = new DOMDocument();
@@ -112,6 +114,23 @@ class CmsHelper extends Helper
     list($node, $attributes) = $this->extractRemoveAttributes($dom->documentElement);
     $html = $dom->saveHTML($dom->documentElement);
 
+    // slot(s)
+    $html = $this->getView()->Html->tag('template', $html, ['v-slot:default' => "sp"]);
+    if($sectionItem)
+    {
+      $attributes['section-item-id'] = $sectionItem->id;
+
+      $attr = [
+        ':settings' => json_encode(Configure::read('Trois/Cms')),
+        'model-store-name' => 'section_items',
+        'model-field' => 'template',
+        'model-id' =>$entity->id,
+        ':edit' => 'sp.edit'
+      ];
+      $slot = $this->getView()->Html->tag('cms-section-item', ' ', $attr);
+      $html .= $this->getView()->Html->tag('template', $slot, ['v-slot:section-item' => "sp"]);
+    }
+
 
     $attributes = array_merge($attributes,[
       ':settings' => json_encode(Configure::read('Trois/Cms')),
@@ -120,7 +139,7 @@ class CmsHelper extends Helper
       'model-id' => $entity->id
     ]);
 
-    return  $this->getView()->Html->tag('cms-'.$entityName, $this->getView()->Html->tag('template', $html, ['v-slot:default' => "sp"]), $attributes );
+    return  $this->getView()->Html->tag('cms-'.$entityName, $html, $attributes );
   }
 
   public function extractRemoveAttributes(\DOMElement $node): Array
