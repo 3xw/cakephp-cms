@@ -6,38 +6,33 @@ return [
       'suffixes' => ['input_text','textarea']
     ],
     'Tree' => [
-      'pages' =>
-      [
-        [
-          'name' => 'default',
+      'pages' => [
+        'default' => [
+          'name' => 'Page défault',
           'template' => 'Trois/Cms.pages/default',
-          'sections' => ['default']
+          'allowed' => ['sections.default']
         ]
       ],
-      'sections' =>
-      [
-        [
-          'name' => 'default',
+      'sections' => [
+        'default' => [
+          'name' => 'Défault Section',
           'template' => 'Trois/Cms.sections/default',
-          'modules' => ['default'],
-          'articles' => ['default','test']
+          'allowed' => ['modules.default','articles.default','articles.test']
         ]
       ],
-      'articles' =>
-      [
-        [
-          'name' => 'default',
+      'articles' => [
+        'default' => [
+          'name' => 'Défault Artcile',
           'template' => 'Trois/Cms.articles/default',
         ],
-        [
-          'name' => 'test',
+        'test' => [
+          'name' => 'Artcile test',
           'template' => 'Trois/Cms.articles/test',
         ]
       ],
-      'modules' =>
-      [
-        [
-          'name' => 'default',
+      'modules' => [
+        'default' => [
+          'name' => 'Défault module',
           'cell' => 'Trois/Cms.Module::default'
         ]
       ]

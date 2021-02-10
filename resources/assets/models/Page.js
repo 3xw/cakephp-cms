@@ -10,6 +10,7 @@ export default class Page extends Model
     return {
       id: this.attr(null).nullable(),
       title: this.attr(null),
+      template: this.attr(null),
 
       sections: this.hasMany(Section, 'page_id'),
     }

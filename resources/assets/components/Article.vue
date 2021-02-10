@@ -8,13 +8,21 @@
         <el-button v-if="!edit" @click="crudDelete()" size="mini" type="danger">Effacer</el-button>
 
         <el-button v-if="edit" @click="edit = false; cancel()" size="mini" type="info">Anuler</el-button>
-        <el-button v-if="edit" @click="edit = false; update()" size="mini" type="success">Enrgsiter</el-button>
+        <el-button v-if="edit" @click="edit = false; save()" size="mini" type="success">Enrgsiter</el-button>
       </el-button-group>
     </div>
 
     <!-- content -->
     <div class="cms-content cms-content--article">
-      <slot name="section-item" v-bind:edit="edit"></slot>
+
+      <!-- section item template -->
+      <cms-editable-select
+      :edit="edit"
+      :opts-provider="optsProvider" :opts-mapper="optsMapperTemplate"
+       modelStoreName="section_items" modelField="template" :modelId="sectionItemId"
+       />
+
+      <!-- article -->
       <slot name="default" v-bind:edit="edit"></slot>
     </div>
 
@@ -24,31 +32,45 @@
 <script>
 import edit from '../mixins/ui/edit'
 import editable from '../mixins/editable'
+import settings from '../mixins/settings'
 
 export default
 {
   name: 'cms-article',
-  mixins: [edit, editable],
+  mixins: [edit, editable, settings],
   props: {
     sectionItemId: String,
   },
+  data: () => ({
+    template: null
+  }),
   computed:
   {
-    SectionItem()
+    SI(){ return this.$store.$db().model('section_items')},
+    si(){ return this.SI.find(this.sectionItemId) },
+    templateChanged(){ return this.template != this.si.template },
+    options(){ return this.getAllowedTFS(this.si.section_id) }
+  },
+  watch:
+  {
+    edit(val)
     {
-      return this.$store.$db().model('section_items')
+      if(val) this.template = this.si.template
     }
   },
   methods:
   {
-    deleted()
-    {
-      window.location.reload()
-    },
+    optsProvider() { return this.options },
+    deleted() { window.location.reload()},
     cancel()
     {
       this.crudGetOne() // for article
-      this.SectionItem.crud().getOne(this.sectionItemId)
+      if(this.templateChanged) this.SI.crud().getOne(this.sectionItemId)
+    },
+    save()
+    {
+      this.update()
+      if(this.templateChanged) this.si.update().then(data => window.location.reload())
     }
   }
 }
