@@ -10,7 +10,7 @@ $resources = [
       'SectionItems'
     ]
   ],
-  'Sections', 'Articles'
+  'Sections', 'Articles','SectionItems'
 ];
 
 // Plugin routes

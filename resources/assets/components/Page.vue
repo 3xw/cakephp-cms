@@ -28,13 +28,14 @@
 <script>
 import Page from '../models/Page'
 import Section from '../models/Section'
+import editable from '../mixins/editable'
 
 export default
 {
   name: 'cms-page',
+  mixins: [editable],
   props:
   {
-    pageId: String,
     settings: Object
   },
   data()
@@ -52,13 +53,13 @@ export default
   {
     page()
     {
-      return Page.query().with('sections.section_items.article').where(this.pageId).first()
+      return Page.query().with('sections.section_items.article').where(this.modelId).first()
     }
   },
   created()
   {
     // load page content!!
-    Page.crud().getOne(this.pageId)
+    Page.crud().getOne(this.modelId)
   },
   methods:
   {

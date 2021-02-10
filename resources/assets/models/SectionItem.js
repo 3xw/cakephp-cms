@@ -5,7 +5,7 @@ import Module from './Module'
 
 export default class SectionItem extends Model
 {
-  static entity = 'sectionItems'
+  static entity = 'section_items'
 
   static fields ()
   {

@@ -67,19 +67,21 @@ class SectionItemsTable extends Table
       'foreignKey' => 'id',
       'bindingKey' => 'foreign_key',
       'className' => 'Trois/Cms.Articles',
+      'dependent' => true,
+      'cascadeCallbacks' => true,
       'conditions' => [
         'SectionItems.model' => 'Articles'
       ],
-      'sort' => ['SectionItems.order' => 'ASC']
     ]);
 
     $this->HasOne('Modules', [
       'foreignKey' => 'id',
       'bindingKey' => 'foreign_key',
+      'dependent' => true,
+      'cascadeCallbacks' => true,
       'conditions' => [
         'SectionItems.model' => 'Modules'
       ],
-      'sort' => ['SectionItems.order' => 'ASC']
     ]);
   }
 

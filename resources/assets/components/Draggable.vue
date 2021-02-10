@@ -21,7 +21,6 @@ export default
   {
     changed()
     {
-      console.log('ready', this.modelStoreName);
       if(!this.$slots.default || this.initied) return
 
       this.initied = true

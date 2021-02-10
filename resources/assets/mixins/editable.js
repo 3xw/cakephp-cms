@@ -59,7 +59,18 @@ export default
     },
     update()
     {
-      this.entity.update(null,[this.modelField])
+      this.entity.update()
+      .catch(err => console.log(err))
+    },
+    reset()
+    {
+      this.model.crud().getOne(this.modelId)
+      .catch(err => console.log(err))
+    },
+    destroy()
+    {
+      if(!confirm('Voulez-vous vraiement effacer l\'enregistrement ?')) return
+      this.entity.delete()
       .catch(err => console.log(err))
     }
   }

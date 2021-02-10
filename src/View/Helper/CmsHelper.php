@@ -47,11 +47,12 @@ class CmsHelper extends Helper
       $ids[] = $section->id;
       $html .= $this->cmsControls($section, 'section');
     }
-    $attributes = [];
-    $attributes['class'] = $classes;
-    $attributes['model-store-name'] = 'sections';
-    $attributes['model-field'] = 'order';
-    $attributes[':model-ids'] = json_encode($ids);
+    $attributes = [
+      'class' => $classes,
+      'model-store-name' => 'sections',
+      'model-field' => 'order',
+      ':model-ids' => json_encode($ids)
+    ];
     return $this->getView()->Html->tag('cms-draggable', $html, $attributes);
   }
 
@@ -69,11 +70,12 @@ class CmsHelper extends Helper
     if(! $this->isEditable()) return $html;
 
     // draggable
-    $attributes = [];
-    $attributes['class'] = $classes;
-    $attributes['model-store-name'] = 'sectionItems';
-    $attributes['model-field'] = 'order';
-    $attributes[':model-ids'] = json_encode($ids);
+    $attributes = [
+      'class' => $classes,
+      'model-store-name' => 'section_items',
+      'model-field' => 'order',
+      ':model-ids' => json_encode($ids)
+    ];
     return $this->getView()->Html->tag('cms-draggable', $html, $attributes);
   }
 
@@ -93,6 +95,10 @@ class CmsHelper extends Helper
 
   public function elem($entity, $entityName)
   {
+    $attributes = [
+      'model-store-name' => Inflector::pluralize(Inflector::underscore($entityName)),
+      'model-id' =>$entity->id
+    ];
     return $this->getView()->element($entity->template, ["$entityName" => $entity]);
   }
 
@@ -109,7 +115,9 @@ class CmsHelper extends Helper
 
     $attributes = array_merge($attributes,[
       ':settings' => json_encode(Configure::read('Trois/Cms')),
-      "$entityName-id" => $entity->id
+      'model-store-name' => Inflector::pluralize(Inflector::underscore($entityName)),
+      'model-field' => 'order',
+      'model-id' => $entity->id
     ]);
 
     return  $this->getView()->Html->tag('cms-'.$entityName, $this->getView()->Html->tag('template', $html, ['v-slot:default' => "sp"]), $attributes );
