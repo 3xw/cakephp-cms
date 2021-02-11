@@ -22,7 +22,7 @@ return [
       ],
       'articles' => [
         'default' => [
-          'name' => 'Défault Artcile',
+          'name' => 'Défault Article',
           'template' => 'Trois/Cms.articles/default',
         ],
         'test' => [

@@ -15,7 +15,7 @@ export default class SectionItem extends Model
       order: this.attr(null),
       model: this.attr(null),
       foreign_key: this.attr(null),
-      template: this.attr(null),
+      template: this.attr('Trois/Cms.articles/default'),
 
       section: this.belongsTo(Section, 'section_id'),
       article: this.hasOne(Article, 'id', 'foreign_key'),

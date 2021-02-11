@@ -9,6 +9,8 @@ export default class Article extends Model
   {
     return {
       id: this.attr(null).nullable(),
+      status: this.attr('cms-managed'),
+      publish_date: this.attr(new Date()),
       title: this.attr(null),
       header: this.attr(null),
       body: this.attr(null),

@@ -10,7 +10,7 @@ export default class Module extends Model
     return {
       id: this.attr(null).nullable(),
       name: this.attr(null),
-      cell: this.attr(null),
+      cell: this.attr('Trois/Cms.Default::display'),
 
       section_item: this.belongsTo(SectionItem, 'foreign_key'),
     }

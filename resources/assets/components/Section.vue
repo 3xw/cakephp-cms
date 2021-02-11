@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="cms-section">
 
-    <!-- controls -->
+    <!-- CONTROLS -->
     <div class="cms-controls cms-controls--section">
       <el-button-group>
         <el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>
@@ -13,24 +13,48 @@
       </el-button-group>
     </div>
 
-    <!-- section modal -->
+    <!-- ADD MODAL -->
     <el-dialog title="Nouvel element" :visible.sync="add" width="60%" >
-      <el-select v-model="type">
-        <el-option v-for="(options, index) in optsType" :key="index" :label="options.label" :value="options.value"></el-option>
-      </el-select>
 
-      <div v-if="type == 'articles'">
-        <h3>Choisir le type d'article</h3>
-        <el-select v-model="sectionItem.template">
-          <el-option v-for="(options, index) in optsTemplate" :key="index" :label="options.label" :value="options.value"></el-option>
-        </el-select>
+      <!-- ELEM TYPE -->
+      <el-form label-width="120px" >
+        <el-form-item label="Type d'elment">
+          <el-select v-model="type">
+            <el-option v-for="(options, index) in optsType" :key="index" :label="options.label" :value="options.value"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form >
+
+      <!-- ADD ARTICLE -->
+      <div v-if="type == 'articles' && optsTemplate.length">
+        <el-form :model="articleForm" :rules="articleRules" ref="articleForm" label-width="120px" >
+
+          <el-form-item label="Type d'article" prop="template">
+            <el-select v-model="articleForm.template">
+              <el-option v-for="(options, index) in optsTemplate" :key="index" :label="options.label" :value="options.value"></el-option>
+            </el-select>
+          </el-form-item>
+
+          <el-form-item label="Titre" prop="title">
+            <el-input required placeholder="Titre d'article" v-model="articleForm.title"></el-input>
+          </el-form-item>
+
+          <el-form-item name="Choisir le type d'article">
+            <el-button @click="$refs['articleForm'].validate(valid => { if(valid){ add = false; createArticle();} })" size="mini" type="success">Créer l'article</el-button>
+          </el-form-item>
+        </el-form>
       </div>
 
-      <div v-if="type == 'modules'">
+      <!-- ADD MODULE -->
+      <div v-if="type == 'modules' && optsCell.length">
+        <br>
         <h3>Choisir le type de module</h3>
         <el-select v-model="module.cell">
           <el-option v-for="(options, index) in optsCell" :key="index" :label="options.label" :value="options.value"></el-option>
         </el-select>
+        <br/>
+        <br/>
+        <el-button @click="add = false; createModule()" size="mini" type="success">Créer le module</el-button>
       </div>
 
     </el-dialog>
@@ -68,7 +92,15 @@ export default
     type: 'articles',
     sectionItem: new SectionItem(),
     article: new Article(),
-    module: new Module()
+    articleForm: {
+      template: 'Trois/Cms.articles/default',
+      title: null
+    },
+    articleRules: {
+      title: [{required: true, message: 'Veuillez entrer un titre', trigger: 'blur'}],
+      template: [{required: true}]
+    },
+    module: new Module(),
   }),
   mounted()
   {
@@ -79,24 +111,49 @@ export default
     SI() { return this.$store.$db().model('section_items') },
     sItems() { return this.SI.query().where('section_id', this.modelId).get() },
     siCount() { return this.sItems.length },
-    optsType() { return [{label: 'Nouvel artcile', value: 'articles'}, {label: 'Nouveau module', value: 'modules'}] },
+    optsType() { return [{label: 'Nouvel article', value: 'articles'}, {label: 'Nouveau module', value: 'modules'}] },
     optsLayout(){ return this.getAllowedTFP(this.entity.page_id) },
-    optsTemplate()
-    {
-      if(!this.entity) return []
-      return this.getAllowedTFS(this.modelId).filter(this.optsMapperTemplate)
-    },
-    optsCell()
-    {
-      if(!this.entity) return []
-      return this.getAllowedCFS(this.modelId).filter(this.optsMapperCell)
-    },
-    //siModel() { return this.type == 'articles'? 'Article': 'Module' }
+    optsTemplate(){ return this.getAllowedTFS(this.modelId).map(this.optsMapperTemplate) },
+    optsCell() { return this.getAllowedCFS(this.modelId).map(this.optsMapperCell) },
   },
   methods:
   {
     optsProvider() { return this.optsLayout },
     deleted() { window.location.reload()},
+    createArticle()
+    {
+      // fill in
+      this.sectionItem.model = 'Article'
+      this.sectionItem.template = this.articleForm.template
+      this.article.title = this.articleForm.title
+
+      // save
+      this.article.save()
+      .catch(err => alert(err))
+      .then(this.createSectionItem)
+    },
+    createModule()
+    {
+      // fill in
+      this.sectionItem.model = 'Module'
+      let opt = this.optsCell.find(e => e.cell = this.module.cell)
+      this.module.name = opt.label
+
+      // save
+      this.module.save()
+      .catch(err => alert(err))
+      .then(this.createSectionItem)
+    },
+    createSectionItem(record)
+    {
+      // fill in
+      this.sectionItem.foreign_key = record.id
+
+      // save
+      this.sectionItem.save()
+      .catch(err => alert(err))
+      .then(data => window.location.reload())
+    }
   }
 }
 </script>
