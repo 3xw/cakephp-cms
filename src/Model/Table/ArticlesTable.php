@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Trois\Cms\Model\Table;
 
+use Cake\Core\Configure;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -69,6 +70,9 @@ class ArticlesTable extends Table
       'className' => 'Trois/Attachment.Attachments',
     ]);
 
+    // custom Behaviors
+    if(Configure::read('Trois/Attachment.translate')) $this->addBehavior('Trois\Utils\ORM\Behavior\TranslateBehavior',['fields' => ['title','slug','meta','header','body']]);
+    $this->addBehavior('Trois\Utils\ORM\Behavior\SluggableBehavior', ['field' => 'title','translate' => Configure::read('Trois/Attachment.translate')]);
     $this->addBehavior('Trois/Cms.DeleteRelatedSectionItem');
   }
 
@@ -90,9 +94,8 @@ class ArticlesTable extends Table
     ->notEmptyString('status');
 
     $validator
-    ->dateTime('publish_date')
-    ->requirePresence('publish_date', 'create')
-    ->notEmptyDateTime('publish_date');
+    ->dateTime('publish_date',[ \Cake\Validation\Validation::DATETIME_ISO8601])
+    ->allowEmptyDateTime('publish_date');
 
     $validator
     ->scalar('title')

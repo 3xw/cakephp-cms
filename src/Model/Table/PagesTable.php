@@ -88,8 +88,8 @@ class PagesTable extends Table
     ]);
 
     // custom behaviors
-    $this->addBehavior('Trois\Utils\ORM\Behavior\SluggableBehavior', ['field' => 'title','translate' => Configure::check('Trois/Attachment.translate')]);
     if(Configure::read('Trois/Attachment.translate')) $this->addBehavior('Trois\Utils\ORM\Behavior\TranslateBehavior',['fields' => ['title','slug','meta','header','body']]);
+    $this->addBehavior('Trois\Utils\ORM\Behavior\SluggableBehavior', ['field' => 'title','translate' => Configure::read('Trois/Attachment.translate')]);
   }
 
   /**

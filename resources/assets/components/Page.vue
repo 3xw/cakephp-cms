@@ -4,21 +4,37 @@
     <!-- controls -->
     <div class="cms-controls">
       <el-button-group>
-        <el-button size="mini" type="primary" >Editer</el-button>
-        <el-button size="mini" type="danger">Effacer</el-button>
-        <el-button size="mini" type="success" @click="section.drawer = true">Ajouter une section</el-button>
+        <el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>
+        <el-button v-if="!edit" @click="crudDelete()" size="mini" type="danger">Effacer</el-button>
+        <el-button v-if="!edit" @click="add = true" size="mini" type="success">Ajouter une section</el-button>
+
+        <el-button v-if="edit" @click="edit = false; crudGetOne()" size="mini" type="info">Anuler</el-button>
+        <el-button v-if="edit" @click="edit = false; update()" size="mini" type="success">Enrgsiter</el-button>
       </el-button-group>
     </div>
 
-    <!-- section modal -->
-    <el-dialog title="Nouvelle section" :visible.sync="section.drawer" width="60%" >
-      <el-select v-model="section.item.template" placeholder="Choisir un type de section" :default-first-option="true">
-        <el-option v-for="(section, name) in settings.Sections" :key="name" :label="name" :value="section.template"></el-option>
-      </el-select><br/>
-      <el-button type="primary" @click="createSection(); section.drawer = false">Créer la section</el-button>
+    <!-- ADD MODAL -->
+    <el-dialog title="Nouvelle section" :visible.sync="add" width="60%" >
+      <div>
+        <el-select v-model="section.template">
+          <el-option v-for="(options, index) in optsSections" :key="index" :label="options.label" :value="options.value"></el-option>
+        </el-select>
+        <br/>
+        <br/>
+        <el-button @click="add = false; createSection()" size="mini" type="success">Créer la séction</el-button>
+      </div>
     </el-dialog>
 
-    <div class="cms-content">
+    <div class="cms-content cms-content--page">
+
+      <!-- section item template -->
+      <cms-editable-select
+      :edit="edit"
+      :opts-provider="optsProvider" :opts-mapper="optsMapperTemplate"
+      modelStoreName="pages" modelField="template" :modelId="modelId"
+      />
+
+      <!-- draggable -->
       <slot></slot>
     </div>
 
@@ -26,51 +42,40 @@
 </template>
 
 <script>
-import Page from '../models/Page'
-import Section from '../models/Section'
+import edit from '../mixins/ui/edit'
+import add from '../mixins/ui/add'
 import editable from '../mixins/editable'
+import settings from '../mixins/settings'
+import Section from '../models/Section'
 
 export default
 {
   name: 'cms-page',
-  mixins: [editable],
-  props:
-  {
-    settings: Object
-  },
-  data()
-  {
-    return {
-      section: {
-        drawer: false,
-        item: {
-          template: null
-        }
-      }
-    }
-  },
+  mixins: [edit, add, editable, settings],
+  data:()=>({
+    section: new Section()
+  }),
+  created(){ this.model.crud().getOne(this.modelId)},
   computed:
   {
-    page()
-    {
-      return Page.query().with('sections.section_items.article').where(this.modelId).first()
-    }
-  },
-  created()
-  {
-    // load page content!!
-    Page.crud().getOne(this.modelId)
+    optsSections() {
+      if(!this.entity) return null
+      return this.getAllowedTFP(this.modelId).map(this.optsMapperTemplate)
+    },
   },
   methods:
   {
+    optsProvider() { return this.getTemplatesForKind('pages') },
     createSection()
     {
-      let section = new Section(this.section.item)
-      section.order = this.page.sections.length
-      section
-      .save(null, null, {relations:[this.page]})
+      // fill in
+      this.section.page_id = this.modelField
+      this.section.order = _.has(this.entity.sections,'length')? this.entity.sections.length: 0
+
+      // save
+      this.section.save(null, null, {relations:[this.entity]})
       .then(data => window.location.reload())
-      .catch(error => console.log(error))
+      .catch(err => alert(err))
     }
   }
 }

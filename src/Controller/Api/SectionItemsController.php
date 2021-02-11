@@ -37,6 +37,10 @@ class SectionItemsController extends AppController
         ],
         'edit' => [
           'className' => 'Crud.Edit',
+          'api.error.exception' => [
+            'type' => 'validate',
+            'class' => 'Trois\Attachment\Crud\Error\Exception\ValidationException'
+          ],
         ],
         'delete' => [
           'className' => 'Crud.Delete',

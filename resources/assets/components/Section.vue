@@ -123,37 +123,38 @@ export default
     createArticle()
     {
       // fill in
-      this.sectionItem.model = 'Article'
+      this.sectionItem.model = 'Articles'
       this.sectionItem.template = this.articleForm.template
       this.article.title = this.articleForm.title
 
       // save
       console.log(this.article.apiPath());
       this.article.save()
-      .catch(err => alert(err))
       .then(this.createSectionItem)
+      .catch(err => alert(err))
     },
     createModule()
     {
       // fill in
-      this.sectionItem.model = 'Module'
+      this.sectionItem.model = 'Modules'
       let opt = this.optsCell.find(e => e.cell = this.module.cell)
       this.module.name = opt.label
 
       // save
       this.module.save()
-      .catch(err => alert(err))
       .then(this.createSectionItem)
+      .catch(err => alert(err))
     },
     createSectionItem(record)
     {
       // fill in
       this.sectionItem.foreign_key = record.id
+      this.sectionItem.order = this.siCount
 
       // save
       this.sectionItem.save()
-      .catch(err => alert(err))
       .then(data => window.location.reload())
+      .catch(err => alert(err))
     }
   }
 }

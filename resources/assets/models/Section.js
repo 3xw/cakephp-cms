@@ -12,7 +12,7 @@ export default class Section extends Model
       id: this.attr(null).nullable(),
       page_id: this.attr(null),
       order: this.attr(null),
-      template: this.attr(null),
+      template: this.attr('Trois/Cms.sections/default'),
 
       page: this.belongsTo(Page, 'page_id'),
       section_items: this.hasMany(SectionItem, 'section_id'),

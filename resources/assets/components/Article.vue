@@ -58,6 +58,10 @@ export default
       if(val) this.template = this.si.template
     }
   },
+  mounted()
+  {
+    console.log(this.$scopedSlots.default());
+  },
   methods:
   {
     optsProvider() { return this.options },

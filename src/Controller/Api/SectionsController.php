@@ -15,7 +15,7 @@ use Trois\Cms\Controller\AppController;
 class SectionsController extends AppController
 {
   use \Crud\Controller\ControllerTrait;
-  
+
   public function initialize():void
   {
     parent::initialize();
@@ -37,6 +37,10 @@ class SectionsController extends AppController
         ],
         'edit' => [
           'className' => 'Crud.Edit',
+          'api.error.exception' => [
+            'type' => 'validate',
+            'class' => 'Trois\Attachment\Crud\Error\Exception\ValidationException'
+          ],
         ],
         'delete' => [
           'className' => 'Crud.Delete',

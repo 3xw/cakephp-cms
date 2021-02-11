@@ -26,9 +26,17 @@ class PagesController extends AppController
         ],
         'add' =>[
           'className' => 'Trois/Utils.Add',
+          'api.error.exception' => [
+            'type' => 'validate',
+            'class' => 'Trois\Attachment\Crud\Error\Exception\ValidationException'
+          ],
         ],
         'edit' =>[
           'className' => 'Trois/Utils.Edit',
+          'api.error.exception' => [
+            'type' => 'validate',
+            'class' => 'Trois\Attachment\Crud\Error\Exception\ValidationException'
+          ],
         ],
         'delete' => [
           'className' => 'Crud.Delete',

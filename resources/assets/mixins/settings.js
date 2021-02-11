@@ -11,6 +11,13 @@ export default
     optsMapperTemplate(elem) { return {label: elem.name, value: elem.template} },
     optsMapperCell(elem) { return {label: elem.name, value: elem.cell} },
 
+    getTemplatesForKind($kind)
+    {
+      let settings = _.get(this.settings.Tree, $kind)
+      let templates = []
+      _.forOwn(settings, (value, key) => { templates.push(value) })
+      return templates
+    },
     getKeyFromTemplateName(tmpl, type = 'pages')
     {
       return _.findKey(this.settings.Tree[type], function(o) { return o.template == tmpl })

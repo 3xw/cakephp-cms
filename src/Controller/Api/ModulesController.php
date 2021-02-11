@@ -37,6 +37,10 @@ class ModulesController extends AppController
         ],
         'edit' => [
           'className' => 'Trois/Utils.Edit',
+          'api.error.exception' => [
+            'type' => 'validate',
+            'class' => 'Trois\Attachment\Crud\Error\Exception\ValidationException'
+          ],
         ],
         'delete' => [
           'className' => 'Crud.Delete',
