@@ -128,6 +128,7 @@ export default
       this.article.title = this.articleForm.title
 
       // save
+      console.log(this.article.apiPath());
       this.article.save()
       .catch(err => alert(err))
       .then(this.createSectionItem)
