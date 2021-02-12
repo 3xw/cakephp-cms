@@ -71,8 +71,8 @@ export default
     {
       if(!confirm('Voulez-vous vraiement effacer l\'enregistrement ?')) return
       this.entity.delete()
-      .catch(err => console.log(err))
       .then(this.deleted)
+      .catch(err => console.log(err))
     }
   }
 }

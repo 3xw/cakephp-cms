@@ -11,30 +11,12 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use Cake\Event\EventInterface;
 use Cake\Datasource\EntityInterface;
+use Trois\Utils\ORM\Traits\AssocationsTrait;
 
-/**
-* SectionItems Model
-*
-* @property \Trois\Cms\Model\Table\SectionsTable&\Cake\ORM\Association\BelongsTo $Sections
-*
-* @method \Trois\Cms\Model\Entity\SectionItem newEmptyEntity()
-* @method \Trois\Cms\Model\Entity\SectionItem newEntity(array $data, array $options = [])
-* @method \Trois\Cms\Model\Entity\SectionItem[] newEntities(array $data, array $options = [])
-* @method \Trois\Cms\Model\Entity\SectionItem get($primaryKey, $options = [])
-* @method \Trois\Cms\Model\Entity\SectionItem findOrCreate($search, ?callable $callback = null, $options = [])
-* @method \Trois\Cms\Model\Entity\SectionItem patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
-* @method \Trois\Cms\Model\Entity\SectionItem[] patchEntities(iterable $entities, array $data, array $options = [])
-* @method \Trois\Cms\Model\Entity\SectionItem|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
-* @method \Trois\Cms\Model\Entity\SectionItem saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
-* @method \Trois\Cms\Model\Entity\SectionItem[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
-* @method \Trois\Cms\Model\Entity\SectionItem[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
-* @method \Trois\Cms\Model\Entity\SectionItem[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
-* @method \Trois\Cms\Model\Entity\SectionItem[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
-*
-* @mixin \Cake\ORM\Behavior\TimestampBehavior
-*/
 class SectionItemsTable extends Table
 {
+  use AssocationsTrait;
+
   /**
   * Initialize method
   *
@@ -67,43 +49,26 @@ class SectionItemsTable extends Table
       'className' => 'Trois/Cms.Sections',
     ]);
 
-    $this->HasOne('Articles', [
-      'foreignKey' => 'id',
-      'bindingKey' => 'foreign_key',
+    $this->HasOneMultiBindings('Articles', [
       'className' => 'Trois/Cms.Articles',
-      'conditions' => [
-        'SectionItems.model' => 'Articles'
-      ],
-    ]);
-
-    $this->HasOne('Modules', [
       'foreignKey' => 'id',
       'bindingKey' => 'foreign_key',
-      'conditions' => [
-        'SectionItems.model' => 'Modules'
+      'multiBindings' => [
+        'SectionItems.model' => 'Articles',
       ],
+      'dependent' => true,
+    ]);
+
+    $this->HasOneMultiBindings('Modules', [
+      'className' => 'Trois/Cms.Modules',
+      'foreignKey' => 'id',
+      'bindingKey' => 'foreign_key',
+      'multiBindings' => [
+        'SectionItems.model' => 'Modules',
+      ],
+      'dependent' => true,
     ]);
   }
-
-  /*
-  public function afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options)
-  {
-    foreach([$this->Articles, $this->Modules] as $Model)
-    {
-      $alias = $Model->getAlias();
-      if($m = $Model->find()
-      ->where([ "$alias.id" => $entity->foreign_key])
-      ->first())
-      {
-        if(!$Model->delete($m))
-        {
-          $event->stopPropagation();
-          return;
-        }
-      }
-    }
-  }
-  */
 
   /**
   * Default validation rules.
@@ -125,14 +90,14 @@ class SectionItemsTable extends Table
     $validator
     ->scalar('model')
     ->maxLength('model', 45)
-    ->requirePresence('model', 'create')
-    ->notEmptyString('model');
+    //->requirePresence('model', 'create')
+    ->allowEmptyString('model');
 
     $validator
     ->scalar('foreign_key')
     ->maxLength('foreign_key', 255)
-    ->requirePresence('foreign_key', 'create')
-    ->notEmptyString('foreign_key');
+    //->requirePresence('foreign_key', 'create')
+    ->allowEmptyString('foreign_key');
 
     $validator
     ->scalar('meta')

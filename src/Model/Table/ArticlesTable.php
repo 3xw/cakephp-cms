@@ -8,6 +8,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Trois\Utils\ORM\Traits\AssocationsTrait;
 
 /**
 * Articles Model
@@ -33,6 +34,8 @@ use Cake\Validation\Validator;
 */
 class ArticlesTable extends Table
 {
+  use AssocationsTrait;
+
   /**
   * Initialize method
   *
@@ -70,10 +73,19 @@ class ArticlesTable extends Table
       'className' => 'Trois/Attachment.Attachments',
     ]);
 
+    $this->HasOneMultiBindings('SectionItems', [
+      'className' => 'Trois/Cms.SectionItems',
+      'foreignKey' => 'foreign_key',
+      'bindingKey' => 'id',
+      'multiBindings' => [
+        'SectionItems.model' => 'Articles'
+      ],
+      'dependent' => true,
+    ]);
+
     // custom Behaviors
     if(Configure::read('Trois/Attachment.translate')) $this->addBehavior('Trois\Utils\ORM\Behavior\TranslateBehavior',['fields' => ['title','slug','meta','header','body']]);
     $this->addBehavior('Trois\Utils\ORM\Behavior\SluggableBehavior', ['field' => 'title','translate' => Configure::read('Trois/Attachment.translate')]);
-    $this->addBehavior('Trois/Cms.DeleteRelatedSectionItem');
   }
 
   /**

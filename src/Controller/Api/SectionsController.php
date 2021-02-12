@@ -55,4 +55,18 @@ class SectionsController extends AppController
       ]
     ]);
   }
+
+  public function view($id)
+  {
+    $this->Crud->on('beforeFind', function(\Cake\Event\Event $event) {
+      $event->getSubject()->query
+      ->contain([
+        'SectionItems' => [
+          'Articles' => ['Attachments'],
+          'Modules'
+        ]
+      ]);
+    });
+    return $this->Crud->execute();
+  }
 }

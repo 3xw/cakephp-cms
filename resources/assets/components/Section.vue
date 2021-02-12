@@ -39,7 +39,7 @@
             <el-input required placeholder="Titre d'article" v-model="articleForm.title"></el-input>
           </el-form-item>
 
-          <el-form-item name="Choisir le type d'article">
+          <el-form-item>
             <el-button @click="$refs['articleForm'].validate(valid => { if(valid){ add = false; createArticle();} })" size="mini" type="success">Créer l'article</el-button>
           </el-form-item>
         </el-form>
@@ -47,14 +47,16 @@
 
       <!-- ADD MODULE -->
       <div v-if="type == 'modules' && optsCell.length">
-        <br>
-        <h3>Choisir le type de module</h3>
-        <el-select v-model="module.cell">
-          <el-option v-for="(options, index) in optsCell" :key="index" :label="options.label" :value="options.value"></el-option>
-        </el-select>
-        <br/>
-        <br/>
-        <el-button @click="add = false; createModule()" size="mini" type="success">Créer le module</el-button>
+        <el-form label-width="120px" >
+          <el-form-item label="Type de module" prop="template">
+            <el-select v-model="module.cell">
+              <el-option v-for="(options, index) in optsCell" :key="index" :label="options.label" :value="options.value"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item>
+            <el-button @click="add = false; createModule()" size="mini" type="success">Créer le module</el-button>
+          </el-form-item>
+        </el-form>
       </div>
 
     </el-dialog>
@@ -123,36 +125,27 @@ export default
     createArticle()
     {
       // fill in
-      this.sectionItem.model = 'Articles'
+      this.sectionItem.order = this.siCount
       this.sectionItem.template = this.articleForm.template
       this.article.title = this.articleForm.title
+      this.article.section_item = this.sectionItem
 
       // save
       console.log(this.article.apiPath());
       this.article.save()
-      .then(this.createSectionItem)
+      .then(data => window.location.reload())
       .catch(err => alert(err))
     },
     createModule()
     {
       // fill in
-      this.sectionItem.model = 'Modules'
+      this.sectionItem.order = this.siCount
       let opt = this.optsCell.find(e => e.cell = this.module.cell)
       this.module.name = opt.label
+      this.module.section_item = this.sectionItem
 
       // save
       this.module.save()
-      .then(this.createSectionItem)
-      .catch(err => alert(err))
-    },
-    createSectionItem(record)
-    {
-      // fill in
-      this.sectionItem.foreign_key = record.id
-      this.sectionItem.order = this.siCount
-
-      // save
-      this.sectionItem.save()
       .then(data => window.location.reload())
       .catch(err => alert(err))
     }

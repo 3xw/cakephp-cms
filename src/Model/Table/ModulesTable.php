@@ -7,6 +7,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Trois\Utils\ORM\Traits\AssocationsTrait;
 
 /**
 * Modules Model
@@ -31,6 +32,8 @@ use Cake\Validation\Validator;
 */
 class ModulesTable extends Table
 {
+  use AssocationsTrait;
+
   /**
   * Initialize method
   *
@@ -64,7 +67,15 @@ class ModulesTable extends Table
       'cascadeCallbacks' => true,
     ]);
 
-    $this->addBehavior('Trois/Cms.DeleteRelatedSectionItem');
+    $this->HasOneMultiBindings('SectionItems', [
+      'className' => 'Trois/Cms.SectionItems',
+      'foreignKey' => 'foreign_key',
+      'bindingKey' => 'id',
+      'multiBindings' => [
+        'SectionItems.model' => 'Modules'
+      ],
+      'dependent' => true,
+    ]);
   }
 
   /**

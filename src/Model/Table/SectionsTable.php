@@ -66,26 +66,9 @@ class SectionsTable extends Table
     $this->hasMany('SectionItems', [
       'foreignKey' => 'section_id',
       'className' => 'Trois/Cms.SectionItems',
-      'dependent' => true,
+      'sort' => ['SectionItems.order' => 'ASC'],
       'cascadeCallbacks' => true,
-      'sort' => ['SectionItems.order' => 'ASC']
-    ]);
-    $this->belongsToMany('Articles', [
-      'foreignKey' => 'section_id',
-      'targetForeignKey' => 'foreign_key',
-      'joinTable' => 'section_items',
-      'className' => 'Trois/Cms.Articles',
-      'conditions' => [
-        'SectionItems.model' => 'Articles'
-      ],
-    ]);
-    $this->belongsToMany('Modules', [
-      'foreignKey' => 'section_id',
-      'targetForeignKey' => 'foreign_key',
-      'joinTable' => 'section_items',
-      'conditions' => [
-        'SectionItems.model' => 'Modules'
-      ],
+      'dependent' => true,
     ]);
   }
 
