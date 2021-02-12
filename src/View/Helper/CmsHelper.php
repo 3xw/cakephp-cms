@@ -143,7 +143,7 @@ class CmsHelper extends Helper
       break;
 
       default:
-      $html = $this->elem($entity, $entityName);
+      $html = $this->cmsEditable($entity, $entityName);
     }
     return $html;
   }
@@ -160,7 +160,7 @@ class CmsHelper extends Helper
   public function cmsEditable($entity, $entityName)
   {
     // create right elmem
-    $html = $entityName == 'article'? $this->elem($entity, $entityName): $this->getView()->cell($entity->cell, [$entity->id]);
+    $html = $entityName == 'module'? $this->getView()->cell($entity->cell, [$entity->id]): $this->elem($entity, $entityName);
 
     // dom stuff
     $dom = new DOMDocument();

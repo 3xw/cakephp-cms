@@ -25,11 +25,11 @@
           </el-form-item>
 
           <el-form-item label="Slug de page" prop="slug">
-            <el-input type="text" v-model="editable.slug"></el-input>
+            <el-input type="textarea" v-model="editable.slug"></el-input>
           </el-form-item>
 
           <el-form-item label="Metas de page" prop="meta">
-            <el-input type="text" v-model="editable.meta"></el-input>
+            <el-input type="textarea" v-model="editable.meta"></el-input>
           </el-form-item>
         </el-form >
       </div>
@@ -51,7 +51,7 @@
     <div class="cms-content cms-content--page">
 
       <!-- draggable -->
-      <slot></slot>
+      <slot name="default" v-bind:edit="edit"></slot>
     </div>
 
   </div>
