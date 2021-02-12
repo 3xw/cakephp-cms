@@ -59,15 +59,16 @@ class PagesTable extends Table
       'sort' => ['ChildPages.lft' => 'ASC']
     ]);
     $this->hasMany('Sections', [
+      'className' => 'Trois/Cms.Sections',
       'foreignKey' => 'page_id',
       'className' => 'Trois/Cms.Sections',
       'sort' => ['Sections.order' => 'ASC']
     ]);
     $this->belongsToMany('Attachments', [
+      'className' => 'Trois/Attachment.Attachments',
       'foreignKey' => 'page_id',
       'targetForeignKey' => 'attachment_id',
       'joinTable' => 'attachments_pages',
-      'className' => 'Trois/Attachment.Attachments',
     ]);
 
     // native behaviors

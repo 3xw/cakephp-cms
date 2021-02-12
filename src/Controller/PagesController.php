@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 namespace Trois\Cms\Controller;
 
-use Trois\Cms\Controller\AppController;
 use Cake\I18n\I18n;
+use Cake\Http\Exception\NotFoundException;
+use Trois\Cms\Controller\AppController;
 
 /**
 * Pages Controller
@@ -15,9 +16,14 @@ use Cake\I18n\I18n;
 */
 class PagesController extends AppController
 {
-  public function view($slug)
+  public function view( ...$slug)
   {
-    //$this->loadModel('Trois/Cms.Pages');
+    // if empty $image
+    if(empty($slug)){ throw new NotFoundException(); }
+    $slug = implode("/", $slug);
+
+    debug($slug);
+    $this->loadModel('Trois/Cms.Pages');
 
     $lng = I18n::getLocale();
     $slugField = $lng == 'fr_CH'? 'Pages.slug' : 'Pages_slug_translation.content';
@@ -38,10 +44,8 @@ class PagesController extends AppController
     ])
     ->first();
 
-    //debug($page);
-
     $this->set('title', $page->title);
-    $this->set('description', $page->meta);
+    $this->set('meta', $page->meta);
     $this->set(compact('page'));
 
   }

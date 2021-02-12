@@ -64,13 +64,13 @@ class ArticlesTable extends Table
 
     $this->belongsTo('Users', [
       'foreignKey' => 'user_id',
-      'className' => 'Trois/Cms.Users',
+      'className' => 'Users',
     ]);
     $this->belongsToMany('Attachments', [
+      'className' => 'Trois/Attachment.Attachments',
       'foreignKey' => 'article_id',
       'targetForeignKey' => 'attachment_id',
       'joinTable' => 'attachments_articles',
-      'className' => 'Trois/Attachment.Attachments',
     ]);
 
     $this->HasOneMultiBindings('SectionItems', [
