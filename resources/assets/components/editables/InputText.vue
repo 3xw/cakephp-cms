@@ -2,7 +2,11 @@
 
   <!-- edit -->
   <div v-if="edit" class="cms-editable-input-text">
-    <input type="text" v-model="field">
+    <el-form label-width="120px">
+      <el-form-item :label="modelField">
+        <el-input v-model="field"></el-input>
+      </el-form-item>
+    </el-form>
   </div>
 
   <!-- show -->

@@ -17,7 +17,7 @@
 
       <!-- SETTINGS -->
       <div v-if="edit" class="cms-item-settings">
-        <el-form :model="editable" :rules="rules" ref="pageForm" label-width="180px" >
+        <el-form :model="editable" :rules="rules" ref="pageForm" label-width="180px" size="mini">
           <el-form-item label="Template de page" prop="template">
             <el-select v-model="editable.template">
               <el-option v-for="(options, index) in pageTemplates" :key="index" :label="options.label" :value="options.value"></el-option>
@@ -32,6 +32,15 @@
             <el-input type="textarea" v-model="editable.meta"></el-input>
           </el-form-item>
         </el-form >
+      </div>
+
+      <!-- SLUG -->
+      <div v-if="0">
+        <el-form ref="form" label-width="300px" size="mini">
+          <el-form-item :label="editable.slug+'/'">
+            <el-input v-model="newPage.slug"></el-input>
+          </el-form-item>
+        </el-form>
       </div>
 
     </div>
@@ -71,6 +80,7 @@ export default
   mixins: [edit, add, editable, settings],
   data:()=>({
     section: new Section(),
+    newPage: new Page(),
     rules: {
       slug: [{required: true, message: 'Veuillez entrer un slug', trigger: 'blur'}],
       template: [{required: true}]
