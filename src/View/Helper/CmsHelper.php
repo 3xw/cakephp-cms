@@ -194,7 +194,12 @@ class CmsHelper extends Helper
 
     // load vue template
     $newNode = $dom->createDocumentFragment();
-    $newNode->appendXML($this->getView()->element("editables/$type", compact('attributes')));
+    try {
+      $html = $this->getView()->element("editables/$type", compact('attributes'));
+    } catch (\Exception $e) {
+      $html = $this->getView()->element("Trois/Cms.editables/$type", compact('attributes'));
+    }
+    $newNode->appendXML($html);
 
     // replace
     $oldNode->parentNode->replaceChild($newNode, $oldNode);

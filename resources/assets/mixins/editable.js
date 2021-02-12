@@ -1,5 +1,11 @@
 export default
 {
+  data()
+  {
+    return {
+      editable: null
+    }
+  },
   props:
   {
     modelStoreName: String,
@@ -16,7 +22,8 @@ export default
     entity()
     {
       if(!this.modelId) return null
-      return this.model.find(this.modelId)
+      this.editable = this.model.find(this.modelId)
+      return this.editable
     },
     entities()
     {
@@ -32,10 +39,10 @@ export default
       },
       set(val)
       {
-        this.entity[this.modelField] = val
+        this.editable[this.modelField] = val
         this.model.update({
           where: this.modelId,
-          data: this.entity
+          data: this.editable
         })
       }
     }
@@ -45,6 +52,7 @@ export default
     entity(val)
     {
       if(val) this.changed()
+      //this.editable = entity
     },
     entities(val)
     {
@@ -59,7 +67,7 @@ export default
 
     update()
     {
-      this.entity.update()
+      this.editable.update()
       .catch(err => console.log(err))
     },
     crudGetOne()
@@ -70,7 +78,7 @@ export default
     crudDelete()
     {
       if(!confirm('Voulez-vous vraiement effacer l\'enregistrement ?')) return
-      this.entity.delete()
+      this.editable.delete()
       .then(this.deleted)
       .catch(err => console.log(err))
     }

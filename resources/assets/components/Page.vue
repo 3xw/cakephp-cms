@@ -9,8 +9,31 @@
         <el-button v-if="!edit" @click="add = true" size="mini" type="success">Ajouter une section</el-button>
 
         <el-button v-if="edit" @click="edit = false; crudGetOne()" size="mini" type="info">Anuler</el-button>
-        <el-button v-if="edit" @click="edit = false; update()" size="mini" type="success">Enrgsiter</el-button>
+        <el-button
+        v-if="edit"
+        @click="$refs['pageForm'].validate(valid => { if(valid){ edit = false; update();} })"
+        size="mini" type="success">Enrgsiter</el-button>
       </el-button-group>
+
+      <!-- SETTINGS -->
+      <div v-if="edit" class="cms-item-settings">
+        <el-form :model="editable" :rules="rules" ref="pageForm" label-width="180px" >
+          <el-form-item label="Template de page" prop="template">
+            <el-select v-model="editable.template">
+              <el-option v-for="(options, index) in pageTemplates" :key="index" :label="options.label" :value="options.value"></el-option>
+            </el-select>
+          </el-form-item>
+
+          <el-form-item label="Slug de page" prop="slug">
+            <el-input type="text" v-model="editable.slug"></el-input>
+          </el-form-item>
+
+          <el-form-item label="Metas de page" prop="meta">
+            <el-input type="text" v-model="editable.meta"></el-input>
+          </el-form-item>
+        </el-form >
+      </div>
+
     </div>
 
     <!-- ADD MODAL -->
@@ -27,13 +50,6 @@
 
     <div class="cms-content cms-content--page">
 
-      <!-- section item template -->
-      <cms-editable-select
-      :edit="edit"
-      :opts-provider="optsProvider" :opts-mapper="optsMapperTemplate"
-      modelStoreName="pages" modelField="template" :modelId="modelId"
-      />
-
       <!-- draggable -->
       <slot></slot>
     </div>
@@ -47,13 +63,18 @@ import add from '../mixins/ui/add'
 import editable from '../mixins/editable'
 import settings from '../mixins/settings'
 import Section from '../models/Section'
+import Page from '../models/Page'
 
 export default
 {
   name: 'cms-page',
   mixins: [edit, add, editable, settings],
   data:()=>({
-    section: new Section()
+    section: new Section(),
+    rules: {
+      slug: [{required: true, message: 'Veuillez entrer un slug', trigger: 'blur'}],
+      template: [{required: true}]
+    },
   }),
   created(){ this.model.crud().getOne(this.modelId)},
   computed:
@@ -62,10 +83,10 @@ export default
       if(!this.entity) return null
       return this.getAllowedTFP(this.modelId).map(this.optsMapperTemplate)
     },
+    pageTemplates(){return this.getTemplatesForKind('pages').map(this.optsMapperTemplate)}
   },
   methods:
   {
-    optsProvider() { return this.getTemplatesForKind('pages') },
     createSection()
     {
       // fill in

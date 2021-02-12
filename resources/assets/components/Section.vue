@@ -11,6 +11,16 @@
         <el-button v-if="edit" @click="edit = false; crudGetOne()" size="mini" type="info">Anuler</el-button>
         <el-button v-if="edit" @click="edit = false; update()" size="mini" type="success">Enrgsiter</el-button>
       </el-button-group>
+
+      <!-- SETTINGS -->
+      <div v-if="edit" class="cms-item-settings">
+        <cms-editable-select
+        :edit="edit"
+        :opts-provider="optsProvider" :opts-mapper="optsMapperTemplate"
+         modelStoreName="sections" modelField="template" :modelId="modelId"
+         />
+      </div>
+
     </div>
 
     <!-- ADD MODAL -->
@@ -62,14 +72,6 @@
     </el-dialog>
 
     <div class="cms-content cms-content--section">
-
-      <!-- section item template -->
-      <cms-editable-select
-      :edit="edit"
-      :opts-provider="optsProvider" :opts-mapper="optsMapperTemplate"
-       modelStoreName="sections" modelField="template" :modelId="modelId"
-       />
-
        <!-- draggable -->
       <slot></slot>
     </div>

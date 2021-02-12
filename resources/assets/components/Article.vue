@@ -10,17 +10,20 @@
         <el-button v-if="edit" @click="edit = false; cancel()" size="mini" type="info">Anuler</el-button>
         <el-button v-if="edit" @click="edit = false; save()" size="mini" type="success">Enrgsiter</el-button>
       </el-button-group>
+
+      <!-- SETTINGS -->
+      <div v-if="edit" class="cms-item-settings">
+        <cms-editable-select
+        :edit="edit"
+        :opts-provider="optsProvider" :opts-mapper="optsMapperTemplate"
+         modelStoreName="section_items" modelField="template" :modelId="sectionItemId"
+         />
+      </div>
+
     </div>
 
     <!-- content -->
     <div class="cms-content cms-content--article">
-
-      <!-- section item template -->
-      <cms-editable-select
-      :edit="edit"
-      :opts-provider="optsProvider" :opts-mapper="optsMapperTemplate"
-       modelStoreName="section_items" modelField="template" :modelId="sectionItemId"
-       />
 
       <!-- article -->
       <slot name="default" v-bind:edit="edit"></slot>

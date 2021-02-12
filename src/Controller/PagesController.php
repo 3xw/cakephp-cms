@@ -22,7 +22,6 @@ class PagesController extends AppController
     if(empty($slug)){ throw new NotFoundException(); }
     $slug = implode("/", $slug);
 
-    debug($slug);
     $this->loadModel('Trois/Cms.Pages');
 
     $lng = I18n::getLocale();
