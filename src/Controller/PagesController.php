@@ -42,7 +42,7 @@ class PagesController extends AppController
       ]
     ])
     ->first();
-    debug($page);
+    
     $this->set('title', $page->title);
     $this->set('meta', $page->meta);
     $this->set(compact('page'));

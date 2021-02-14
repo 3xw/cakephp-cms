@@ -7,11 +7,12 @@ export default
   mixins: [editable],
   props:
   {
-    elem: String
+    elem: String,
+    html: Boolean
   },
-  render: function (createElement)
+  render: function (ce)
   {
-    return createElement(this.elem, this.field)
+    return this.html?  ce(this.elem, {domProps:{innerHTML:this.field}}): ce(this.elem, this.field)
   }
 }
 </script>

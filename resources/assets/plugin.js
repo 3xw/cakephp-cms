@@ -12,11 +12,13 @@ import SimpleElement from './components/SimpleElement'
 import InputText from './components/editables/InputText'
 import Textarea from './components/editables/Textarea'
 import Select from './components/editables/Select'
+import Tiptap from './components/editables/Tiptap'
+import Tinymce from './components/editables/Tinymce'
 
 const
 components = [
   Page, Draggable, Section, Article, Module, SimpleElement,
-  InputText, Textarea, Select
+  InputText, Textarea, Select, Tiptap, Tinymce
 ],
 install = function(Vue, { store })
 {
@@ -42,5 +44,7 @@ export default
   SimpleElement,
   InputText,
   Textarea,
-  Select
+  Select,
+  Tiptap,
+  Tinymce
 }

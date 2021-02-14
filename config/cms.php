@@ -3,7 +3,7 @@ return [
   'Trois/Cms' => [
     'Editables' => [
       'prefix' => 'cms',
-      'suffixes' => ['input_text','textarea']
+      'suffixes' => ['input_text','textarea','tiptap', 'tinymce']
     ],
     'Tree' => [
       'pages' => [
