@@ -14,11 +14,12 @@ import Textarea from './components/editables/Textarea'
 import Select from './components/editables/Select'
 import Tiptap from './components/editables/Tiptap'
 import Tinymce from './components/editables/Tinymce'
+import Attachment from './components/editables/Attachment'
 
 const
 components = [
   Page, Draggable, Section, Article, Module, SimpleElement,
-  InputText, Textarea, Select, Tiptap, Tinymce
+  InputText, Textarea, Select, Tiptap, Tinymce, Attachment
 ],
 install = function(Vue, { store })
 {
@@ -46,5 +47,6 @@ export default
   Textarea,
   Select,
   Tiptap,
-  Tinymce
+  Tinymce,
+  Attachment
 }

@@ -2,7 +2,7 @@
 
   <!-- edit -->
   <div v-if="edit" class="cms-editable-tiptap">
-    <el-form label-width="120px">
+    <el-form label-position="top">
       <el-form-item :label="modelField">
 
         <editor
