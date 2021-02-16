@@ -9,6 +9,7 @@ use Cake\View\View;
 use Cake\Core\Configure;
 use Cake\Routing\Router;
 use Cake\Utility\Inflector;
+use PHPHtmlParser\Dom;
 
 class CmsHelper extends Helper
 {
@@ -115,12 +116,11 @@ class CmsHelper extends Helper
     $html = $this->getCmsInnerHtml($entity, $entityName);
 
     // extract element & attributes
-    $dom = new DOMDocument();
-    libxml_use_internal_errors(true);
-    if(!$dom->loadXML($html)) die(debug(libxml_get_errors()));
-
-    list($node, $attributes) = $this->extractRemoveAttributes($dom->documentElement);
-    $html = $dom->saveHTML($dom->documentElement);
+    $dom = new Dom;
+    $dom->loadStr($html);
+    $elem = $dom->find('*')[0];
+    $attributes = $elem->getAttributes();
+    $html = "<div>$elem->innerHtml</div>";
 
     // attr
     $attributes = array_merge($attributes,[
@@ -147,15 +147,6 @@ class CmsHelper extends Helper
       $html = $this->cmsEditable($entity, $entityName);
     }
     return $html;
-  }
-
-  public function extractRemoveAttributes(\DOMElement $node): Array
-  {
-    $attributes = [];
-    $renamed = $node->ownerDocument->createElement('div');
-    foreach ($node->attributes as $attribute) $attributes[$attribute->nodeName] = $attribute->nodeValue;
-    while ($node->firstChild) $renamed->appendChild($node->firstChild);
-    return [$node->parentNode->replaceChild($renamed, $node), $attributes];
   }
 
   public function cmsEditable($entity, $entityName)
