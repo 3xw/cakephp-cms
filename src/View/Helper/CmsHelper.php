@@ -117,7 +117,8 @@ class CmsHelper extends Helper
     // extract element & attributes
     $dom = new DOMDocument();
     libxml_use_internal_errors(true);
-    $dom->loadXML($html);
+    if(!$dom->loadXML($html)) die(debug(libxml_get_errors()));
+
     list($node, $attributes) = $this->extractRemoveAttributes($dom->documentElement);
     $html = $dom->saveHTML($dom->documentElement);
 
@@ -183,8 +184,9 @@ class CmsHelper extends Helper
     {
       if($attr->nodeName == "cms:$type")
       {
+        $field = $attr->nodeValue;
         $attributes['model-store-name'] = Inflector::pluralize(Inflector::underscore($entityName));
-        $attributes['model-field'] = "$attr->nodeValue";
+        $attributes['model-field'] = $field;
         $attributes['model-id'] = $entity->id;
         $attributes['elem'] = strtolower($oldNode->nodeName);
         $attributes[':edit'] = 'sp.edit';
@@ -195,9 +197,9 @@ class CmsHelper extends Helper
     // load vue template
     $newNode = $dom->createDocumentFragment();
     try {
-      $html = $this->getView()->element("editables/$type", compact('attributes'));
+      $html = $this->getView()->element("editables/$type", compact('attributes','entity','entityName','field'));
     } catch (\Exception $e) {
-      $html = $this->getView()->element("Trois/Cms.editables/$type", compact('attributes'));
+      $html = $this->getView()->element("Trois/Cms.editables/$type", compact('attributes','entity','entityName','field'));
     }
     $newNode->appendXML($html);
 

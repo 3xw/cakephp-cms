@@ -33,9 +33,10 @@
 </template>
 
 <script>
+import Cms from '©/3xw/cakephp-tinymce/resources/assets/vendor/js/tinymce/tinymce.5.1.min.js'
 import mutableInput from '../../mixins/ui/mutableInput.js'
 import editable from '../../mixins/editable.js'
- import Editor from '@tinymce/tinymce-vue'
+import Editor from '@tinymce/tinymce-vue'
 
 export default
 {
