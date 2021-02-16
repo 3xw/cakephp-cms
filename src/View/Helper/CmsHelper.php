@@ -1,9 +1,6 @@
 <?php
 namespace Trois\Cms\View\Helper;
 
-use \DOMDocument;
-use \DOMXPath;
-
 use Cake\View\Helper;
 use Cake\View\View;
 use Cake\Core\Configure;
@@ -155,46 +152,45 @@ class CmsHelper extends Helper
     $html = $entityName == 'module'? $this->getView()->cell($entity->cell, [$entity->id]): $this->elem($entity, $entityName);
 
     // dom stuff
-    $dom = new DOMDocument();
-    libxml_use_internal_errors(true);
-    $dom->loadXML($html);
-    $xpath = new DOMXPath($dom);
+    $dom = new Dom;
+    $dom->loadStr($html);
 
+    // findReplace
     $e = (object) Configure::read('Trois/Cms.Editables');
-    $nodes = [];
-    foreach($e->suffixes as $type) foreach($xpath->query("//*/@*[name()='$e->prefix:$type']") as $domAttr) $nodes[] = (object)['type' => $type, 'domAttr' => $domAttr];
-    foreach($nodes as $node) $this->cmsReplaceEditable($dom, $entity, $entityName, $node->type, $node->domAttr->ownerElement);
-    return $dom->saveHTML($dom->documentElement);
+    foreach($e->suffixes as $type) foreach($dom->find("*[$e->prefix:$type]") as $node) $this->cmsReplaceEditable($e->prefix, $type, $node, $entity, $entityName);
+
+    return $dom->outerHtml;
   }
 
-  public function cmsReplaceEditable($dom, $entity, $entityName, $type, $oldNode)
+  public function cmsReplaceEditable($prefix, $type, $node, $entity, $entityName)
   {
+    // find replace attribute
+    $field = $node->getAttribute("$prefix:$type");
+    $node->removeAttribute("$prefix:$type");
+
     // copy attributes collect Field
-    $attributes = [];
-    foreach ($oldNode->attributes as $attr)
-    {
-      if($attr->nodeName == "cms:$type")
-      {
-        $field = $attr->nodeValue;
-        $attributes['model-store-name'] = Inflector::pluralize(Inflector::underscore($entityName));
-        $attributes['model-field'] = $field;
-        $attributes['model-id'] = $entity->id;
-        $attributes['elem'] = strtolower($oldNode->nodeName);
-        $attributes[':edit'] = 'sp.edit';
-      }
-      else $attributes[$attr->nodeName] = "$attr->nodeValue";
-    }
+    $attributes = array_merge(
+      $node->getAttributes(),
+      [
+        'model-store-name' => Inflector::pluralize(Inflector::underscore($entityName)),
+        'model-field' => $field,
+        'model-id' => $entity->id,
+        'elem' => $node->getTag()->name(),
+        ':edit' => 'sp.edit'
+      ]
+    );
 
     // load vue template
-    $newNode = $dom->createDocumentFragment();
     try {
       $html = $this->getView()->element("editables/$type", compact('attributes','entity','entityName','field'));
     } catch (\Exception $e) {
       $html = $this->getView()->element("Trois/Cms.editables/$type", compact('attributes','entity','entityName','field'));
     }
-    $newNode->appendXML($html);
+    if(empty($html)) return;
+    $newNode = (new Dom)->loadStr($html)->find('*')[0];
 
     // replace
-    $oldNode->parentNode->replaceChild($newNode, $oldNode);
+    $parent = $node->getParent();
+    $parent->replaceChild($node->id(),$newNode);
   }
 }
