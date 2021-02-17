@@ -13,13 +13,12 @@ import InputText from './components/editables/InputText'
 import Textarea from './components/editables/Textarea'
 import Select from './components/editables/Select'
 import Tiptap from './components/editables/Tiptap'
-import InputsHandler from './components/editables/InputsHandler'
-import Attachment from './components/editables/Attachment'
+import Slot from './components/editables/Slot'
 
 const
 components = [
   Page, Draggable, Section, Article, Module, SimpleElement,
-  InputText, Textarea, Select, Tiptap, InputsHandler, Attachment
+  InputText, Textarea, Select, Tiptap, Slot
 ],
 install = function(Vue, { store })
 {
@@ -47,6 +46,5 @@ export default
   Textarea,
   Select,
   Tiptap,
-  InputsHandler,
-  Attachment
+  Slot
 }
