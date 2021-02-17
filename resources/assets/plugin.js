@@ -34,17 +34,4 @@ export default
 {
   version: '4.0.0',
   install,
-
-  // export compo individually
-  Page,
-  Draggable,
-  Section,
-  Article,
-  Module,
-  SimpleElement,
-  InputText,
-  Textarea,
-  Select,
-  Tiptap,
-  Slot
 }

@@ -7,7 +7,7 @@ $html = $this->element('Trois/Tinymce.tinymce',[
   'value' => $entity->{$field},
   'init' => [
     'external_plugins' => [
-      'attachment' => $this->Url->build('/attachment/js/Plugins/tinymce/plugin.min.js', ['fullBase' => true]),
+      //'attachment' => $this->Url->build('/attachment/js/Plugins/tinymce/plugin.min.js', ['fullBase' => true]),
     ],
     'attachment_settings' => $this->Attachment->setup('body',[
       'types' => [
