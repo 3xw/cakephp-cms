@@ -1,5 +1,7 @@
 import { Model } from '@vuex-orm/core'
 import SectionItem from './SectionItem'
+import Attachment from './Attachment'
+import AttachmentArticle from './AttachmentArticle'
 import moment from 'moment'
 
 export default class Article extends Model
@@ -17,6 +19,7 @@ export default class Article extends Model
       body: this.attr(null),
 
       section_item: this.belongsTo(SectionItem, 'foreign_key'),
+      attachments: this.belongsToMany(Attachment, AttachmentArticle, 'article_id', 'attachment_id'),
     }
   }
 }
