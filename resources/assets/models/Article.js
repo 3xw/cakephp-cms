@@ -25,17 +25,16 @@ export default class Article extends Model
 
   async setAttachments( objs )
   {
-    switch(objs.length)
-    {
-      case 0:
-        // delete pivot !
-        let article = await this.constructor.query().whereId(this.id).with('attachments').first()
-        article.attachments.forEach(a => AttachmentArticle.delete([this.id, a.id]))
-        break;
+    console.log('article.setAttachments',objs)
 
-      default:
-        await this.constructor.insertOrUpdate({data: { id: this.id, attachments: objs }})
-        break;
-    }
+    // clear existing
+    let article = await this.constructor.query().whereId(this.id).with('attachments').first()
+    article.attachments.forEach(a => AttachmentArticle.delete([this.id, a.id]))
+
+    if(!objs.length) return
+
+    // create with order in pivot table
+    objs = objs.map((obj, i) => Object.assign(obj, { pivot:{order: i} }))
+    await this.constructor.insertOrUpdate({data: { id: this.id, attachments: objs }})
   }
 }
