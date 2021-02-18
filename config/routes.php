@@ -10,7 +10,7 @@ $resources = [
       'SectionItems'
     ]
   ],
-  'Sections', 'Articles','SectionItems', 'Modules'
+  'Sections', 'Articles','SectionItems', 'Modules', 'Categories'
 ];
 
 // Plugin routes
@@ -21,6 +21,13 @@ Router::plugin('Trois/Cms', ['path' => '/cms'], function (RouteBuilder $builder)
 
   // Plugin's Api routes
   $builder->prefix('Api', function (RouteBuilder $builder) use ($resources)
+  {
+    Mapper::mapRessources($resources, $builder);
+    $builder->setExtensions(['json']);
+    $builder->fallbacks();
+  });
+
+  $builder->prefix('Admin', function (RouteBuilder $builder) use ($resources)
   {
     Mapper::mapRessources($resources, $builder);
     $builder->setExtensions(['json']);
