@@ -58,6 +58,8 @@ class CategoriesTable extends Table
             'fields' => ['name']
         ]);
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Tree');
+        $this->addBehavior('Trois\Utils\ORM\Behavior\SluggableBehavior', ['field' => 'name', 'translate' => false]);
 
         $this->belongsTo('ParentCategories', [
             'className' => 'Trois/Cms.Categories',
@@ -73,6 +75,14 @@ class CategoriesTable extends Table
             'joinTable' => 'categories_faqs',
             'className' => 'Trois/Cms.Faqs',
         ]);
+
+        $this->belongsToMany('Attachments', [
+            'foreignKey' => 'category_id',
+            'targetForeignKey' => 'attachment_id',
+            'joinTable' => 'attachments_categories',
+            'className' => 'Trois/Attachment.Attachments',
+            'sort' => 'AttachmentsCategories.order ASC'
+        ]);
     }
 
     /**
@@ -86,11 +96,6 @@ class CategoriesTable extends Table
         $validator
             ->nonNegativeInteger('id')
             ->allowEmptyString('id', null, 'create');
-
-        $validator
-            ->nonNegativeInteger('left')
-            ->requirePresence('left', 'create')
-            ->notEmptyString('left');
 
         $validator
             ->scalar('name')

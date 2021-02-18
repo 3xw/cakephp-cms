@@ -66,11 +66,20 @@ class ArticlesTable extends Table
       'foreignKey' => 'user_id',
       'className' => 'Users',
     ]);
+
+    $this->belongsToMany('Categories', [
+      'className' => 'Trois/Cms.Categories',
+      'foreignKey' => 'article_id',
+      'targetForeignKey' => 'category_id',
+      'joinTable' => 'categories_articles'
+    ]);
+
     $this->belongsToMany('Attachments', [
       'className' => 'Trois/Attachment.Attachments',
       'foreignKey' => 'article_id',
       'targetForeignKey' => 'attachment_id',
       'joinTable' => 'attachments_articles',
+      'sort' => 'AttachmentsArticles.order ASC'
     ]);
 
     $this->HasOneMultiBindings('SectionItems', [
