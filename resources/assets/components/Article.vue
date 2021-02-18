@@ -49,6 +49,12 @@ export default
   }),
   computed:
   {
+    entity()
+    {
+      if(!this.modelId) return null
+      this.editable = this.model.query().whereId(this.modelId).with('attachments').first()
+      return this.editable
+    },
     attachments(){ return this.$store.$db().model('attachments').all() },
     SI(){ return this.$store.$db().model('section_items')},
     si(){ return this.SI.find(this.sectionItemId) },
