@@ -74,6 +74,11 @@ export default
   },
   methods:
   {
+    update()
+    {
+      this.editable.updateWithAttachments()
+      .catch(err => console.log(err))
+    },
     optsProvider() { return this.options },
     deleted() { window.location.reload()},
     cancel()
