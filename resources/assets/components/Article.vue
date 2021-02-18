@@ -49,6 +49,7 @@ export default
   }),
   computed:
   {
+    attachments(){ return this.$store.$db().model('attachments').all() },
     SI(){ return this.$store.$db().model('section_items')},
     si(){ return this.SI.find(this.sectionItemId) },
     templateChanged(){ return this.template != this.si.template },
@@ -63,7 +64,7 @@ export default
   },
   mounted()
   {
-    console.log(this.$scopedSlots.default());
+
   },
   methods:
   {
