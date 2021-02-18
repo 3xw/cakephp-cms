@@ -4,17 +4,26 @@
     <?
     if(!empty($article->attachments))
     {
-      echo $this->Attachment->image(
-        [
-          'image' => $article->attachment->path,
-          'profile' => $article->attachment->profile,
-          'width' => 1200
-        ],
-        [
-          'cms:attachment' => 'attachments'
-        ]
-      );
-    }else echo $this->Html->tag('div','',['cms:attachment' => 'attachments'])
+        foreach($article->attachments as $a)
+        {
+          if($a->type == 'image')
+          {
+            echo $this->Attachment->image(
+              [
+                'image' => $a->path,
+                'profile' => $a->profile,
+                'width' => 1200
+              ],
+              [
+                'cms:attachment' => 'attachments',
+                'class' => 'img-fluid'
+              ]
+            );
+            break;
+          }
+        }
+    }
+    else echo $this->Html->tag('div','',['cms:attachment' => 'attachments'])
 
     ?>
 
