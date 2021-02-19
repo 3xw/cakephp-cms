@@ -13,6 +13,9 @@ export default class Page extends Model
       template: this.attr(null),
       slug: this.attr(null),
       meta: this.attr(null),
+      lft: this.attr(null),
+      rght: this.attr(null),
+      parent_id: this.attr(null),
 
       sections: this.hasMany(Section, 'page_id'),
     }

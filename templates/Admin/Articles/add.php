@@ -49,6 +49,8 @@
           <div class="col-sm-4">
             <?= $this->Form->control('status', ['options' => ['draft' => __('Draft'), 'published' => __('Published')], 'class'=>'form-control']);?>
             <?= $this->Form->control('publish_date', ['class'=>'form-control']);?>
+            <?= $this->Form->control('categories._ids', ['options' => $categories, 'class'=>'form-control']);?>
+
             <?= $this->Attachment->input('Attachments',
             [
               'profile' => 'default',
