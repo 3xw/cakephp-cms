@@ -28,6 +28,8 @@ export default class Attachment extends Model
       duration: this.attr(null),
       meta: this.attr(null),
 
+      _joinData: this.attr(null),
+
     }
   }
 }
