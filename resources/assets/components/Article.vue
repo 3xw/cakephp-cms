@@ -16,8 +16,8 @@
         <cms-editable-select
         :edit="edit"
         :opts-provider="optsProvider" :opts-mapper="optsMapperTemplate"
-         modelStoreName="section_items" modelField="template" :modelId="sectionItemId"
-         />
+        modelStoreName="section_items" modelField="template" :modelId="sectionItemId"
+        />
       </div>
 
     </div>
@@ -49,12 +49,14 @@ export default
   }),
   computed:
   {
+    /*
     entity()
     {
       if(!this.modelId) return null
       this.editable = this.model.query().whereId(this.modelId).with('attachments').first()
       return this.editable
     },
+    */
     attachments(){ return this.$store.$db().model('attachments').all() },
     SI(){ return this.$store.$db().model('section_items')},
     si(){ return this.SI.find(this.sectionItemId) },
@@ -74,11 +76,6 @@ export default
   },
   methods:
   {
-    update()
-    {
-      this.editable.updateWithAttachments()
-      .catch(err => console.log(err))
-    },
     optsProvider() { return this.options },
     deleted() { window.location.reload()},
     cancel()
