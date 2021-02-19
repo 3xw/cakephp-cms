@@ -81,8 +81,12 @@ export default
     },
     save()
     {
+
+      if(this.templateChanged) this.si.update().catch(err => console.log(err))
+
       this.update()
-      if(this.templateChanged) this.si.update().then(data => window.location.reload())
+      //.then(data => window.location.reload())
+      .catch(err => console.log(err))
     }
   }
 }

@@ -2,13 +2,11 @@ import { Model } from '@vuex-orm/core'
 
 export default class ModelWithAttachments extends Model
 {
-  /*
+
   static query()
   {
-    //console.log('ModelWithAttachments.query');
-    return this.getters('query')().with('attachments')
+    return this.getters('query')().with('attachments');
   }
-  */
 
   async setAttachments( objs )
   {
