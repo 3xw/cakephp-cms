@@ -49,14 +49,10 @@ export default
   }),
   computed:
   {
-    /*
-    entity()
+    state()
     {
-      if(!this.modelId) return null
-      this.editable = this.model.query().whereId(this.modelId).with('attachments').first()
-      return this.editable
+      return this.$store.state
     },
-    */
     attachments(){ return this.$store.$db().model('attachments').all() },
     SI(){ return this.$store.$db().model('section_items')},
     si(){ return this.SI.find(this.sectionItemId) },
@@ -72,7 +68,7 @@ export default
   },
   mounted()
   {
-
+    this.crudGetOne()
   },
   methods:
   {
