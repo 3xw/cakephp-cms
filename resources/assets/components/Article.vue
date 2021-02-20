@@ -81,11 +81,11 @@ export default
     },
     save()
     {
+      let promises = [this.update()]
+      if(this.templateChanged) promises.push(this.si.update())
 
-      if(this.templateChanged) this.si.update().catch(err => console.log(err))
-
-      this.update()
-      //.then(data => window.location.reload())
+      Promise.all(promises)
+      .then(data => window.location.reload())
       .catch(err => console.log(err))
     }
   }
