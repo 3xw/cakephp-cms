@@ -4,7 +4,6 @@ import ormPlugin from './store/ormPlugin'
 
 // COMPONENTS
 import Page from './components/Page'
-import Pages from './components/Pages'
 import Draggable from './components/Draggable'
 import Section from './components/Section'
 import Article from './components/Article'
@@ -18,7 +17,7 @@ import Slot from './components/editables/Slot'
 
 const
 components = [
-  Page, Pages, Draggable, Section, Article, Module, SimpleElement,
+  Page, Draggable, Section, Article, Module, SimpleElement,
   InputText, Textarea, Select, Tiptap, Slot
 ],
 install = function(Vue, { store })

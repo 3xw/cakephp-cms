@@ -41,10 +41,10 @@
             <thead class="thead-default">
               <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('parent_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('slug') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('category_template') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('parent_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
               </tr>
             </thead>
@@ -52,10 +52,10 @@
             <?php foreach ($categories as $category): ?>
               <tr>
                 <td><?= $this->Number->format($category->id) ?></td>
-                <td><?= ($category->parent_category)? $category->parent_category->name : '' ?></td>
                 <td><?= (($category->parent_category)? ' - ' : '' ).h($category->name) ?></td>
                 <td><?= h($category->slug) ?></td>
                 <td><?= h($category->category_template) ?></td>
+                <td><?= ($category->parent_category)? $category->parent_category->name : '' ?></td>
                 <td data-title="actions" class="actions" class="text-right">
                   <div class="btn-group">
                     <?= $this->Html->link('<i class="material-icons">keyboard_arrow_up</i>', ['action' => 'moveUp', $category->id],['class' => 'btn btn-xs btn-simple btn-info btn-icon edit','escape' => false]) ?>
