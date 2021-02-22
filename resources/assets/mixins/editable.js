@@ -22,7 +22,7 @@ export default
     entity()
     {
       if(!this.modelId) return null
-      this.editable = this.model.find(this.modelId)
+      this.editable = this.model.query().where({id:this.modelId}).first()
       return this.editable
     },
     entities()
@@ -67,13 +67,11 @@ export default
 
     update()
     {
-      this.editable.update()
-      .catch(err => console.log(err))
+      return this.editable.update()
     },
     crudGetOne()
     {
-      this.model.crud().getOne(this.modelId)
-      .catch(err => console.log(err))
+      return this.model.crud().getOne(this.modelId)
     },
     crudDelete()
     {
