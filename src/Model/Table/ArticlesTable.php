@@ -92,9 +92,8 @@ class ArticlesTable extends Table
       'dependent' => true,
     ]);
 
-    // custom Behaviors
-    if(Configure::read('Trois/Attachment.translate')) $this->addBehavior('Trois\Utils\ORM\Behavior\TranslateBehavior',['fields' => ['title','slug','meta','header','body']]);
-    $this->addBehavior('Trois\Utils\ORM\Behavior\SluggableBehavior', ['field' => 'title','translate' => Configure::read('Trois/Attachment.translate')]);
+    // Behaviors from CMS settings...
+    if($behaviors = Configure::read('Trois/Cms.Models.Articles.behaviors')) foreach ($behaviors as $behavior => $settings) $this->addBehavior($behavior, $settings);
   }
 
   /**

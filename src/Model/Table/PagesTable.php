@@ -71,10 +71,6 @@ class PagesTable extends Table
       'joinTable' => 'attachments_pages',
     ]);
 
-    // native behaviors
-    $this->addBehavior('Timestamp');
-    $this->addBehavior('Tree');
-
     // vendor behaviors
     $this->addBehavior('Search.Search');
     $this->searchManager()
@@ -88,9 +84,12 @@ class PagesTable extends Table
       'fields' => ['title','meta','header','body']
     ]);
 
-    // custom behaviors
-    if(Configure::read('Trois/Attachment.translate')) $this->addBehavior('Trois\Utils\ORM\Behavior\TranslateBehavior',['fields' => ['title','slug','meta','header','body']]);
-    $this->addBehavior('Trois\Utils\ORM\Behavior\SluggableBehavior', ['field' => 'title','translate' => Configure::read('Trois/Attachment.translate')]);
+    // native behaviors
+    $this->addBehavior('Timestamp');
+    $this->addBehavior('Tree');
+    
+    // Behaviors from CMS settings...
+    if($behaviors = Configure::read('Trois/Cms.Models.Categories.behaviors')) foreach ($behaviors as $behavior => $settings) $this->addBehavior($behavior, $settings);
   }
 
   /**
