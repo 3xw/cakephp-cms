@@ -5,7 +5,7 @@
     <el-form label-position="top">
       <el-form-item :label="modelField">
 
-        <slot :entity="entity" />
+        <slot :entity="editable" />
 
       </el-form-item>
     </el-form>

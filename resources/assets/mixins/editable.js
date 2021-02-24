@@ -17,12 +17,13 @@ export default
   {
     model()
     {
+      if(!this.modelStoreName) return null
       return this.$store.$db().model(this.modelStoreName)
     },
     entity()
     {
       if(!this.modelId) return null
-      return this.model.query().whereId(this.modelId).first()
+      return this.model.query().where(entity => ( entity.id == this.modelId )).first()
     },
     entities()
     {
@@ -52,6 +53,7 @@ export default
     {
       if(val)
       {
+
         this.changed()
         this.editable = val
       }
@@ -69,7 +71,9 @@ export default
 
     update()
     {
-      return this.editable.update()
+      console.log('entity',this.entity);
+      console.log('editable',this.editable);
+      return this.entity.update()
     },
     crudGetOne()
     {
