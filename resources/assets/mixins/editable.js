@@ -3,7 +3,7 @@ export default
   data()
   {
     return {
-      editable: null
+      editable: null,
     }
   },
   props:
@@ -22,9 +22,7 @@ export default
     entity()
     {
       if(!this.modelId) return null
-      if(this.editable) return this.editable
-      this.editable = this.model.query().whereId(this.modelId).first()
-      return this.editable
+      return this.model.query().whereId(this.modelId).first()
     },
     entities()
     {
@@ -35,8 +33,8 @@ export default
     {
       get()
       {
-        if(!this.entity) return null
-        return this.entity[this.modelField]
+        if(!this.editable) return null
+        return this.editable[this.modelField]
       },
       set(val)
       {
@@ -52,8 +50,11 @@ export default
   {
     entity(val)
     {
-      if(val) this.changed()
-      //this.editable = entity
+      if(val)
+      {
+        this.changed()
+        this.editable = val
+      }
     },
     entities(val)
     {
