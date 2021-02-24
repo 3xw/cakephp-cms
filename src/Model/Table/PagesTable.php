@@ -88,8 +88,6 @@ class PagesTable extends Table
     $this->addBehavior('Timestamp');
     $this->addBehavior('Tree');
 
-    debug(  Configure::read('Trois/Cms') );
-
     // Behaviors from CMS settings...
     if($behaviors = Configure::read('Trois/Cms.Models.Categories.behaviors')) foreach ($behaviors as $behavior => $settings) $this->addBehavior($behavior, $settings);
     else $this->addBehavior(\Trois\Utils\ORM\Behavior\SluggableBehavior::class, ['field' => 'title','translate' => false]);
