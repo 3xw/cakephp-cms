@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Trois\Cms\Model\Table;
 
+use Cake\Core\Configure;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -83,7 +84,7 @@ class CategoriesTable extends Table
 
     $this->addBehavior('Timestamp');
     $this->addBehavior('Tree');
-    
+
     // Behaviors from CMS settings...
     if($behaviors = Configure::read('Trois/Cms.Models.Categories.behaviors')) foreach ($behaviors as $behavior => $settings) $this->addBehavior($behavior, $settings);
   }
