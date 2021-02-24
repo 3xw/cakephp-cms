@@ -22,7 +22,8 @@ export default
     entity()
     {
       if(!this.modelId) return null
-      this.editable = this.model.query().where({id:this.modelId}).first()
+      if(this.editable) return this.editable
+      this.editable = this.model.query().whereId(this.modelId).first()
       return this.editable
     },
     entities()
