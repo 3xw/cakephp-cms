@@ -87,6 +87,7 @@ class CategoriesTable extends Table
 
     // Behaviors from CMS settings...
     if($behaviors = Configure::read('Trois/Cms.Models.Categories.behaviors')) foreach ($behaviors as $behavior => $settings) $this->addBehavior($behavior, $settings);
+    else $this->addBehavior(\Trois\Utils\ORM\Behavior\SluggableBehavior::class, ['field' => 'name','translate' => false]);
   }
 
   /**
