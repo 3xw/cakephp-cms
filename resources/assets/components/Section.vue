@@ -6,10 +6,10 @@
       <el-button-group>
         <el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>
         <el-button v-if="!edit" @click="crudDelete()" size="mini" type="danger">Effacer</el-button>
-        <el-button v-if="!edit" @click="add = true" size="mini" type="success">Ajouter une element</el-button>
+        <el-button v-if="!edit" @click="add = true" size="mini" type="success">Ajouter un élément</el-button>
 
-        <el-button v-if="edit" @click="edit = false; crudGetOne()" size="mini" type="info">Anuler</el-button>
-        <el-button v-if="edit" @click="edit = false; update()" size="mini" type="success">Enrgsiter</el-button>
+        <el-button v-if="edit" @click="edit = false; crudGetOne()" size="mini" type="info">Annuler</el-button>
+        <el-button v-if="edit" @click="edit = false; update()" size="mini" type="success">Enregistrer</el-button>
       </el-button-group>
 
       <!-- SETTINGS -->

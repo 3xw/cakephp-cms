@@ -8,11 +8,11 @@
         <el-button v-if="!edit" @click="crudDelete()" size="mini" type="danger">Effacer</el-button>
         <el-button v-if="!edit" @click="add = true" size="mini" type="success">Ajouter une section</el-button>
 
-        <el-button v-if="edit" @click="edit = false; crudGetOne()" size="mini" type="info">Anuler</el-button>
+        <el-button v-if="edit" @click="edit = false; crudGetOne()" size="mini" type="info">Annuler</el-button>
         <el-button
         v-if="edit"
         @click="$refs['pageForm'].validate(valid => { if(valid){ edit = false; update();} })"
-        size="mini" type="success">Enrgsiter</el-button>
+        size="mini" type="success">Enregistrer</el-button>
       </el-button-group>
 
       <!-- SETTINGS -->

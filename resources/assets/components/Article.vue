@@ -7,8 +7,8 @@
         <el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>
         <el-button v-if="!edit" @click="crudDelete()" size="mini" type="danger">Effacer</el-button>
 
-        <el-button v-if="edit" @click="edit = false; cancel()" size="mini" type="info">Anuler</el-button>
-        <el-button v-if="edit" @click="edit = false; save()" size="mini" type="success">Enrgsiter</el-button>
+        <el-button v-if="edit" @click="edit = false; cancel()" size="mini" type="info">Annuler</el-button>
+        <el-button v-if="edit" @click="edit = false; save()" size="mini" type="success">Enregistrer</el-button>
       </el-button-group>
 
       <!-- SETTINGS -->
