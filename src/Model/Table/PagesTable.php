@@ -106,12 +106,16 @@ class PagesTable extends Table
     ->allowEmptyString('id', null, 'create');
 
     $validator
-        ->boolean('private')
-        ->allowEmptyString('private');
+    ->boolean('private')
+    ->allowEmptyString('private');
 
     $validator
-        ->boolean('published')
-        ->allowEmptyString('published');
+    ->boolean('published')
+    ->allowEmptyString('published');
+
+    $validator
+    ->dateTime('publish_date',[ \Cake\Validation\Validation::DATETIME_ISO8601])
+    ->allowEmptyDateTime('publish_date');
 
     $validator
     ->scalar('title')
