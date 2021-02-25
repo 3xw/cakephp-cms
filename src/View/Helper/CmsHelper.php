@@ -14,7 +14,7 @@ class CmsHelper extends Helper
   {
     if(!$identity = $this->getView()->getRequest()->getAttribute('identity')) return false;
 
-    
+
     return true;
   }
 
@@ -67,7 +67,7 @@ class CmsHelper extends Helper
     }
 
     // regular
-    if(! $this->isEditable('Sections')) return $html;
+    if(! $this->isEditable('Sections')) return $this->getView()->Html->tag('div', $html, ['class' => $classes]);
 
     // draggable
     $attributes = [
