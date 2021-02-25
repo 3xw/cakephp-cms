@@ -71,8 +71,6 @@ export default
 
     update()
     {
-      console.log('entity',this.entity);
-      console.log('editable',this.editable);
       return this.entity.update()
     },
     crudGetOne()

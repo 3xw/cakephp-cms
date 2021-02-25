@@ -8,7 +8,7 @@
         <el-button v-if="!edit" @click="crudDelete()" size="mini" type="danger">Effacer</el-button>
 
         <el-button v-if="edit" @click="edit = false; cancel()" size="mini" type="info">Anuler</el-button>
-        <el-button v-if="edit" @click="save()" size="mini" type="success">Enrgsiter</el-button>
+        <el-button v-if="edit" @click="edit = false; save()" size="mini" type="success">Enrgsiter</el-button>
       </el-button-group>
 
       <!-- SETTINGS -->
@@ -85,7 +85,7 @@ export default
       if(this.templateChanged) promises.push(this.si.update())
 
       Promise.all(promises)
-      //.then(data => window.location.reload())
+      .then(data => window.location.reload())
       .catch(err => console.log(err))
     }
   }

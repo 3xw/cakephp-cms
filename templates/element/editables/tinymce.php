@@ -1,7 +1,8 @@
 <?php
 $html = $this->element('Trois/Tinymce.tinymce',[
   'attributes' => [
-    ':entity' => 'sp.entity'
+    ':entity' => 'sp.entity',
+    ':set-filed' => 'sp.setFiled'
   ],
   'field' => $field,
   'value' => $entity->{$field},

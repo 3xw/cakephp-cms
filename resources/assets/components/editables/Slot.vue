@@ -5,7 +5,7 @@
     <el-form label-position="top">
       <el-form-item :label="modelField">
 
-        <slot :entity="editable" />
+        <slot :entity="editable" :setFiled="setFiled" />
 
       </el-form-item>
     </el-form>
@@ -24,5 +24,12 @@ export default
 {
   name: 'cms-editable-slot',
   mixins: [mutableInput, editable],
+  methods:
+  {
+    setFiled( val )
+    {
+      this.field = val
+    }
+  }
 }
 </script>
