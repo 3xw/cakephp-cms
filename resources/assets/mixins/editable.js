@@ -39,6 +39,7 @@ export default
       },
       set(val)
       {
+        if(!this.editable) return null
         this.editable[this.modelField] = val
         this.model.update({
           where: this.modelId,

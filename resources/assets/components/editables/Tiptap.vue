@@ -38,6 +38,13 @@ export default
     this.editor.on('update', this.editorUpdate)
     this.editor.setContent(this.field, 'html')
   },
+  watch:
+  {
+    edit(bool)
+    {
+      if(bool) this.editor.setContent(this.field, 'html')
+    }
+  },
   methods:
   {
     editorUpdate({getHTML})
