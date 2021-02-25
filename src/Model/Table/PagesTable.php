@@ -106,6 +106,14 @@ class PagesTable extends Table
     ->allowEmptyString('id', null, 'create');
 
     $validator
+        ->boolean('private')
+        ->allowEmptyString('private');
+
+    $validator
+        ->boolean('published')
+        ->allowEmptyString('published');
+
+    $validator
     ->scalar('title')
     ->maxLength('title', 255)
     ->requirePresence('title', 'create')

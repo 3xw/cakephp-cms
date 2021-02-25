@@ -71,6 +71,8 @@
           </div>
           <div class="col-sm-4">
             <?= $this->Form->control('parent_id', ['options' => $parentPages, 'empty' => true, 'class'=>'form-control']);?>
+            <?= $this->Form->control('private',['class'=>'form-control']);?>
+            <?= $this->Form->control('published',['class'=>'form-control']);?>
           </div>
         </div>
       </div>

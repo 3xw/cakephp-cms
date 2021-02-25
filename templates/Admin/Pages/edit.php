@@ -29,7 +29,7 @@
         <div class="row">
           <div class="col-sm-8">
             <?= $this->Form->control('title',['class'=>'form-control']);?>
-            <?= $this->Form->control('slug',['class'=>'form-control']);?>
+            <?= $this->Form->control('publlished',['class'=>'form-control']);?>
             <?= $this->Form->control('meta',['class'=>'form-control']);?>
             <? /* $this->element('Trois/Tinymce.tinymce',[
               'field' => 'header',
@@ -70,6 +70,8 @@
             ]); */?>
           </div>
           <div class="col-sm-4">
+            <?= $this->Form->control('private',['class'=>'form-control']);?>
+            <?= $this->Form->control('published',['class'=>'form-control']);?>
             <?= $this->Form->control('parent_id', ['options' => $parentPages, 'empty' => true, 'class'=>'form-control']);?>
           </div>
         </div>
