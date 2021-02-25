@@ -18,6 +18,8 @@ class CmsHelper extends Helper
   {
     if(!$identity = $this->getView()->getRequest()->getAttribute('identity')) return false;
 
+    if( $identity->is_superuser ) return true;
+
     $wantedRequest = new ServerRequest([
       'params' => [
         'plugin' => 'Trois/Cms',
