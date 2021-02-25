@@ -10,18 +10,20 @@ use PHPHtmlParser\Dom;
 
 class CmsHelper extends Helper
 {
-
-  public function isEditable($what = 'page')
+  public function isEditable($what = 'Pages')
   {
+    if(!$identity = $this->getView()->getRequest()->getAttribute('identity')) return false;
+
+    
     return true;
   }
 
   public function page($page)
   {
-    $html = $this->elem($page, 'page');
+    $html = $this->elem($page, 'Pages');
 
     // regular
-    if(! $this->isEditable()) return $html;
+    if(! $this->isEditable('Pages')) return $html;
 
     // draggable
     return $this->cmsControls($page, 'page');
@@ -32,7 +34,7 @@ class CmsHelper extends Helper
     $html = '';
 
     // regular
-    if(!$this->isEditable())
+    if(!$this->isEditable('Sections'))
     {
       foreach ($sections as $section) $html .= $this->elem($section, 'section');
       return $this->getView()->Html->tag('div', $html, ['class' => $classes]);
@@ -65,7 +67,7 @@ class CmsHelper extends Helper
     }
 
     // regular
-    if(! $this->isEditable()) return $html;
+    if(! $this->isEditable('Sections')) return $html;
 
     // draggable
     $attributes = [
@@ -85,14 +87,14 @@ class CmsHelper extends Helper
       $item->article->set('template', $item->template);
 
       // regular
-      if(! $this->isEditable())  return $this->elem($item->article, 'article');
+      if(! $this->isEditable('Articles'))  return $this->elem($item->article, 'article');
 
       // cmsize
       return $this->cmsControls($item->article, 'article', $item);
     }
 
     // regular
-    if(! $this->isEditable()) return $this->getView()->cell($item->module->cell, [$item->module->id]);
+    if(! $this->isEditable('Modules')) return $this->getView()->cell($item->module->cell, [$item->module->id]);
 
     // cmsize
     return $this->cmsControls($item->module, 'module', $item);
