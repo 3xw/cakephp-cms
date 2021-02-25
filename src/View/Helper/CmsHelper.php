@@ -6,7 +6,6 @@ use Cake\View\View;
 use Cake\Core\Configure;
 use Cake\Routing\Router;
 use Cake\Utility\Inflector;
-use Cake\Http\ServerRequestFactory;
 use Cake\Http\ServerRequest;
 
 use CakeDC\Auth\Rbac\Rbac;
@@ -19,23 +18,16 @@ class CmsHelper extends Helper
   {
     if(!$identity = $this->getView()->getRequest()->getAttribute('identity')) return false;
 
-    /*
-    debug($wantedRequest = new ServerRequest([
+    $wantedRequest = new ServerRequest([
       'params' => [
-        'plugin' => 'Trois/cms',
+        'plugin' => 'Trois/Cms',
         'controller' => $what,
         'prefix' => 'api',
-        'action' => 'add',
-        '_ext' => null,
-        'pass' => [],
+        'action' => 'add'
       ]
-    ]));
+    ]);
     $isAuth = (new Rbac())->checkPermissions($identity->getoriginalData(), $wantedRequest);
-    debug($isAuth);
-
-    die();
-    */
-    return true;
+    return $isAuth;
   }
 
   public function page($page)
