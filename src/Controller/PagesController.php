@@ -29,7 +29,7 @@ class PagesController extends AppController
     if(property_exists($this->Pages, 'setLocale')) $this->Pages->setLocale($lng);
 
     if(!$page = $this->Pages->find()
-    ->where([$slugField => $slug])
+    ->where(["$slugField IN" => [$slug, "/$slug"]])
     ->contain([
       'ParentPages',
       'ChildPages',
