@@ -90,7 +90,8 @@ class PagesTable extends Table
 
     // Behaviors from CMS settings...
     if($behaviors = Configure::read('Trois/Cms.Models.Pages.behaviors')) foreach ($behaviors as $behavior => $settings) $this->addBehavior($behavior, $settings);
-    else $this->addBehavior(\Trois\Utils\ORM\Behavior\SluggableBehavior::class, ['field' => 'title','translate' => false]);
+    //else $this->addBehavior(\Trois\Utils\ORM\Behavior\SluggableBehavior::class, ['field' => 'title','translate' => false]);
+    else $this->addBehavior(\Trois\Cms\Model\Behavior\PageSlugBehavior::class);
   }
 
   /**
