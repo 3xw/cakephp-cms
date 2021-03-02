@@ -18,19 +18,21 @@
       <!-- SETTINGS -->
       <div v-if="edit" class="cms-item-settings">
         <el-form :model="editable" :rules="rules" ref="pageForm" label-width="180px" size="mini">
+
+          <el-form-item label="Titre de page" prop="slug">
+            <el-input type="text" v-model="editable.title"></el-input>
+          </el-form-item>
+
           <el-form-item label="Template de page" prop="template">
             <el-select v-model="editable.template">
               <el-option v-for="(options, index) in pageTemplates" :key="index" :label="options.label" :value="options.value"></el-option>
             </el-select>
           </el-form-item>
 
-          <el-form-item label="Slug de page" prop="slug">
-            <el-input type="textarea" v-model="editable.slug"></el-input>
-          </el-form-item>
-
           <el-form-item label="Metas de page" prop="meta">
             <el-input type="textarea" v-model="editable.meta"></el-input>
           </el-form-item>
+
         </el-form >
       </div>
 
@@ -82,7 +84,7 @@ export default
     section: new Section(),
     newPage: new Page(),
     rules: {
-      slug: [{required: true, message: 'Veuillez entrer un slug', trigger: 'blur'}],
+      title: [{required: true, message: 'Veuillez entrer un titre', trigger: 'blur'}],
       template: [{required: true}]
     },
   }),
