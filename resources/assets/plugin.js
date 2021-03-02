@@ -12,13 +12,14 @@ import SimpleElement from './components/SimpleElement'
 import InputText from './components/editables/InputText'
 import Textarea from './components/editables/Textarea'
 import Select from './components/editables/Select'
+import MetaSelect from './components/editables/MetaSelect'
 import Tiptap from './components/editables/Tiptap'
 import Slot from './components/editables/Slot'
 
 const
 components = [
   Page, Draggable, Section, Article, Module, SimpleElement,
-  InputText, Textarea, Select, Tiptap, Slot
+  InputText, Textarea, Select, MetaSelect, Tiptap, Slot
 ],
 install = function(Vue, { store })
 {

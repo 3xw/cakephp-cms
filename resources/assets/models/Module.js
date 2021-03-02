@@ -11,6 +11,7 @@ export default class Module extends Model
       id: this.attr(null).nullable(),
       name: this.attr(null),
       cell: this.attr('Trois/Cms.Default::display'),
+      meta: this.attr(null),
 
       section_item: this.belongsTo(SectionItem, 'foreign_key'),
     }

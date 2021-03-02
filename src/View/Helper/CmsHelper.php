@@ -108,7 +108,7 @@ class CmsHelper extends Helper
     }
 
     // regular
-    if(! $this->isEditable('Modules')) return $this->getView()->cell($item->module->cell, [$item->module->id]);
+    if(! $this->isEditable('Modules')) return $this->getView()->cell($item->module->cell, json_decode($item->module->meta, true) ?? []);
 
     // cmsize
     return $this->cmsControls($item->module, 'module', $item);
@@ -165,7 +165,7 @@ class CmsHelper extends Helper
   public function cmsEditable($entity, $entityName)
   {
     // create right elmem
-    $html = $entityName == 'module'? $this->getView()->cell($entity->cell, [$entity->id]): $this->elem($entity, $entityName);
+    $html = $entityName == 'module'? $this->getView()->cell($entity->cell, json_decode($entity->meta, true) ?? []): $this->elem($entity, $entityName);
 
     // dom stuff
     $dom = new Dom;

@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import client from '../http/client.js'
 
 export default
 {
@@ -62,6 +63,32 @@ export default
           return true;
         }
       })
+    },
+    getModuleOptions(moduleKey)
+    {
+      let options = {}
+      if(!this.settings.Tree.modules[moduleKey].hasOwnProperty('params')) return false
+
+      let params = this.settings.Tree.modules[moduleKey]['params']
+      for(const [key, param] of Object.entries(params)) {
+        if(param.type == 'list'){
+          options[key] = param.options
+        }else{
+          let controller = param.options.split('::')[0].toLowerCase()
+          let action = param.options.split('::')[1]
+          client.get(controller+'/'+action, { baseURL: BASE_URL + 'api/', })
+          .then(function (response) {
+            options[key] = response.data[controller]
+          })
+          .catch(function (error) { console.log(error); })
+          .then(function(){
+            console.log(options);
+            return options
+          })
+        }
+      }
+      console.log(options);
+      return options
     }
   }
 }

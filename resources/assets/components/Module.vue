@@ -18,6 +18,11 @@
         :opts-provider="optsProvider" :opts-mapper="optsMapperCell"
         :modelStoreName="modelStoreName" modelField="cell" :modelId="modelId"
          />
+         <cms-editable-meta-select
+         :edit="edit"
+         :opts-provider="optsParamProvider"
+         :modelStoreName="modelStoreName" modelField="meta" :modelId="modelId"
+         />
       </div>
 
     </div>
@@ -51,17 +56,22 @@ export default
     SI(){ return this.$store.$db().model('section_items')},
     si(){ return this.SI.find(this.sectionItemId) },
     templateChanged(){ return this.template != this.si.template },
-    options(){ return this.getAllowedCFS(this.si.section_id) }
+    options(){ return this.getAllowedCFS(this.si.section_id) },
+    paramsOptions(){ return this.getModuleOptions(this.si.template) }
   },
   watch:
   {
     edit(val)
     {
       if(val) this.template = this.si.template
-    }
+    },
+  },
+  created(){
+    this.crudGetOne()
   },
   methods:
   {
+    optsParamProvider() { return this.paramsOptions },
     optsProvider() { return this.options },
     deleted() { window.location.reload()},
     cancel()
@@ -71,8 +81,12 @@ export default
     },
     save()
     {
-      this.update()
+      let promises = [this.update()]
       if(this.templateChanged) this.si.update().then(data => window.location.reload())
+
+      Promise.all(promises)
+      .then(data => window.location.reload())
+      .catch(err => console.log(err))
     }
   }
 }
