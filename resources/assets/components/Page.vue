@@ -9,6 +9,14 @@
         <el-button v-if="!edit" @click="add = true" size="mini" type="success">Ajouter une section</el-button>
 
         <el-button v-if="edit" @click="edit = false; crudGetOne()" size="mini" type="info">Annuler</el-button>
+
+        <!--
+        <el-button
+        v-if="edit"
+        @click="$refs['pageForm'].validate(valid => { if(valid){ edit = false; update();} })"
+        size="mini" type="success">Enregistrer</el-button>
+        -->
+
         <el-button
         v-if="edit"
         @click="$refs['pageForm'].validate(valid => { if(valid){ edit = false; update();} })"
@@ -33,15 +41,17 @@
             <el-input type="textarea" v-model="editable.meta"></el-input>
           </el-form-item>
 
+          <el-form-item :label="editable.slug">
+            <el-input v-model="editable.slug"></el-input>
+          </el-form-item>
+
         </el-form >
       </div>
 
       <!-- SLUG -->
       <div v-if="0">
         <el-form ref="form" label-width="300px" size="mini">
-          <el-form-item :label="editable.slug+'/'">
-            <el-input v-model="newPage.slug"></el-input>
-          </el-form-item>
+
         </el-form>
       </div>
 
@@ -81,6 +91,7 @@ export default
   name: 'cms-page',
   mixins: [edit, add, editable, settings],
   data:()=>({
+    addPage: false,
     section: new Section(),
     newPage: new Page(),
     rules: {
