@@ -82,12 +82,10 @@ export default
           })
           .catch(function (error) { console.log(error); })
           .then(function(){
-            console.log(options);
             return options
           })
         }
       }
-      console.log(options);
       return options
     }
   }
