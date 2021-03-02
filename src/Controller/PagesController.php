@@ -28,7 +28,7 @@ class PagesController extends AppController
     $slugField = $lng == 'fr_CH'? 'Pages.slug' : 'Pages_slug_translation.content';
     if(property_exists($this->Pages, 'setLocale')) $this->Pages->setLocale($lng);
 
-    $page = $this->Pages->find()
+    if(!$page = $this->Pages->find()
     ->where([$slugField => $slug])
     ->contain([
       'ParentPages',
@@ -41,8 +41,8 @@ class PagesController extends AppController
         ]
       ]
     ])
-    ->first();
-    
+    ->first()) throw new NotFoundException();
+
     $this->set('title', $page->title);
     $this->set('meta', $page->meta);
     $this->set(compact('page'));
