@@ -1,0 +1,172 @@
+<?php
+declare(strict_types=1);
+
+namespace Trois\Cms\Controller\Admin;
+
+use Trois\Cms\Controller\AppController;
+
+/**
+ * MenuItems Controller
+ *
+ * @property \App\Model\Table\MenuItemsTable $MenuItems
+ *
+ * @method \App\Model\Entity\MenuItem[] paginate($object = null, array $settings = [])
+ */
+class MenuItemsController extends AppController
+{
+  public function initialize():void
+  {
+    parent::initialize();
+    $this->loadComponent('Search.Search', [
+      'actions' => ['index']
+    ]);
+  }
+
+    /**
+     * Index method
+     *
+     * @return \Cake\Http\Response|void
+     */
+    public function index()
+    {
+        $query = $this->MenuItems->find('search', ['search' => $this->request->getQuery()])->contain(['ParentMenuItems', 'Menus']);
+        if (!empty($this->request->getQuery('q'))) {
+          if (!$query->count()) {
+            $this->Flash->error(__('No result.'));
+          }else{
+            $this->Flash->success($query->count()." ".__('result(s).'));
+          }
+          $this->set('q',$this->request->getQuery('q'));
+        }
+        $menuItems = $this->paginate($query);
+        $this->set(compact('menuItems'));
+    }
+
+    public function moveUp($id, $menu_id = null)
+    {
+      $menuItems = $this->MenuItems->get($id);
+      $this->MenuItems->moveUp($menuItems);
+
+      if($menu_id){
+        return $this->redirect(['controller' => 'Menus', 'action' => 'view', $menu_id]);
+      }else{
+        return $this->redirect(['action' => 'index']);
+      }
+
+      return $this->redirect(['action' => 'index']);
+    }
+
+    public function toggleActive($id, $menu_id = null)
+    {
+      $menuItems = $this->MenuItems->get($id);
+      $menuItems->active = !$menuItems->active;
+
+      if($this->MenuItems->save($menuItems)){
+        if($menu_id){
+          return $this->redirect(['controller' => 'Menus', 'action' => 'view', $menu_id]);
+        }else{
+          return $this->redirect(['action' => 'index']);
+        }
+      }
+    }
+
+    /**
+     * View method
+     *
+     * @param string|null $id Menu Item id.
+     * @return \Cake\Http\Response|void
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function view($id = null)
+    {
+        $menuItem = $this->MenuItems->get($id, [
+            'contain' => ['ParentMenuItems', 'Menus', 'ChildMenuItems']
+        ]);
+
+        $this->set('menuItem', $menuItem);
+    }
+
+    /**
+     * Add method
+     *
+     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     */
+    public function add($menu_id = null)
+    {
+        $menuItem = $this->MenuItems->newEmptyEntity();
+        if ($this->request->is('post')) {
+            $menuItem = $this->MenuItems->patchEntity($menuItem, $this->request->getData());
+            if ($this->MenuItems->save($menuItem)) {
+                $this->Flash->success(__('The menu item has been saved.'));
+                if($menu_id){
+                  return $this->redirect(['controller' => 'Menus', 'action' => 'view', $menu_id]);
+                }else{
+                  return $this->redirect(['action' => 'index']);
+                }
+            }
+            $this->Flash->error(__('The menu item could not be saved. Please, try again.'));
+        }
+        $parentMenuItems = $this->MenuItems->ParentMenuItems->find('list', ['limit' => 200]);
+        $menus = $this->MenuItems->Menus->find('list', ['limit' => 200]);
+        $pages = $this->MenuItems->Pages->find('treeList', [
+            'keyPath' => 'slug',
+            'valuePath' => 'title',
+            'spacer' => ' - '
+        ]);
+        $this->set(compact('menuItem', 'parentMenuItems', 'menus', 'pages', 'menu_id'));
+    }
+
+    /**
+     * Edit method
+     *
+     * @param string|null $id Menu Item id.
+     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function edit($id = null, $menu_id = null)
+    {
+        $menuItem = $this->MenuItems->get($id, [
+            'contain' => []
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $menuItem = $this->MenuItems->patchEntity($menuItem, $this->request->getData());
+            if ($this->MenuItems->save($menuItem)) {
+                $this->Flash->success(__('The menu item has been saved.'));
+
+                if($menu_id){
+                  return $this->redirect(['controller' => 'Menus', 'action' => 'view', $menu_id]);
+                }else{
+                  return $this->redirect(['action' => 'index']);
+                }
+            }
+            $this->Flash->error(__('The menu item could not be saved. Please, try again.'));
+        }
+        $parentMenuItems = $this->MenuItems->ParentMenuItems->find('list', ['limit' => 200]);
+        $menus = $this->MenuItems->Menus->find('list', ['limit' => 200]);
+        $this->set(compact('menuItem', 'parentMenuItems', 'menus'));
+    }
+
+    /**
+     * Delete method
+     *
+     * @param string|null $id Menu Item id.
+     * @return \Cake\Http\Response|null Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function delete($id = null, $menu_id = null)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+        $menuItem = $this->MenuItems->get($id);
+        if ($this->MenuItems->delete($menuItem)) {
+            $this->Flash->success(__('The menu item has been deleted.'));
+        } else {
+            $this->Flash->error(__('The menu item could not be deleted. Please, try again.'));
+        }
+
+        if($menu_id){
+          return $this->redirect(['controller' => 'Menus', 'action' => 'view', $menu_id]);
+        }else{
+          return $this->redirect(['action' => 'index']);
+        }
+    }
+}
