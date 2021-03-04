@@ -56,6 +56,20 @@ class MenuItemsController extends AppController
       return $this->redirect(['action' => 'index']);
     }
 
+    public function moveDown($id, $menu_id = null)
+    {
+      $menuItems = $this->MenuItems->get($id);
+      $this->MenuItems->moveDown($menuItems);
+
+      if($menu_id){
+        return $this->redirect(['controller' => 'Menus', 'action' => 'view', $menu_id]);
+      }else{
+        return $this->redirect(['action' => 'index']);
+      }
+
+      return $this->redirect(['action' => 'index']);
+    }
+
     public function toggleActive($id, $menu_id = null)
     {
       $menuItems = $this->MenuItems->get($id);
@@ -106,7 +120,12 @@ class MenuItemsController extends AppController
             }
             $this->Flash->error(__('The menu item could not be saved. Please, try again.'));
         }
-        $parentMenuItems = $this->MenuItems->ParentMenuItems->find('list', ['limit' => 200]);
+        $parentMenuItems = $this->MenuItems->ParentMenuItems->find('treeList', [
+          'keyPath' => 'id',
+          'valuePath' => 'label',
+          'spacer' => ' - '
+        ])
+        ->where(['ParentMenuItems.menu_id' => $menu_id]);
         $menus = $this->MenuItems->Menus->find('list', ['limit' => 200]);
         $pages = $this->MenuItems->Pages->find('treeList', [
             'keyPath' => 'slug',

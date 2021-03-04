@@ -24,7 +24,7 @@
 </nav>
 <div class="utils--spacer-semi"></div>
 <div class="row no-gutters">
-  <div class="col-8 mx-auto">
+  <div class="col-12 mx-auto">
     <div class="card">
       <!-- pic -->
       <?php if ($menu->attachment): ?>
@@ -62,7 +62,7 @@
                     <tr>
                       <td><?= h($menuItems->id) ?></td>
                       <td><?= $this->Html->link(($menuItems->active)? '<i class="material-icons">done</i>' : '<i class="material-icons">clear</i>', ['controller' => 'MenuItems', 'action' => 'toggleActive',  $menuItems->id, $menu->id], ['escape' => false])  ?></td>
-                      <td><?= h($menuItems->label) ?></td>
+                      <td><?= (($menuItems->parent_id)? '- ' : ''). h($menuItems->label) ?></td>
                       <td><?= h($menuItems->url) ?></td>
                       <td><?= h($menuItems->target) ?></td>
                       <td data-title="actions" class="actions" class="text-right">
@@ -81,7 +81,7 @@
         </div>
       </div>
   </div>
-  <div class="col-3 mx-auto">
+  <div class="col-12 mx-auto">
     <div class="card">
       <div class="card-header">
         <h4><?= __('Informations')?></h4>

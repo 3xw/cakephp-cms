@@ -21,12 +21,13 @@
             <?= $this->Form->control('model',['type' => 'hidden', 'class'=>'form-control menu-item__model']);?>
             <? // $this->Form->control('foreign_key',['class'=>'menu-item__foreign_key']);?>
             <?= $this->Form->control('url',['class'=>'form-control menu-item__page-url']);?>
-            <?= $this->Form->control('target',['class'=>'form-control']);?>
+            <?= $this->Form->control('target',['type' => 'select', 'empty' => false, 'options' => ['_self' => 'Défaut', '_blank' => 'Nouvelle page'], 'class'=>'form-control']);?>
           </div>
           <div class="col-sm-4">
             <?= $this->Form->control('active', ['class'=>'form-control']);?>
+            <?= $this->Form->control('class', ['type' => 'text', 'class'=>'form-control']);?>
             <?= $this->Form->control('parent_id', ['options' => $parentMenuItems, 'empty' => true, 'class'=>'form-control']);?>
-            <?= $this->Form->control('menu_id', ['options' => $menus, 'class'=>'form-control']);?>
+            <?= $this->Form->control('menu_id', ['options' => $menus, 'value' => $menu_id, 'class'=>'form-control']);?>
           </div>
         </div>
       </div>

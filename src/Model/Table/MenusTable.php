@@ -55,7 +55,10 @@ class MenusTable extends Table
         ]);
         $this->hasMany('MenuItems', [
             'foreignKey' => 'menu_id',
-            'sort' => 'MenuItems.lft ASC'
+            'sort' => 'MenuItems.lft ASC',
+            'conditions' => [
+              //'MenuItems.active' => 1
+            ]
         ]);
     }
 

@@ -95,8 +95,12 @@ class PagesController extends AppController
       debug($page->getErrors());
       $this->Flash->error(__('The page could not be saved. Please, try again.'));
     }
-    $parentPages = $this->Pages->ParentPages->find('list', ['limit' => 200]);
-    $attachments = $this->Pages->Attachments->find('list', ['limit' => 200]);
+    $parentPages = $this->Pages->ParentPages->find('treeList', [
+      'keyPath' => 'id',
+      'valuePath' => 'title',
+      'spacer' => ' - '
+    ]);
+    $attachments = $this->Pages->Attachments->find('list');
     $this->set(compact('page', 'parentPages', 'attachments'));
   }
 
@@ -121,8 +125,12 @@ class PagesController extends AppController
       }
       $this->Flash->error(__('The page could not be saved. Please, try again.'));
     }
-    $parentPages = $this->Pages->ParentPages->find('list', ['limit' => 200]);
-    $attachments = $this->Pages->Attachments->find('list', ['limit' => 200]);
+    $parentPages = $this->Pages->ParentPages->find('treeList', [
+      'keyPath' => 'id',
+      'valuePath' => 'title',
+      'spacer' => ' - '
+    ]);
+    $attachments = $this->Pages->Attachments->find('list');
     $this->set(compact('page', 'parentPages', 'attachments'));
   }
 

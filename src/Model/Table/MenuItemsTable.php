@@ -8,6 +8,8 @@ use ArrayObject;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\Cache\Cache;
+use Cake\Event\Event;
 use Cake\Validation\Validator;
 use Cake\Event\EventInterface;
 use Cake\Datasource\EntityInterface;
@@ -87,7 +89,7 @@ class MenuItemsTable extends Table
           'multiBindings' => [
             'MenuItems.model' => 'Pages',
           ],
-          'dependent' => true,
+          'dependent' => false,
         ]);
     }
 
@@ -153,5 +155,12 @@ class MenuItemsTable extends Table
         $rules->add($rules->existsIn(['menu_id'], 'Menus'));
 
         return $rules;
+    }
+
+    public function beforeSave(Event $event, EntityInterface $entity, ArrayObject $options){
+      Cache::delete('menus');
+    }
+    public function afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options){
+      Cache::delete('menus');
     }
 }
