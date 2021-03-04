@@ -133,7 +133,6 @@ export default
       this.article.section_item = this.sectionItem
 
       // save
-      console.log(this.article.apiPath());
       this.article.save()
       .then(data => window.location.reload())
       .catch(err => alert(err))
@@ -144,6 +143,7 @@ export default
       this.sectionItem.order = this.siCount
       let opt = this.optsCell.find(e => e.cell = this.module.cell)
       this.module.name = opt.label
+      this.module.meta = {}
       this.module.section_item = this.sectionItem
 
       // save
