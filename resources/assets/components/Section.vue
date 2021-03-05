@@ -140,10 +140,11 @@ export default
     createModule()
     {
       // fill in
+      let opt = this.optsCell.find(e => e.value == this.module.cell)
       this.sectionItem.order = this.siCount
-      let opt = this.optsCell.find(e => e.cell = this.module.cell)
+      this.sectionItem.template = opt.template
       this.module.name = opt.label
-      this.module.meta = {}
+      this.module.meta = '{}'
       this.module.section_item = this.sectionItem
 
       // save
