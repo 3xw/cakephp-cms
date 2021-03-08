@@ -82,6 +82,13 @@ class CategoriesTable extends Table
       'sort' => 'AttachmentsCategories.order ASC'
     ]);
 
+    $this->belongsToMany('Articles', [
+      'className' => 'Trois/Cms.Articles',
+      'foreignKey' => 'category_id',
+      'targetForeignKey' => 'article_id',
+      'joinTable' => 'categories_articles'
+    ]);
+
     $this->addBehavior('Timestamp');
     $this->addBehavior('Tree');
 
