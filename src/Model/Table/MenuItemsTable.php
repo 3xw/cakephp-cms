@@ -81,6 +81,14 @@ class MenuItemsTable extends Table
             'className' => 'MenuItems',
             'foreignKey' => 'parent_id',
         ]);
+        $this->hasMany('SubChildMenuItems', [
+            'className' => 'MenuItems',
+            'foreignKey' => 'parent_id',
+        ]);
+        $this->hasMany('LastChildMenuItems', [
+            'className' => 'MenuItems',
+            'foreignKey' => 'parent_id',
+        ]);
 
         $this->HasOneMultiBindings('Pages', [
           'className' => 'Trois/Cms.Pages',

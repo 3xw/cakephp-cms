@@ -49,7 +49,7 @@
               <table id="datatables" class="table table-striped table-no-bordered table-hover dataTable dtr-inline" cellspacing="0" width="100%" style="width: 100%;" role="grid" aria-describedby="datatables_info">
                 <thead>
                   <tr>
-                    <th scope="col"><?= __('Id') ?></th>
+                    <!--<th scope="col"><?= __('Id') ?></th>-->
                     <th scope="col"><?= __('Active') ?></th>
                     <th scope="col"><?= __('Label') ?></th>
                     <th scope="col"><?= __('Url') ?></th>
@@ -58,12 +58,12 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($menu->menu_items as $menuItems): ?>
+                  <?php foreach ($menu->menu_items as $key => $menuItems): ?>
                     <tr>
-                      <td><?= h($menuItems->id) ?></td>
+                      <!--<td><?= h($menuItems->id) ?></td>-->
                       <td><?= $this->Html->link(($menuItems->active)? '<i class="material-icons">done</i>' : '<i class="material-icons">clear</i>', ['controller' => 'MenuItems', 'action' => 'toggleActive',  $menuItems->id, $menu->id], ['escape' => false])  ?></td>
-                      <td><?= (($menuItems->parent_id)? '- ' : ''). h($menuItems->label) ?></td>
-                      <td><?= h($menuItems->url) ?></td>
+                      <td><?= !$menuItems->has('parent_menu_item')? '<strong>' : '' ?> <?= $treeList[$menuItems->id] ?><?= !$menuItems->has('parent_menu_item')? '</strong>' : '' ?></td>
+                      <td title="<?= $menuItems->url ?>"><?= $this->Text->truncate($menuItems->url, 50) ?></td>
                       <td><?= h($menuItems->target) ?></td>
                       <td data-title="actions" class="actions" class="text-right">
                         <div class="btn-group">

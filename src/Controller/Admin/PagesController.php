@@ -29,18 +29,8 @@ class PagesController extends AppController
   */
   public function index()
   {
-    $query = $this->Pages->find('search', ['search' => $this->request->getQuery()])
-    ->order(['Pages.lft' => 'ASC'])
-    ->contain(['ParentPages']);
-    if (!empty($this->request->getQuery('q'))) {
-      if (!$query->count()) {
-        $this->Flash->error(__('No result.'));
-      }else{
-        $this->Flash->success($query->count()." ".__('result(s).'));
-      }
-      $this->set('q',$this->request->getQuery('q'));
-    }
-    $pages = $this->paginate($query);
+    $pages = $this->Pages->find('treeList', ['spacer' => ' - '])->toArray();
+
     $this->set(compact('pages'));
   }
 

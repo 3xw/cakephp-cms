@@ -52,10 +52,18 @@ class MenusController extends AppController
     public function view($id = null)
     {
         $menu = $this->Menus->get($id, [
-            'contain' => ['MenuItems']
+            'contain' => ['MenuItems' => 'ParentMenuItems']
         ]);
 
-        $this->set('menu', $menu);
+        $treeList = $this->Menus->MenuItems->find('treeList', [
+          'spacer' => ' – ',
+          'keyPath' => 'id',
+          'valuePath' => 'label',
+        ])
+        ->where(['MenuItems.menu_id' => $id])
+        ->toArray();
+
+        $this->set(compact('menu', 'treeList'));
     }
 
     /**

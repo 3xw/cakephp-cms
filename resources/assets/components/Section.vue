@@ -27,8 +27,8 @@
     <el-dialog title="Nouvel element" :visible.sync="add" width="60%" >
 
       <!-- ELEM TYPE -->
-      <el-form label-width="120px" >
-        <el-form-item label="Type d'elment">
+      <el-form label-width="120px">
+        <el-form-item label="Type d'élément">
           <el-select v-model="type">
             <el-option v-for="(options, index) in optsType" :key="index" :label="options.label" :value="options.value"></el-option>
           </el-select>

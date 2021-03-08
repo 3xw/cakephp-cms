@@ -81,7 +81,7 @@ export default
     crudDelete()
     {
       if(!confirm('Voulez-vous vraiement effacer l\'enregistrement ?')) return
-      this.editable.delete()
+      this.entity.delete()
       .then(this.deleted)
       .catch(err => console.log(err))
     }
