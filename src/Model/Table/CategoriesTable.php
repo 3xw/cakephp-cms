@@ -93,7 +93,7 @@ class CategoriesTable extends Table
     $this->addBehavior('Tree');
 
     // Behaviors from CMS settings...
-    $this->addBehavior(\Trois\Utils\ORM\Behavior\SluggableBehavior::class, ['field' => 'name','translate' => false]);
+    $this->addBehavior(\Trois\Utils\ORM\Behavior\SluggableBehavior::class, ['field' => 'name','translate' => Configure::read('Trois/Cms.Settings.translate')]);
   }
 
   /**

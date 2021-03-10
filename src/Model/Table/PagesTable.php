@@ -89,7 +89,8 @@ class PagesTable extends Table
     $this->addBehavior('Tree');
 
     // Behaviors from CMS settings...
-    $this->addBehavior(\Trois\Cms\Model\Behavior\PageSlugBehavior::class);
+    // transaltion is not handled as toDay
+    $this->addBehavior(\Trois\Cms\Model\Behavior\PageSlugBehavior::class,['translate' => Configure::read('Trois/Cms.Settings.translate')]);
   }
 
   /**

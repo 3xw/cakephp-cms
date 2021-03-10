@@ -1,6 +1,9 @@
 <?php
 return [
   'Trois/Cms' => [
+    'Settings' => [
+      'translate' => false,
+    ],
     'Models' => [
       'Articles' => 'Trois/Cms.Articles',
       'Categories' => 'Trois/Cms.Categories',

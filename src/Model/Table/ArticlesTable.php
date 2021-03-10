@@ -93,7 +93,7 @@ class ArticlesTable extends Table
     ]);
 
     // Behaviors from CMS settings...
-    $this->addBehavior(\Trois\Utils\ORM\Behavior\SluggableBehavior::class, ['field' => 'title','translate' => false]);
+    $this->addBehavior(\Trois\Utils\ORM\Behavior\SluggableBehavior::class, ['field' => 'title','translate' => Configure::read('Trois/Cms.Settings.translate')]);
   }
 
   /**
