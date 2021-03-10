@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Trois\Cms\Controller;
 
+use Cake\Core\Configure;
 use Cake\I18n\I18n;
 use Cake\Http\Exception\NotFoundException;
 use Trois\Cms\Controller\AppController;
@@ -16,6 +17,12 @@ use Trois\Cms\Controller\AppController;
 */
 class PagesController extends AppController
 {
+  public function initialize():void
+  {
+    parent::initialize();
+    $this->loadModel(Configure::read('Trois/Cms.Models.Pages'));
+  }
+
   public function view( ...$slug)
   {
     // if empty $image

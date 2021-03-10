@@ -2,15 +2,10 @@
 return [
   'Trois/Cms' => [
     'Models' => [
-      'Articles' =>[
-        'behaviors' => false
-      ],
-      'Categories' => [
-        'behaviors' => false
-      ],
-      'Pages' => [
-        'behaviors' => false
-      ],
+      'Articles' => 'Trois/Cms.Articles',
+      'Categories' => 'Trois/Cms.Categories',
+      'Modules' => 'Trois/Cms.Modules',
+      'Pages' => 'Trois/Cms.Pages',
     ],
     'Editables' => [
       'prefix' => 'cms',

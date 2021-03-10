@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Trois\Cms\Controller\Api;
 
+use Cake\Core\Configure;
 use Trois\Cms\Controller\AppController;
 
 /**
@@ -19,6 +20,7 @@ class ModulesController extends AppController
   public function initialize():void
   {
     parent::initialize();
+    $this->loadModel(Configure::read('Trois/Cms.Models.Modules'));
     $this->loadComponent('Crud.Crud', [
       'actions' => [
         'index' => [

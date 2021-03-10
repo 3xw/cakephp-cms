@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Trois\Cms\Controller\Admin;
 
+use Cake\Core\Configure;
 use Trois\Cms\Controller\AppController;
 
 /**
@@ -20,6 +21,8 @@ class PagesController extends AppController
     $this->loadComponent('Search.Search', [
       'actions' => ['index']
     ]);
+
+    $this->loadModel(Configure::read('Trois/Cms.Models.Pages'));
   }
 
   /**
