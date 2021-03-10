@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Trois\Cms\Controller\Api\Pages;
 
+use Cake\Core\Configure;
 use Trois\Cms\Controller\AppController;
 
 /**
@@ -19,6 +20,7 @@ class SectionsController extends AppController
   public function initialize():void
   {
     parent::initialize();
+    $this->loadModel(Configure::read('Trois/Cms.Models.Sections'));
     $this->loadComponent('Crud.Crud', [
       'actions' => [
         'view' => [
@@ -56,7 +58,7 @@ class SectionsController extends AppController
       debug($event->getSubject());
     });
     */
-    
+
     return $this->Crud->execute();
   }
 

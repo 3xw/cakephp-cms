@@ -7,8 +7,13 @@ return [
     'Models' => [
       'Articles' => 'Trois/Cms.Articles',
       'Categories' => 'Trois/Cms.Categories',
+      'MenuItems' => 'Trois/Cms.MenuItems',
+      'Menus' => 'Trois/Cms.Menus',
+      'ModuleItems' => 'Trois/Cms.ModuleItems',
       'Modules' => 'Trois/Cms.Modules',
       'Pages' => 'Trois/Cms.Pages',
+      'SectionItems' => 'Trois/Cms.SectionItems',
+      'Sections' => 'Trois/Cms.Sections',
     ],
     'Editables' => [
       'prefix' => 'cms',

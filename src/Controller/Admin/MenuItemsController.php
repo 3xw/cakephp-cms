@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Trois\Cms\Controller\Admin;
 
+use Cake\Core\Configure;
 use Trois\Cms\Controller\AppController;
 
 /**
@@ -17,6 +18,7 @@ class MenuItemsController extends AppController
   public function initialize():void
   {
     parent::initialize();
+    $this->loadModel(Configure::read('Trois/Cms.Models.MenuItems'));
     $this->loadComponent('Search.Search', [
       'actions' => ['index']
     ]);
