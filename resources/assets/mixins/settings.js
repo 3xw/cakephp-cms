@@ -9,7 +9,7 @@ export default
   },
   methods:
   {
-    optsMapperTemplate(elem) { return {label: elem.name, value: elem.template} },
+    optsMapperTemplate(elem) { console.log(elem); return {label: elem.name, value: elem.template} },
     optsMapperCell(elem) { return {label: elem.name, value: elem.cell, template: elem.template} },
 
     getTemplatesForKind($kind)
@@ -52,7 +52,7 @@ export default
         switch(type)
         {
           case 'article':
-          if(elem.template) return true;
+          if(!elem.cell) return true;
           break
 
           case 'module':
