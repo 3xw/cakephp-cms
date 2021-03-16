@@ -3,13 +3,16 @@
 
     <!-- controls -->
     <div class="cms-controls cms-controls--module">
-      <el-button-group>
-        <el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>
-        <el-button v-if="!edit" @click="crudDelete()" size="mini" type="danger">Effacer</el-button>
+      <div class="d-flex justify-content-between align-items-center px-2">
+        <p class="small m-0"><strong>{{templateName}}</strong></p>
+        <el-button-group>
+          <el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>
+          <el-button v-if="!edit" @click="crudDelete()" size="mini" type="danger">Supprimer</el-button>
 
-        <el-button v-if="edit" @click="edit = false; cancel()" size="mini" type="info">Annuler</el-button>
-        <el-button v-if="edit" @click="edit = false; save()" size="mini" type="success">Enregistrer</el-button>
-      </el-button-group>
+          <el-button v-if="edit" @click="edit = false; cancel()" size="mini" type="info">Annuler</el-button>
+          <el-button v-if="edit" @click="edit = false; save()" size="mini" type="success">Enregistrer</el-button>
+        </el-button-group>
+      </div>
 
       <!-- SETTINGS -->
       <div v-if="edit" class="cms-item-settings">
@@ -57,7 +60,8 @@ export default
     si(){ return this.SI.find(this.sectionItemId) },
     templateChanged(){ return this.template != this.si.template },
     options(){ return this.getAllowedCFS(this.si.section_id) },
-    paramsOptions(){ return this.getModuleOptions(this.si.template) }
+    paramsOptions(){ return this.getModuleOptions(this.si.template) },
+    templateName(){ let c = this; return this.options.find(e => e.template === c.si.template ).name}
   },
   watch:
   {

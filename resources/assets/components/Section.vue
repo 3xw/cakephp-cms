@@ -3,15 +3,17 @@
 
     <!-- CONTROLS -->
     <div class="cms-controls cms-controls--section">
-      <el-button-group>
-        <el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>
-        <el-button v-if="!edit" @click="crudDelete()" size="mini" type="danger">Effacer</el-button>
-        <el-button v-if="!edit" @click="setDefaultTemplate();add = true" size="mini" type="success">Ajouter un élément</el-button>
+      <div class="d-flex justify-content-between align-items-center px-2">
+        <p class="small m-0"><strong>Section</strong></p>
+        <el-button-group>
+          <!--<el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>-->
+          <el-button v-if="!edit" @click="setDefaultTemplate();add = true" size="mini" type="success">Ajouter un élément</el-button>
+          <el-button v-if="!edit" @click="crudDelete()" size="mini" type="danger">Supprimer</el-button>
 
-        <el-button v-if="edit" @click="edit = false; crudGetOne()" size="mini" type="info">Annuler</el-button>
-        <el-button v-if="edit" @click="edit = false; update()" size="mini" type="success">Enregistrer</el-button>
-      </el-button-group>
-
+          <el-button v-if="edit" @click="edit = false; crudGetOne()" size="mini" type="info">Annuler</el-button>
+          <el-button v-if="edit" @click="edit = false; update()" size="mini" type="success">Enregistrer</el-button>
+        </el-button-group>
+      </div>
       <!-- SETTINGS -->
       <div v-if="edit" class="cms-item-settings">
         <cms-editable-select

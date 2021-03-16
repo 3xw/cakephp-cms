@@ -3,11 +3,13 @@
   padding: 5px; background: rgba(255, 194, 194 , .5);
   &--section { background: rgba(194, 232, 255 , .5); }
   &--article { background: rgba(212, 255, 194 , .5); }
+  &--module { background: rgba(247, 140, 14 , .3); }
 }
 
 .cms-content
 {
   border: solid rgba(255, 194, 194 , .5) 1px; min-height: 200px;
-  &--section {   border: solid rgba(194, 232, 255 , .5) 1px; }
-  &--article {   border: solid rgba(212, 255, 194 , .5) 1px; }
+  &--section { border: solid rgba(194, 232, 255 , .5) 1px; }
+  &--article { border: solid rgba(212, 255, 194 , .5) 1px; }
+  &--module { border: solid rgba(247, 140, 14 , .3) 1px; }
 }

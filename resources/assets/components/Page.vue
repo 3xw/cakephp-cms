@@ -3,25 +3,28 @@
 
     <!-- controls -->
     <div class="cms-controls">
-      <el-button-group>
-        <el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>
-        <el-button v-if="!edit" @click="crudDelete()" size="mini" type="danger">Effacer</el-button>
-        <el-button v-if="!edit" @click="setDefaultTemplate();add = true" size="mini" type="success">Ajouter une section</el-button>
+      <div class="d-flex justify-content-between align-items-center px-2">
+        <p class="small m-0"><strong>Page</strong></p>
+        <el-button-group>
+          <el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>
+          <el-button v-if="!edit" @click="setDefaultTemplate();add = true" size="mini" type="success">Ajouter une section</el-button>
+          <el-button v-if="!edit" @click="crudDelete()" size="mini" type="danger">Supprimer</el-button>
 
-        <el-button v-if="edit" @click="edit = false; crudGetOne()" size="mini" type="info">Annuler</el-button>
+          <el-button v-if="edit" @click="edit = false; crudGetOne()" size="mini" type="info">Annuler</el-button>
 
-        <!--
-        <el-button
-        v-if="edit"
-        @click="$refs['pageForm'].validate(valid => { if(valid){ edit = false; update();} })"
-        size="mini" type="success">Enregistrer</el-button>
-        -->
+          <!--
+          <el-button
+          v-if="edit"
+          @click="$refs['pageForm'].validate(valid => { if(valid){ edit = false; update();} })"
+          size="mini" type="success">Enregistrer</el-button>
+          -->
 
-        <el-button
-        v-if="edit"
-        @click="$refs['pageForm'].validate(valid => { if(valid){ edit = false; update();} })"
-        size="mini" type="success">Enregistrer</el-button>
-      </el-button-group>
+          <el-button
+          v-if="edit"
+          @click="$refs['pageForm'].validate(valid => { if(valid){ edit = false; update();} })"
+          size="mini" type="success">Enregistrer</el-button>
+        </el-button-group>
+      </div>
 
       <!-- SETTINGS -->
       <div v-if="edit" class="cms-item-settings">
