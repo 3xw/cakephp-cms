@@ -1,0 +1,634 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2021-03-16 16:27+0000\n"
+"PO-Revision-Date: 2021-03-16 17:29+0100\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.2.4\n"
+
+#: Controller/Admin/ArticlesController.php:38
+#: Controller/Admin/CategoriesController.php:39
+#: Controller/Admin/MenuItemsController.php:37
+#: Controller/Admin/MenusController.php:37
+msgid "No result."
+msgstr "Pas de résultat."
+
+#: Controller/Admin/ArticlesController.php:40
+#: Controller/Admin/CategoriesController.php:41
+#: Controller/Admin/MenuItemsController.php:39
+#: Controller/Admin/MenusController.php:39
+msgid "result(s)."
+msgstr "résultat(s)."
+
+#: Controller/Admin/ArticlesController.php:75
+#: Controller/Admin/ArticlesController.php:100
+msgid "The article has been saved."
+msgstr "L'article a été sauvegardé."
+
+#: Controller/Admin/ArticlesController.php:79
+#: Controller/Admin/ArticlesController.php:104
+msgid "The article could not be saved. Please, try again."
+msgstr "L'article n'a pas pu être sauvegardé. Veuillez réessayer."
+
+#: Controller/Admin/ArticlesController.php:123
+msgid "The article has been deleted."
+msgstr "L'article a été supprimé."
+
+#: Controller/Admin/ArticlesController.php:125
+msgid "The article could not be deleted. Please, try again."
+msgstr "L'article n'a pas pu être supprimé. Veuillez réessayer."
+
+#: Controller/Admin/CategoriesController.php:92
+#: Controller/Admin/CategoriesController.php:118
+msgid "The category has been saved."
+msgstr "La catégorie a été sauvegardée."
+
+#: Controller/Admin/CategoriesController.php:96
+#: Controller/Admin/CategoriesController.php:122
+msgid "The category could not be saved. Please, try again."
+msgstr "La catégorie n'a pas pu être sauvé. Veuillez réessayer."
+
+#: Controller/Admin/CategoriesController.php:140
+msgid "The category has been deleted."
+msgstr "La catégorie a été supprimée."
+
+#: Controller/Admin/CategoriesController.php:142
+msgid "The category could not be deleted. Please, try again."
+msgstr "La catégorie n'a pas pu être supprimé. Veuillez réessayer."
+
+#: Controller/Admin/MenuItemsController.php:116
+#: Controller/Admin/MenuItemsController.php:155
+msgid "The menu item has been saved."
+msgstr "L’élément de menu a été enregistré."
+
+#: Controller/Admin/MenuItemsController.php:123
+#: Controller/Admin/MenuItemsController.php:163
+msgid "The menu item could not be saved. Please, try again."
+msgstr "L’élément de menu n’a pas pu être enregistré. Veuillez réessayer."
+
+#: Controller/Admin/MenuItemsController.php:182
+msgid "The menu item has been deleted."
+msgstr "L’élément de menu a été supprimé."
+
+#: Controller/Admin/MenuItemsController.php:184
+msgid "The menu item could not be deleted. Please, try again."
+msgstr "L’élément de menu n’a pas pu être supprimé. Veuillez réessayer."
+
+#: Controller/Admin/MenusController.php:82
+#: Controller/Admin/MenusController.php:106
+msgid "The menu has been saved."
+msgstr "Le menu a été enregistré."
+
+#: Controller/Admin/MenusController.php:86
+#: Controller/Admin/MenusController.php:110
+msgid "The menu could not be saved. Please, try again."
+msgstr "Le menu n’a pas pu être enregistré. Veuillez réessayer."
+
+#: Controller/Admin/MenusController.php:127
+msgid "The menu has been deleted."
+msgstr "Le menu a été supprimé."
+
+#: Controller/Admin/MenusController.php:129
+msgid "The menu could not be deleted. Please, try again."
+msgstr "Le menu n'a pas été supprimé. Réessayez."
+
+#: Controller/Admin/PagesController.php:84
+#: Controller/Admin/PagesController.php:115
+msgid "The page has been saved."
+msgstr "La page a été enregistrée."
+
+#: Controller/Admin/PagesController.php:89
+#: Controller/Admin/PagesController.php:119
+msgid "The page could not be saved. Please, try again."
+msgstr "La page n'a pas pu être enregistrée. Veuillez réessayer."
+
+#: Controller/Admin/PagesController.php:142
+msgid "The page has been deleted."
+msgstr "La page a été supprimée."
+
+#: Controller/Admin/PagesController.php:144
+msgid "The page could not be deleted. Please, try again."
+msgstr "La page n'a pas pu être supprimée. Veuillez réessayer."
+
+#: Admin/Articles/add.php:14 Admin/Articles/edit.php:14
+#: Admin/Articles/view.php:14 Admin/Categories/add.php:14
+#: Admin/Categories/edit.php:14 Admin/Categories/view.php:14
+#: Admin/MenuItems/edit.php:14 Admin/MenuItems/view.php:14
+#: Admin/Menus/add.php:14 Admin/Menus/edit.php:14 Admin/Menus/view.php:14
+#: Admin/Pages/add.php:14 Admin/Pages/edit.php:14 Admin/Pages/view.php:14
+msgid "List"
+msgstr "Liste"
+
+#: Admin/Articles/add.php:26
+msgid "Add Article"
+msgstr "Ajouter un article"
+
+#: Admin/Articles/add.php:38 Admin/Articles/edit.php:38
+#: Admin/Articles/view.php:38 Admin/Categories/add.php:39
+#: Admin/Categories/edit.php:40 Admin/Categories/view.php:40
+#: Admin/Pages/add.php:38 Admin/Pages/view.php:38
+msgid "Header"
+msgstr "En-tête"
+
+#: Admin/Articles/add.php:45 Admin/Articles/edit.php:45
+#: Admin/Articles/view.php:40 Admin/Categories/add.php:47
+#: Admin/Categories/edit.php:47 Admin/Categories/view.php:42
+#: Admin/Pages/add.php:45 Admin/Pages/view.php:40
+msgid "Body"
+msgstr "Corps"
+
+#: Admin/Articles/add.php:50 Admin/Articles/edit.php:50
+msgid "Draft"
+msgstr "Brouillon"
+
+#: Admin/Articles/add.php:50 Admin/Articles/edit.php:50
+msgid "Published"
+msgstr "Publié"
+
+#: Admin/Articles/add.php:72 Admin/Articles/edit.php:72
+#: Admin/Categories/add.php:72 Admin/Categories/edit.php:71
+#: Admin/MenuItems/add.php:37 Admin/MenuItems/edit.php:49
+#: Admin/Menus/add.php:41 Admin/Menus/edit.php:41 Admin/Pages/add.php:82
+#: Admin/Pages/edit.php:82
+msgid "Cancel"
+msgstr "Annuler"
+
+#: Admin/Articles/add.php:73 Admin/Articles/edit.php:73
+#: Admin/Categories/add.php:73 Admin/Categories/edit.php:72
+#: Admin/MenuItems/add.php:38 Admin/MenuItems/edit.php:50
+#: Admin/Menus/add.php:42 Admin/Menus/edit.php:42 Admin/Pages/add.php:83
+#: Admin/Pages/edit.php:83
+msgid "Submit"
+msgstr "Envoyer"
+
+#: Admin/Articles/edit.php:26
+msgid "Edit Article"
+msgstr "Modifier l’article"
+
+#: Admin/Articles/index.php:14 Admin/Categories/index.php:14
+#: Admin/MenuItems/index.php:14 Admin/Menus/index.php:14
+#: Admin/Pages/index.php:14
+msgid "Add"
+msgstr "Ajouter"
+
+#: Admin/Articles/index.php:27
+msgid "Articles"
+msgstr "Articles"
+
+#: Admin/Articles/index.php:27 Admin/Articles/index.php:79
+#: Admin/Categories/index.php:27 Admin/Categories/index.php:79
+#: Admin/MenuItems/index.php:27 Admin/MenuItems/index.php:93
+#: Admin/Menus/index.php:27 Admin/Menus/index.php:73
+msgid ""
+"Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} "
+"total"
+msgstr ""
+"Page {{page}} sur {{pages}}, actuellement {{current}} enregistrement(s) sur "
+"{{count}} au total"
+
+#: Admin/Articles/index.php:30 Admin/Categories/index.php:30
+#: Admin/MenuItems/index.php:30 Admin/Menus/index.php:30
+msgid "Search..."
+msgstr "Rechercher..."
+
+#: Admin/Articles/index.php:49 Admin/Categories/index.php:48
+#: Admin/MenuItems/index.php:56 Admin/MenuItems/view.php:75
+#: Admin/Menus/index.php:46 Admin/Menus/view.php:57 Admin/Pages/index.php:37
+#: Admin/Pages/view.php:81 Admin/Pages/view.php:137 Admin/Pages/view.php:178
+msgid "Actions"
+msgstr "Actions"
+
+#: Admin/Articles/index.php:65 Admin/Articles/view.php:20
+#: Admin/Categories/index.php:65 Admin/Categories/view.php:20
+#: Admin/MenuItems/index.php:79 Admin/MenuItems/view.php:20
+#: Admin/Menus/index.php:59 Admin/Menus/view.php:20 Admin/Menus/view.php:72
+#: Admin/Pages/index.php:50 Admin/Pages/view.php:20
+msgid "Are you sure you want to delete # {0}?"
+msgstr "Êtes-vous sûr de vouloir supprimer # {0} ?"
+
+#: Admin/Articles/index.php:84 Admin/Categories/index.php:84
+#: Admin/MenuItems/index.php:98 Admin/Menus/index.php:78
+msgid "first"
+msgstr "premier"
+
+#: Admin/Articles/index.php:85 Admin/Categories/index.php:85
+#: Admin/MenuItems/index.php:99 Admin/Menus/index.php:79
+msgid "previous"
+msgstr "précédent"
+
+#: Admin/Articles/index.php:87 Admin/Categories/index.php:87
+#: Admin/MenuItems/index.php:101 Admin/Menus/index.php:81
+msgid "next"
+msgstr "suivant"
+
+#: Admin/Articles/index.php:88 Admin/Categories/index.php:88
+#: Admin/MenuItems/index.php:102 Admin/Menus/index.php:82
+msgid "last"
+msgstr "dernier"
+
+#: Admin/Articles/view.php:17 Admin/Categories/view.php:17
+#: Admin/MenuItems/view.php:17 Admin/Menus/view.php:17 Admin/Pages/view.php:17
+msgid "Edit"
+msgstr "Éditer"
+
+#: Admin/Articles/view.php:20 Admin/Categories/view.php:20
+#: Admin/MenuItems/view.php:20 Admin/Menus/view.php:20 Admin/Pages/view.php:20
+msgid "Delete"
+msgstr "Supprimer"
+
+#: Admin/Articles/view.php:42
+msgid "Status"
+msgstr "Statut"
+
+#: Admin/Articles/view.php:44 Admin/Categories/view.php:44
+#: Admin/Pages/view.php:44 Admin/Pages/view.php:134
+msgid "Slug"
+msgstr "Identifiant"
+
+#: Admin/Articles/view.php:46 Admin/Categories/view.php:38
+#: Admin/Pages/view.php:46 Admin/Pages/view.php:79 Admin/Pages/view.php:135
+msgid "Meta"
+msgstr "Meta"
+
+#: Admin/Articles/view.php:48 Admin/Pages/view.php:80
+msgid "User Id"
+msgstr "ID de l’utilisateur"
+
+#: Admin/Articles/view.php:56 Admin/Categories/view.php:54
+#: Admin/MenuItems/view.php:109 Admin/Menus/view.php:87
+#: Admin/Pages/view.php:205
+msgid "Informations"
+msgstr "Informations"
+
+#: Admin/Articles/view.php:64 Admin/Categories/view.php:62
+#: Admin/MenuItems/view.php:64 Admin/MenuItems/view.php:129
+#: Admin/Menus/view.php:52 Admin/Menus/view.php:99 Admin/Pages/view.php:62
+#: Admin/Pages/view.php:129 Admin/Pages/view.php:174 Admin/Pages/view.php:217
+msgid "Id"
+msgstr "ID"
+
+#: Admin/Articles/view.php:68 Admin/Categories/view.php:78
+#: Admin/MenuItems/view.php:141 Admin/Pages/view.php:229
+msgid "Created"
+msgstr "Créé"
+
+#: Admin/Articles/view.php:72 Admin/Categories/view.php:82
+#: Admin/MenuItems/view.php:145 Admin/Pages/view.php:233
+msgid "Modified"
+msgstr "Modifié"
+
+#: Admin/Articles/view.php:76
+msgid "Publish Date"
+msgstr "Date de publication"
+
+#: Admin/Categories/add.php:26
+msgid "Add Category"
+msgstr "Ajouter une catégorie"
+
+#: Admin/Categories/edit.php:26
+msgid "Edit Category"
+msgstr "Modifier une catégorie"
+
+#: Admin/Categories/index.php:27
+msgid "Categories"
+msgstr "Catégories"
+
+#: Admin/Categories/view.php:46
+msgid "Category Template"
+msgstr "Modèle de catégorie"
+
+#: Admin/Categories/view.php:66 Admin/MenuItems/view.php:48
+#: Admin/MenuItems/view.php:71 Admin/Pages/view.php:42 Admin/Pages/view.php:130
+msgid "Parent Id"
+msgstr "Parent"
+
+#: Admin/Categories/view.php:70 Admin/Pages/view.php:131
+#: Admin/Pages/view.php:221
+msgid "Lft"
+msgstr ""
+
+#: Admin/Categories/view.php:74 Admin/MenuItems/view.php:73
+#: Admin/MenuItems/view.php:137 Admin/Pages/view.php:132
+#: Admin/Pages/view.php:225
+msgid "Rght"
+msgstr ""
+
+#: Admin/MenuItems/add.php:14
+msgid "Add Menu Item"
+msgstr "Ajouter un élément de menu"
+
+#: Admin/MenuItems/edit.php:26
+msgid "Edit Menu Item"
+msgstr "Modifier un élément de menu"
+
+#: Admin/MenuItems/index.php:27
+msgid "Menu Items"
+msgstr "Éléments du menu"
+
+#: Admin/MenuItems/index.php:65 Admin/MenuItems/view.php:118
+#: Admin/Menus/index.php:54 Admin/Menus/view.php:96
+msgid "Yes"
+msgstr "Oui"
+
+#: Admin/MenuItems/index.php:65 Admin/MenuItems/view.php:118
+#: Admin/Menus/index.php:54 Admin/Menus/view.php:96
+msgid "No"
+msgstr "Non"
+
+#: Admin/MenuItems/view.php:38 Admin/MenuItems/view.php:66
+#: Admin/Menus/view.php:54
+msgid "Label"
+msgstr "Label"
+
+#: Admin/MenuItems/view.php:40 Admin/MenuItems/view.php:67
+msgid "Model"
+msgstr "Modèle"
+
+#: Admin/MenuItems/view.php:42 Admin/MenuItems/view.php:68
+msgid "Foreign Key"
+msgstr "Clé étrangère"
+
+#: Admin/MenuItems/view.php:44 Admin/MenuItems/view.php:69
+#: Admin/Menus/view.php:55
+msgid "Url"
+msgstr "Url"
+
+#: Admin/MenuItems/view.php:46 Admin/MenuItems/view.php:70
+#: Admin/Menus/view.php:56
+msgid "Target"
+msgstr "Cible"
+
+#: Admin/MenuItems/view.php:50 Admin/MenuItems/view.php:74
+msgid "Menu Id"
+msgstr "ID du menu"
+
+#: Admin/MenuItems/view.php:57 Admin/Menus/view.php:42
+msgid "Related Menu Items"
+msgstr "Éléments de menu"
+
+#: Admin/MenuItems/view.php:65 Admin/MenuItems/view.php:117
+#: Admin/Menus/view.php:53 Admin/Menus/view.php:95
+msgid "Active"
+msgstr "Actif"
+
+#: Admin/MenuItems/view.php:72 Admin/MenuItems/view.php:133
+msgid "Left"
+msgstr "Gauche"
+
+#: Admin/MenuItems/view.php:94 Admin/Pages/view.php:108
+#: Admin/Pages/view.php:153 Admin/Pages/view.php:190
+msgid "View"
+msgstr "Voir"
+
+#: Admin/MenuItems/view.php:121
+msgid "Parent Menu Item"
+msgstr "Element de menu parent"
+
+#: Admin/MenuItems/view.php:125
+msgid "Menu"
+msgstr "Menu"
+
+#: Admin/Menus/add.php:26
+msgid "Add Menu"
+msgstr "Ajouter un menu"
+
+#: Admin/Menus/edit.php:26
+msgid "Edit Menu"
+msgstr "Modifier un menu"
+
+#: Admin/Menus/index.php:27
+msgid "Menus"
+msgstr "Menus"
+
+#: Admin/Menus/view.php:43
+msgid "add"
+msgstr "ajouter"
+
+#: Admin/Pages/add.php:26
+msgid "Add Page"
+msgstr "Ajouter une page"
+
+#: Admin/Pages/add.php:50
+msgid "Medias"
+msgstr "Médias"
+
+#: Admin/Pages/edit.php:26
+msgid "Edit Page"
+msgstr "Modifier la page"
+
+#: Admin/Pages/index.php:27
+msgid "Pages"
+msgstr "Pages"
+
+#: Admin/Pages/index.php:36
+msgid "title"
+msgstr "titre"
+
+#: Admin/Pages/view.php:48 Admin/Pages/view.php:136 Admin/Pages/view.php:176
+msgid "Template"
+msgstr "Modèle"
+
+#: Admin/Pages/view.php:55
+msgid "Related Attachments"
+msgstr "Médias relatifs"
+
+#: Admin/Pages/view.php:63
+msgid "Profile"
+msgstr "Profil"
+
+#: Admin/Pages/view.php:64
+msgid "Type"
+msgstr "Type"
+
+#: Admin/Pages/view.php:65
+msgid "Subtype"
+msgstr "Sous-type"
+
+#: Admin/Pages/view.php:66
+msgid "Name"
+msgstr "Nom"
+
+#: Admin/Pages/view.php:67
+msgid "Size"
+msgstr "Taille"
+
+#: Admin/Pages/view.php:68
+msgid "Md5"
+msgstr "Md5"
+
+#: Admin/Pages/view.php:69
+msgid "Path"
+msgstr "Chemin"
+
+#: Admin/Pages/view.php:70
+msgid "Embed"
+msgstr "Intégration"
+
+#: Admin/Pages/view.php:71 Admin/Pages/view.php:133
+msgid "Title"
+msgstr "Titre"
+
+#: Admin/Pages/view.php:72
+msgid "Date"
+msgstr "Date"
+
+#: Admin/Pages/view.php:73
+msgid "Description"
+msgstr "Description"
+
+#: Admin/Pages/view.php:74
+msgid "Author"
+msgstr "Auteur"
+
+#: Admin/Pages/view.php:75
+msgid "Copyright"
+msgstr "Copyright"
+
+#: Admin/Pages/view.php:76
+msgid "Width"
+msgstr "Largeur"
+
+#: Admin/Pages/view.php:77
+msgid "Height"
+msgstr "Hauteur"
+
+#: Admin/Pages/view.php:78
+msgid "Duration"
+msgstr "Durée"
+
+#: Admin/Pages/view.php:122
+msgid "Related Pages"
+msgstr "Pages connexes"
+
+#: Admin/Pages/view.php:167
+msgid "Related Sections"
+msgstr "Sections connexes"
+
+#: Admin/Pages/view.php:175
+msgid "Page Id"
+msgstr "Page Id"
+
+#: Admin/Pages/view.php:177
+msgid "Order"
+msgstr "Ordre"
+
+#: Admin/Pages/view.php:213
+msgid "Parent Page"
+msgstr "Page parente"
+
+#~ msgid "Dashboard"
+#~ msgstr "Tableaux de bord"
+
+#~ msgid "Add Document"
+#~ msgstr "Ajouter un document"
+
+#~ msgid "Media"
+#~ msgstr "Média"
+
+#~ msgid "Edit Document"
+#~ msgstr "Modifier le document"
+
+#~ msgid "Documents"
+#~ msgstr "Documents"
+
+#~ msgid "Attachment Id"
+#~ msgstr "Pièce jointe Id"
+
+#~ msgid "Private"
+#~ msgstr "Privé"
+
+#~ msgid "Is Cat"
+#~ msgstr "Catégories"
+
+#~ msgid "Attachment"
+#~ msgstr "Média"
+
+#~ msgid "User"
+#~ msgstr "Utilisateur"
+
+#~ msgid "Add Faq"
+#~ msgstr "Ajouter"
+
+#~ msgid "Edit Faq"
+#~ msgstr "Modifier"
+
+#~ msgid "Faqs"
+#~ msgstr "Faqs"
+
+#~ msgid "Add User"
+#~ msgstr "Ajouter un utilisateur"
+
+#~ msgid "Edit profile"
+#~ msgstr "Modifier mon profil"
+
+#~ msgid "Change Password"
+#~ msgstr "Modifier le mot de passe"
+
+#~ msgid "Change User Password"
+#~ msgstr "Changer le mot de passe de l'utilisateur"
+
+#~ msgid "Edit User"
+#~ msgstr "Modifier l'utilisateur"
+
+#~ msgid "Edit My Profile"
+#~ msgstr "Modifier mon profil"
+
+#~ msgid "Users"
+#~ msgstr "Utilisateurs"
+
+#~ msgid "Mot de passe oublié"
+#~ msgstr "Mot de passe oublié"
+
+#~ msgid "Si vous n'avez pas encore de compte, "
+#~ msgstr "Si vous n'avez pas encore de compte,"
+
+#~ msgid "inscrivez-vous"
+#~ msgstr "inscrivez-vous"
+
+#~ msgid "Envoyer"
+#~ msgstr "Envoyer"
+
+#~ msgid "retour au login"
+#~ msgstr "retour au login"
+
+#~ msgid "Email"
+#~ msgstr "E-mail"
+
+#~ msgid "First Name"
+#~ msgstr "Prénom"
+
+#~ msgid "Last Name"
+#~ msgstr "Nom"
+
+#~ msgid "Role"
+#~ msgstr "Rôle"
+
+#~ msgid "Is Superuser"
+#~ msgstr "Est Superuser"
+
+#~ msgid "Token Expires"
+#~ msgstr "Expiration du jeton"
+
+#~ msgid "Activation Date"
+#~ msgstr "Date d’activation"
+
+#~ msgid "Tos Date"
+#~ msgstr "Tos Date"
+
+#~ msgid "My Profile"
+#~ msgstr "Мon profil"
+
+#~ msgid "Edit Profile"
+#~ msgstr "Modifier le profil"
+
+#~ msgid "Logout"
+#~ msgstr "Déconnexion"
