@@ -32,9 +32,24 @@ class PagesController extends AppController
   */
   public function index()
   {
-    $pages = $this->Pages->find('treeList', ['spacer' => ' - '])->toArray();
+    $pages = $this->Pages->find('treeList', ['spacer' => ' - '])
+    ->order(['Pages.title' => 'asc'])
+    ->toArray();
 
-    $this->set(compact('pages'));
+    $fullPages = $this->Pages->find()
+    ->order(['Pages.lft' => 'asc'])
+    ->mapReduce(function ($page, $key, $mapReduce)
+    {
+      $mapReduce->emitIntermediate($page, $page->id);
+    },
+    function ($pages, $id, $mapReduce)
+    {
+      $mapReduce->emit($pages[0], $id);
+    }
+    )
+    ->toArray();
+
+    $this->set(compact('pages','fullPages'));
   }
 
   public function moveUp($id = null)
