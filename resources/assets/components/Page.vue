@@ -6,7 +6,7 @@
       <el-button-group>
         <el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>
         <el-button v-if="!edit" @click="crudDelete()" size="mini" type="danger">Effacer</el-button>
-        <el-button v-if="!edit" @click="add = true" size="mini" type="success">Ajouter une section</el-button>
+        <el-button v-if="!edit" @click="setDefaultTemplate();add = true" size="mini" type="success">Ajouter une section</el-button>
 
         <el-button v-if="edit" @click="edit = false; crudGetOne()" size="mini" type="info">Annuler</el-button>
 
@@ -60,7 +60,7 @@
     <!-- ADD MODAL -->
     <el-dialog title="Nouvelle section" :visible.sync="add" width="60%" >
       <div>
-        <el-select v-model="section.template">
+        <el-select v-model="section.template" placeholder="">
           <el-option v-for="(options, index) in optsSections" :key="index" :label="options.label" :value="options.value"></el-option>
         </el-select>
         <br/>
@@ -110,6 +110,10 @@ export default
   },
   methods:
   {
+    setDefaultTemplate()
+    {
+      if(this.optsSections.length) this.section.template = this.optsSections[0].value
+    },
     createSection()
     {
       // fill in

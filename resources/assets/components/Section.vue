@@ -6,7 +6,7 @@
       <el-button-group>
         <el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>
         <el-button v-if="!edit" @click="crudDelete()" size="mini" type="danger">Effacer</el-button>
-        <el-button v-if="!edit" @click="add = true" size="mini" type="success">Ajouter un élément</el-button>
+        <el-button v-if="!edit" @click="setDefaultTemplate();add = true" size="mini" type="success">Ajouter un élément</el-button>
 
         <el-button v-if="edit" @click="edit = false; crudGetOne()" size="mini" type="info">Annuler</el-button>
         <el-button v-if="edit" @click="edit = false; update()" size="mini" type="success">Enregistrer</el-button>
@@ -124,6 +124,10 @@ export default
   {
     optsProvider() { return this.optsLayout },
     deleted() { window.location.reload()},
+    setDefaultTemplate(){
+      if(this.optsTemplate.length) this.articleForm.template = this.optsTemplate[0].value
+      if(this.optsCell.length) this.module.cell = this.optsCell[0].value
+    },
     createArticle()
     {
       // fill in
