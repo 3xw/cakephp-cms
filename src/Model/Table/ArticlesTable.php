@@ -93,6 +93,12 @@ class ArticlesTable extends Table
     ]);
 
     // Behaviors from CMS settings...
+    $this->addBehavior(\Trois\Cms\Model\Behavior\PublishdateAutoBehavior::class,[
+      'published' => [
+        'field' => 'status',
+        'values' => ['published','cms_managed']
+      ],
+    ]);
     $this->addBehavior(\Trois\Utils\ORM\Behavior\SluggableBehavior::class, ['field' => 'title','translate' => Configure::read('Trois/Cms.Settings.translate')]);
   }
 

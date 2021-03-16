@@ -29,7 +29,7 @@
         <div class="row">
           <div class="col-sm-8">
             <?= $this->Form->control('title',['class'=>'form-control']);?>
-            <?= $this->Form->control('publlished',['class'=>'form-control']);?>
+            <?= $this->Form->control('publish_date',['class'=>'form-control']);?>
             <?= $this->Form->control('meta',['class'=>'form-control']);?>
             <? /* $this->element('Trois/Tinymce.tinymce',[
               'field' => 'header',

@@ -90,6 +90,7 @@ class PagesTable extends Table
 
     // Behaviors from CMS settings...
     // transaltion is not handled as toDay
+    $this->addBehavior(\Trois\Cms\Model\Behavior\PublishdateAutoBehavior::class);
     $this->addBehavior(\Trois\Cms\Model\Behavior\PageSlugBehavior::class,['translate' => Configure::read('Trois/Cms.Settings.translate')]);
   }
 
