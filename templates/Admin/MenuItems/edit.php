@@ -4,18 +4,6 @@
  * @var \App\Model\Entity\MenuItem $menuItem
  */
 ?>
-<nav class="navbar navbar-expand-lg">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <?= $this->Html->link('<i class="material-icons">list</i> '.__('List'),['action'=>'index'], ['class' => '','escape'=>false]) ?>
-      </li>
-    </ul>
-  </div>
-</nav>
 <div class="utils--spacer-semi"></div>
 <div class="row no-gutters">
   <div class="col-11 mx-auto">
@@ -28,18 +16,18 @@
       <div class="card-body">
         <div class="row">
           <div class="col-sm-8">
-            <?= $this->Form->control('label',['class'=>'form-control']);?>
-            <?= $this->Form->control('model',['class'=>'form-control']);?>
-            <?= $this->Form->control('foreign_key',['class'=>'form-control']);?>
-            <?= $this->Form->control('url',['class'=>'form-control']);?>
-            <?= $this->Form->control('target',['class'=>'form-control']);?>
+            <?= $this->Form->control('label',['class'=>'form-control menu-item__title']);?>
+            <? // $this->Form->control('page', ['empty' => ' ', 'type' => 'select', 'options' => $pages,  'class'=>'form-control menu-item__page-select' , 'data-model' => 'Pages']);?>
+            <? // $this->Form->control('model',['type' => 'hidden', 'value' => NULL, 'class'=>'form-control menu-item__model']);?>
+            <? // $this->Form->control('foreign_key',['type' => 'hidden', 'value' => NULL, 'class'=>'form-control']);?>
+            <?= $this->Form->control('url',['class'=>'form-control menu-item__page-url']);?>
+            <?= $this->Form->control('target',['type' => 'select', 'empty' => false, 'options' => ['_self' => 'Défaut', '_blank' => 'Nouvelle page'], 'class'=>'form-control']);?>
           </div>
           <div class="col-sm-4">
             <?= $this->Form->control('active', ['class'=>'form-control']);?>
+            <?= $this->Form->control('class', ['type' => 'text', 'class'=>'form-control']);?>
             <?= $this->Form->control('parent_id', ['options' => $parentMenuItems, 'empty' => true, 'class'=>'form-control']);?>
-            <?= $this->Form->control('left', ['class'=>'form-control']);?>
-            <?= $this->Form->control('rght', ['class'=>'form-control']);?>
-            <?= $this->Form->control('menu_id', ['options' => $menus, 'class'=>'form-control']);?>
+            <?= $this->Form->control('menu_id', ['options' => $menus, 'value' => $menu_id, 'class'=>'form-control']);?>
           </div>
         </div>
       </div>

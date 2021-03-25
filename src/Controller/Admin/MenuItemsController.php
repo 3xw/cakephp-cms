@@ -147,7 +147,7 @@ class MenuItemsController extends AppController
     public function edit($id = null, $menu_id = null)
     {
         $menuItem = $this->MenuItems->get($id, [
-            'contain' => []
+            'contain' => ['ParentMenuItems', 'Pages', 'Menus']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $menuItem = $this->MenuItems->patchEntity($menuItem, $this->request->getData());
@@ -162,9 +162,19 @@ class MenuItemsController extends AppController
             }
             $this->Flash->error(__('The menu item could not be saved. Please, try again.'));
         }
-        $parentMenuItems = $this->MenuItems->ParentMenuItems->find('list', ['limit' => 200]);
+        $parentMenuItems = $this->MenuItems->ParentMenuItems->find('treeList', [
+          'keyPath' => 'id',
+          'valuePath' => 'label',
+          'spacer' => ' - '
+        ])
+        ->where(['ParentMenuItems.menu_id' => $menu_id]);
         $menus = $this->MenuItems->Menus->find('list', ['limit' => 200]);
-        $this->set(compact('menuItem', 'parentMenuItems', 'menus'));
+        $pages = $this->MenuItems->Pages->find('treeList', [
+            'keyPath' => 'slug',
+            'valuePath' => 'title',
+            'spacer' => ' - '
+        ]);
+        $this->set(compact('menuItem', 'parentMenuItems', 'menus', 'pages', 'menu_id'));
     }
 
     /**

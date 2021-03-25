@@ -69,6 +69,7 @@
                         <div class="btn-group">
                           <?= $this->Html->link('<i class="material-icons">keyboard_arrow_up</i>', ['controller' => 'MenuItems', 'action' => 'moveUp', $menuItems->id, $menu->id],['class' => 'btn btn-xs btn-simple btn-info btn-icon edit','escape' => false]) ?>
                           <?= $this->Html->link('<i class="material-icons">keyboard_arrow_down</i>', ['controller' => 'MenuItems','action' => 'moveDown', $menuItems->id, $menu->id],['class' => 'btn btn-xs btn-simple btn-info btn-icon edit','escape' => false]) ?>
+                          <?= $this->Html->link('<i class="material-icons">mode_edit</i>', ['controller' => 'MenuItems', 'action' => 'edit', $menuItems->id, $menu->id], ['class' => 'btn btn-xs btn-simple btn-warning btn-icon edit','escape' => false]) ?>
                           <?= $this->Form->postLink('<i class="material-icons">delete</i>', ['controller' => 'MenuItems', 'action' => 'delete', $menuItems->id, $menu->id], ['class' => 'btn btn-xs btn-simple btn-danger btn-icon remove','escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?',  $menuItems->id)]) ?>
                         </td>
                       </div>
