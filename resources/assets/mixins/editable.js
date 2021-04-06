@@ -35,12 +35,12 @@ export default
       get()
       {
         if(!this.editable) return null
-        return this.editable[this.modelField]
+        return _.get(this.editable,this.modelField)
       },
       set(val)
       {
         if(!this.editable) return null
-        this.editable[this.modelField] = val
+        _.set(this.editable,this.modelField, val)
         this.model.update({
           where: this.modelId,
           data: this.editable

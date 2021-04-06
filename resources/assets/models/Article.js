@@ -18,6 +18,7 @@ export default class Article extends ModelWithAttachments
       title: this.attr(null),
       header: this.attr(null),
       body: this.attr(null),
+      meta: this.attr(null),
 
       section_item: this.belongsTo(SectionItem, 'foreign_key'),
       attachments: this.belongsToMany(Attachment, AttachmentArticle, 'article_id', 'attachment_id'),
