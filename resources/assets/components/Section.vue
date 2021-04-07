@@ -4,8 +4,8 @@
     <!-- CONTROLS -->
     <div class="cms-controls cms-controls--section">
       <div class="d-flex justify-content-between align-items-center px-2">
-        <span class="material-icons handle"> reorder </span>
-        <p class="small m-0"><strong>Section</strong></p>
+        <span class="material-icons cms-handle"> reorder </span>
+        <p class="small"><strong>Section</strong></p>
         <el-button-group>
           <!--<el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>-->
           <el-button v-if="!edit" @click="setDefaultTemplate();add = true" size="mini" type="success">Ajouter un élément</el-button>

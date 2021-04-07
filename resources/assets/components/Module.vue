@@ -4,8 +4,8 @@
     <!-- controls -->
     <div class="cms-controls cms-controls--module">
       <div class="d-flex justify-content-between align-items-center px-2">
-        <span class="material-icons handle"> reorder </span>
-        <p class="small m-0"><strong>{{templateName}}</strong></p>
+        <span class="material-icons cms-handle"> reorder </span>
+        <p class="small"><strong>{{templateName}}</strong></p>
         <el-button-group>
           <el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>
           <el-button v-if="!edit" @click="crudDelete()" size="mini" type="danger">Supprimer</el-button>

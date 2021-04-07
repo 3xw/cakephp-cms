@@ -1,9 +1,10 @@
 .cms-controls
 {
-  padding: 5px; background: rgba(255, 194, 194 , .5);
+  padding: 5px; margin-left: auto;background: rgba(255, 194, 194 , .5);
   &--section { background: rgba(194, 232, 255 , .5); }
   &--article { background: rgba(212, 255, 194 , .5); }
   &--module { background: rgba(247, 140, 14 , .2); }
+  p{ max-width: 25%;margin: 0 auto 0 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 }
 
 .cms-content
@@ -13,3 +14,5 @@
   &--article { border: solid rgba(212, 255, 194 , .5) 1px; }
   &--module { border: solid rgba(247, 140, 14 , .2) 1px; }
 }
+
+.cms-handle{cursor: move;}
