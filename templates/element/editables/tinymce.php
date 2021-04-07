@@ -1,4 +1,5 @@
 <?php
+use Cake\Core\Configure;
 $html = $this->element('Trois/Tinymce.tinymce',[
   'attributes' => [
     ':entity' => 'sp.entity',
@@ -7,7 +8,7 @@ $html = $this->element('Trois/Tinymce.tinymce',[
   'field' => $field,
   'value' => $entity->{$field},
   'init' => [
-    'plugins' => [ 'attachment'],
+    Configure::read('Trois/Tinymce'),
     'attachment_settings' => $this->Attachment->setup($field,[
       'types' => [
         'application/pdf',

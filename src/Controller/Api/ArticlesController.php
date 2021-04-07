@@ -58,12 +58,22 @@ class ArticlesController extends AppController
     ]);
   }
 
+  public function view()
+  {
+    $this->Crud->on('beforeFind', function ($event) {
+      $event->getSubject()->query->contain([
+        'Metas'
+      ]);
+    });
+    return $this->Crud->execute();
+  }
+
   public function index()
   {
     $this->Crud->on('beforePaginate', function(\Cake\Event\Event $event) {
       $event->getSubject()->query
       ->contain([
-        'SectionItems'
+        'SectionItems', 'Metas'
       ]);
     });
     return $this->Crud->execute();

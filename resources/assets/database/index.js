@@ -8,6 +8,7 @@ import Section from '../models/Section'
 import SectionItem from '../models/SectionItem'
 import Article from '../models/Article'
 import Module from '../models/Module'
+import Meta from '../models/Meta'
 
 const database = new Database()
 database.register(Page)
@@ -17,5 +18,6 @@ database.register(Article)
 database.register(Module)
 database.register(AttachmentArticle)
 database.register(Attachment)
+database.register(Meta)
 
 export default database

@@ -1,6 +1,7 @@
 import ModelWithAttachments from './ModelWithAttachments'
 
 import SectionItem from './SectionItem'
+import Meta from './Meta'
 import Attachment from './Attachment'
 import AttachmentArticle from './AttachmentArticle'
 import moment from 'moment'
@@ -18,9 +19,9 @@ export default class Article extends ModelWithAttachments
       title: this.attr(null),
       header: this.attr(null),
       body: this.attr(null),
-      meta: this.attr(null),
 
       section_item: this.belongsTo(SectionItem, 'foreign_key'),
+      metas: this.hasMany(Meta, 'foreign_key'),
       attachments: this.belongsToMany(Attachment, AttachmentArticle, 'article_id', 'attachment_id'),
     }
   }

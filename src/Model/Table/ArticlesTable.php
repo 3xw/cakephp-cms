@@ -92,6 +92,16 @@ class ArticlesTable extends Table
       'dependent' => true,
     ]);
 
+    $this->HasMany('Metas', [
+      'className' => 'Trois/Cms.Metas',
+      'foreignKey' => 'foreign_key',
+      'bindingKey' => 'id',
+      'propertyName' => 'metas',
+      'conditions' => [
+        'Metas.model' => 'Articles'
+      ],
+    ]);
+
     // Behaviors from CMS settings...
     $this->addBehavior(\Trois\Cms\Model\Behavior\PublishdateAutoBehavior::class,[
       'published' => [
