@@ -43,7 +43,7 @@ class PagesController extends AppController
       'Attachments',
       'Sections' => [
         'SectionItems' => [
-          'Articles' => ['Attachments'],
+          'Articles' => ['Attachments', 'Metas'],
           'Modules'
         ]
       ]

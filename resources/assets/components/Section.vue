@@ -4,6 +4,7 @@
     <!-- CONTROLS -->
     <div class="cms-controls cms-controls--section">
       <div class="d-flex justify-content-between align-items-center px-2">
+        <span class="material-icons handle"> reorder </span>
         <p class="small m-0"><strong>Section</strong></p>
         <el-button-group>
           <!--<el-button v-if="!edit" @click="edit = true" size="mini" type="primary" >Editer</el-button>-->

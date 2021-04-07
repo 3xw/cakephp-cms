@@ -65,7 +65,8 @@ class CmsHelper extends Helper
       'class' => $classes,
       'model-store-name' => 'sections',
       'model-field' => 'order',
-      ':model-ids' => json_encode($ids)
+      ':model-ids' => json_encode($ids),
+      ':options' => json_encode(['handle' => '.handle'])
     ];
     return $this->getView()->Html->tag('cms-draggable', $html, $attributes);
   }
@@ -88,7 +89,8 @@ class CmsHelper extends Helper
       'class' => $classes,
       'model-store-name' => 'section_items',
       'model-field' => 'order',
-      ':model-ids' => json_encode($ids)
+      ':model-ids' => json_encode($ids),
+      ':options' => json_encode(['handle' => '.handle'])
     ];
     return $this->getView()->Html->tag('cms-draggable', $html, $attributes);
   }
