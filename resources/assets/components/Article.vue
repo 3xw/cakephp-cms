@@ -65,7 +65,7 @@ export default
     si(){ return this.SI.find(this.sectionItemId) },
     Meta(){ return this.$store.$db().model('metas')},
     metas(){ return this.Meta.query().where('foreign_key', parseInt(this.modelId)).get() },
-    metasComponents(){ return this.$children.find(c => c.isMeta)},
+    metasComponents(){ return this.$children.filter(c => c.isMeta)},
     templateChanged(){ return this.template != this.si.template },
     options(){ return this.getAllowedTFS(this.si.section_id) },
     templateName(){ let c = this; return this.options.find(e => e.template === c.si.template ).name}
@@ -74,15 +74,12 @@ export default
   {
     edit(val)
     {
-      //console.log(this.metasComponents);
-      //console.log(this.metas);
       if(val) this.template = this.si.template
     }
   },
   mounted()
   {
     this.crudGetOne()
-    //this.Meta.crud().get()
   },
   methods:
   {
@@ -93,36 +90,31 @@ export default
       this.crudGetOne() // for article
       if(this.templateChanged) this.SI.crud().getOne(this.sectionItemId)
     },
-
     save()
     {
-
 
       let promises = []
 
       let mc = (_.isArray(this.metasComponents))? this.metasComponents : [this.metasComponents]
+      this.entity.metas = []
       for(let i = 0;i < mc.length;i++){
         let c = mc[i]
         if(!this.checkMetaExists(c)){
           promises.push(this.createMeta(c).save())
-        }else{
-
         }
+        this.entity.metas.push(c.meta)
       }
 
       promises.push(this.update())
 
       if(this.templateChanged) promises.push(this.si.update())
 
-
-
       Promise.all(promises)
-      .then(data => /*window.location.reload()*/console.log('saved'))
+      .then(data => window.location.reload())
       .catch(err => console.log(err))
     },
     checkMetaExists(c)
     {
-      console.log(this.metas);
       return (this.metas.find(m => m.key === c.modelField))
     },
     createMeta(c)

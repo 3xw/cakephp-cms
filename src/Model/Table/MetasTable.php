@@ -40,7 +40,7 @@ class MetasTable extends Table
     parent::initialize($config);
 
     $this->setTable('metas');
-    $this->setDisplayField('id');
+    $this->setDisplayField('value');
     $this->setPrimaryKey('id');
     $this->addBehavior('Search.Search');
     $this->searchManager()
@@ -54,15 +54,15 @@ class MetasTable extends Table
       'fields' => ['id']
     ]);
 
-    /*$this->HasOneMultiBindings('Articles', [
+    $this->HasOneMultiBindings('Articles', [
       'className' => 'Trois/Cms.Articles',
       'foreignKey' => 'id',
       'bindingKey' => 'foreign_key',
       'multiBindings' => [
-        'SectionItems.model' => 'Articles',
+        'Metas.model' => 'Articles',
       ],
       'dependent' => true,
-    ]);*/
+    ]);
 
   }
 

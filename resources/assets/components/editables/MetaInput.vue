@@ -23,11 +23,13 @@ export default {
   computed:
   {
     meta(){
-      let existentMetaKey = this.entity.metas.findIndex(m => (m.foreign_key === this.entity.id && m.key === this.modelField))
-      if(existentMetaKey){
-        return this.entity.metas[existentMetaKey]
+      let metaKey = this.entity.metas.findIndex(m => (m.foreign_key === this.entity.id && m.key === this.modelField))
+      if(metaKey != -1){
+        return this.entity.metas[metaKey]
       }else{
-        return { model: this.modelStoreName, key: this.modelField, foreign_key: this.modelId, value: '' };
+        let meta = new Meta({ model: this.modelStoreName, key: this.modelField, foreign_key: this.modelId, value: '' })
+        this.entity.metas.push(meta)
+        return this.entity.metas[0];
       }
     }
   }

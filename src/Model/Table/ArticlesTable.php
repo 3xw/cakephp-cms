@@ -100,6 +100,8 @@ class ArticlesTable extends Table
       'conditions' => [
         'Metas.model' => 'Articles'
       ],
+      'saveStrategy' => 'replace',
+      'dependent' => true,
     ]);
 
     // Behaviors from CMS settings...
