@@ -14,8 +14,9 @@ export default class Meta extends Model
       foreign_key: this.attr(null),
       key: this.attr(null),
       value: this.attr(null),
+      locale: this.attr('fr_CH'),
 
-      article: this.hasOne(Article, 'id', 'foreign_key'),
+      article: this.hasOne(Article, 'foreign_key', 'id'),
     }
   }
 }

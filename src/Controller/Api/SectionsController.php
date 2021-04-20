@@ -64,7 +64,7 @@ class SectionsController extends AppController
       $event->getSubject()->query
       ->contain([
         'SectionItems' => [
-          'Articles' => ['Attachments'],
+          'Articles' => ['Attachments', 'Metas'],
           'Modules'
         ]
       ]);

@@ -9,18 +9,18 @@ use Trois\Cms\Controller\AppController;
 /**
 * Articles Controller
 *
-* @property \Trois\Cms\Model\Table\ArticlesTable $Articles
+* @property \Trois\Cms\Model\Table\MetasTable $Articles
 *
-* @method \Trois\Cms\Model\Entity\Article[] paginate($object = null, array $settings = [])
+* @method \Trois\Cms\Model\Entity\Metas[] paginate($object = null, array $settings = [])
 */
-class ArticlesController extends AppController
+class MetasController extends AppController
 {
   use \Crud\Controller\ControllerTrait;
 
   public function initialize():void
   {
     parent::initialize();
-    $this->loadModel(Configure::read('Trois/Cms.Models.Articles'));
+    $this->loadModel(Configure::read('Trois/Cms.Models.Metas'));
     $this->loadComponent('Crud.Crud', [
       'actions' => [
         'index' => [
@@ -56,26 +56,5 @@ class ArticlesController extends AppController
         'Crud.Search'
       ]
     ]);
-  }
-
-  public function view()
-  {
-    $this->Crud->on('beforeFind', function ($event) {
-      $event->getSubject()->query->contain([
-        'Metas', 'Attachments'
-      ]);
-    });
-    return $this->Crud->execute();
-  }
-
-  public function index()
-  {
-    $this->Crud->on('beforePaginate', function(\Cake\Event\Event $event) {
-      $event->getSubject()->query
-      ->contain([
-        'SectionItems', 'Metas'
-      ]);
-    });
-    return $this->Crud->execute();
   }
 }

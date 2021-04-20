@@ -42,6 +42,8 @@ import edit from '../mixins/ui/edit'
 import editable from '../mixins/editable'
 import settings from '../mixins/settings'
 
+import Meta from '../models/Meta'
+
 export default
 {
   name: 'cms-article',
@@ -61,6 +63,9 @@ export default
     attachments(){ return this.$store.$db().model('attachments').all() },
     SI(){ return this.$store.$db().model('section_items')},
     si(){ return this.SI.find(this.sectionItemId) },
+    Meta(){ return this.$store.$db().model('metas')},
+    metas(){ return this.Meta.query().where('foreign_key', parseInt(this.modelId)).get() },
+    metasComponents(){ return this.$children.find(c => c.isMeta)},
     templateChanged(){ return this.template != this.si.template },
     options(){ return this.getAllowedTFS(this.si.section_id) },
     templateName(){ let c = this; return this.options.find(e => e.template === c.si.template ).name}
@@ -69,30 +74,61 @@ export default
   {
     edit(val)
     {
+      //console.log(this.metasComponents);
+      //console.log(this.metas);
       if(val) this.template = this.si.template
     }
   },
   mounted()
   {
     this.crudGetOne()
+    //this.Meta.crud().get()
   },
   methods:
   {
     optsProvider() { return this.options },
-    deleted() { window.location.reload()},
+    deleted() { window.location.reload() },
     cancel()
     {
       this.crudGetOne() // for article
       if(this.templateChanged) this.SI.crud().getOne(this.sectionItemId)
     },
+
     save()
     {
-      let promises = [this.update()]
+
+
+      let promises = []
+
+      let mc = (_.isArray(this.metasComponents))? this.metasComponents : [this.metasComponents]
+      for(let i = 0;i < mc.length;i++){
+        let c = mc[i]
+        if(!this.checkMetaExists(c)){
+          promises.push(this.createMeta(c).save())
+        }else{
+
+        }
+      }
+
+      promises.push(this.update())
+
       if(this.templateChanged) promises.push(this.si.update())
 
+
+
       Promise.all(promises)
-      .then(data => window.location.reload())
+      .then(data => /*window.location.reload()*/console.log('saved'))
       .catch(err => console.log(err))
+    },
+    checkMetaExists(c)
+    {
+      console.log(this.metas);
+      return (this.metas.find(m => m.key === c.modelField))
+    },
+    createMeta(c)
+    {
+      let meta = new Meta(c.meta)
+      return meta
     }
   }
 }

@@ -54,7 +54,7 @@ class MetasTable extends Table
       'fields' => ['id']
     ]);
 
-    $this->HasOneMultiBindings('Articles', [
+    /*$this->HasOneMultiBindings('Articles', [
       'className' => 'Trois/Cms.Articles',
       'foreignKey' => 'id',
       'bindingKey' => 'foreign_key',
@@ -62,7 +62,7 @@ class MetasTable extends Table
         'SectionItems.model' => 'Articles',
       ],
       'dependent' => true,
-    ]);
+    ]);*/
 
   }
 
@@ -84,7 +84,7 @@ class MetasTable extends Table
     ->notEmptyString('model');
 
     $validator
-    ->uuid('foreign_key')
+    ->scalar('foreign_key')
     ->requirePresence('foreign_key', 'create')
     ->notEmptyString('foreign_key');
 
@@ -93,16 +93,6 @@ class MetasTable extends Table
     ->maxLength('key', 255)
     ->requirePresence('key', 'create')
     ->notEmptyString('key');
-
-    $validator
-    ->scalar('value')
-    ->requirePresence('value', 'create')
-    ->notEmptyString('value');
-
-    $validator
-    ->scalar('locale')
-    ->maxLength('locale', 5)
-    ->notEmptyString('locale');
 
     return $validator;
   }

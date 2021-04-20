@@ -1,11 +1,18 @@
-import { Model } from '@vuex-orm/core'
+import { Model, Relation } from '@vuex-orm/core'
 
 export default class ModelWithAttachments extends Model
 {
 
   static query()
   {
-    return this.getters('query')().with('attachments');
+    let
+    method = this.getters('query')(),
+    fields = this.fields()
+    for( let key in fields)
+    {
+      if(fields[key] instanceof Relation) method.with(key)
+    }
+    return method
   }
 
   async setAttachments( objs )

@@ -72,7 +72,7 @@ class SectionItemsController extends AppController
     $this->Crud->on('beforeFind', function(\Cake\Event\Event $event) {
       $event->getSubject()->query
       ->matching('Sections', function ($q) {
-        return $q->where(['Sections.id' => $this->request->getParam('section_id')]);
+        return $q->contain(['Articles' => ['Metas'], 'Modules'])->where(['Sections.id' => $this->request->getParam('section_id')]);
       });
     });
     return $this->Crud->execute();

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Trois\Cms\Controller\Api;
 
 use Cake\Core\Configure;
+use Cake\Log\Log;
 use Trois\Cms\Controller\AppController;
 
 /**

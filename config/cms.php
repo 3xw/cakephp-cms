@@ -14,6 +14,7 @@ return [
       'Pages' => 'Trois/Cms.Pages',
       'SectionItems' => 'Trois/Cms.SectionItems',
       'Sections' => 'Trois/Cms.Sections',
+      'Metas' => 'Trois/Cms.Metas',
     ],
     'Editables' => [
       'prefix' => 'cms',
