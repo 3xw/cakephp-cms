@@ -72,21 +72,21 @@ export default
       let params = this.settings.Tree.modules[moduleKey]['params']
       for(const [key, param] of Object.entries(params)) {
         if(param.type == 'list'){
-          options[key] = param.options
+          params[key] = param.options
         }else{
           let controller = param.options.split('::')[0].toLowerCase()
           let action = param.options.split('::')[1]
           client.get(controller+'/'+action, { baseURL: BASE_URL + 'api/', })
           .then(function (response) {
-            options[key] = response.data[controller]
+            params[key] = response.data[controller]
           })
           .catch(function (error) { console.log(error); })
           .then(function(){
-            return options
+            return params;
           })
         }
       }
-      return options
+      return params
     }
   }
 }

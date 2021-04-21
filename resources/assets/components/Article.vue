@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="cms-article">
+  <div class="cms-article" :class="{'cms-edit': edit}">
 
     <!-- controls -->
     <div class="cms-controls cms-controls--article">

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="cms-module">
+  <div class="cms-module" :class="{'cms-edit': edit}">
 
     <!-- controls -->
     <div class="cms-controls cms-controls--module">
@@ -73,7 +73,7 @@ export default
   },
   created(){
     this.crudGetOne()
-    this.paramsOptions()
+    this.paramsOptions
   },
   methods:
   {
