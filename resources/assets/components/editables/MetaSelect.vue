@@ -3,7 +3,7 @@
   <!-- edit -->
   <div v-if="edit" class="cms-editable-select">
     <div class="input" v-for="(param, key) in options">
-      <el-select v-model="metaData[key]" :placeholder="key" @change="selectUpdate">
+      <el-select v-model="metaData[key]" :multiple="(key.indexOf('ids') !== -1)" :placeholder="key" @change="selectUpdate">
         <el-option v-for="(label, value) in param" :key="value" :label="label" :value="value"></el-option>
       </el-select>
     </div>

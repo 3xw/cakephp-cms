@@ -73,6 +73,7 @@ export default
   },
   created(){
     this.crudGetOne()
+    this.paramsOptions()
   },
   methods:
   {
