@@ -17,19 +17,19 @@ export default class ModelWithAttachments extends Model
 
   async setAttachments( objs )
   {
-    //console.log('modelWithAttachments.setAttachments')
 
     // clear existing
     let
-    article = await this.constructor.find(this.id), // see find override...
     Pivot
+
     this.constructor.pivotFields().map(f => {if(f.attachments) Pivot = f.attachments.pivot} )
-    article.attachments.forEach(a => Pivot.delete([this.id, a.id]))
+    this.attachments.forEach(a => Pivot.delete([this.id, a.id]))
 
     if(!objs.length) return
 
     // create with order in pivot table
     objs = objs.map((obj, i) => Object.assign(obj, { pivot:{order: i} }))
+
     await this.constructor.insertOrUpdate({data: { id: this.id, attachments: objs }})
   }
 
