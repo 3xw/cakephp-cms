@@ -17,7 +17,6 @@ export default class Attachment extends Model
       size: this.attr(null),
       md5: this.attr(null),
       path: this.attr(null),
-      embed: this.attr(null),
       title: this.attr(null),
       date: this.attr(moment().format()),
       description: this.attr(null),
