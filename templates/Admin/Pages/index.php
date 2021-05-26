@@ -17,7 +17,7 @@
   </div>
 </nav>
 <div class="utils--spacer-semi"></div>
-<div class="row no-gutters">
+<div class="row no-gutters g-0">
   <div class="col-11 mx-auto ">
     <!-- LIST ELEMENT -->
     <div class="card">
