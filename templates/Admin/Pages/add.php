@@ -1,8 +1,5 @@
 <?php
-/**
- * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface $page
- */
+use Cake\Core\Configure;
 ?>
 <nav class="navbar navbar-expand-lg">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,23 +25,49 @@
       <div class="card-body">
         <div class="row">
           <div class="col-sm-8">
-            <?= $this->Form->control('title',['class'=>'form-control']);?>
+            <?php
+            if(Configure::read('Trois/Cms.Settings.translate'))
+            {
+              echo $this->element('locale',['fields' => [
+                'name',
+                'meta',
+                'Trois/Tinymce.tinymce' => [
+                  'field' => 'header',
+                  'value' => '',
+                  'init' => [
+                    'attachment_settings' => []
+                  ]
+                ],
+                'Trois/Tinymce.tinymce' => [
+                  'field' => 'body',
+                  'value' => '',
+                  'init' => [
+                    'attachment_settings' => []
+                  ]
+                ],
+              ], 'labels' => ['Title','Meta', 'Header','Body']]);
+            }
+            else
+            {
+              echo $this->Form->control('title',['class'=>'form-control']);
+              echo $this->Form->control('meta',['class'=>'form-control']);
+              echo $this->element('Trois/Tinymce.tinymce',[
+                'field' => 'header',
+                'value' => '',
+                'init' => [
+                  'label' => __('Header')
+                ]
+              ]);
+              echo $this->element('Trois/Tinymce.tinymce',[
+                'field' => 'body',
+                'value' => '',
+                'init' => [
+                  'label' => __('Body')
+                ]
+              ]);
+            }
+            ?>
 
-            <?= $this->Form->control('meta',['class'=>'form-control']);?>
-            <?= $this->element('Trois/Tinymce.tinymce',[
-              'field' => 'header',
-              'value' => '',
-              'init' => [
-                'label' => __('Header')
-              ]
-            ]) ?>
-            <?= $this->element('Trois/Tinymce.tinymce',[
-              'field' => 'body',
-              'value' => '',
-              'init' => [
-                'label' => __('Body')
-              ]
-            ]) ?>
             <?= $this->Form->control('template',['class'=>'form-control']);?>
             <?= $this->Attachment->input('Attachments',[
               'label' => __('Medias'),
