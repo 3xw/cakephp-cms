@@ -31,15 +31,15 @@ use Cake\Core\Configure;
               echo $this->element('locale',['fields' => [
                 'name',
                 'meta',
-                'Trois/Tinymce.tinymce' => [
-                  'field' => 'header',
+                'header' => [
+                  'element' => 'Trois/Tinymce.tinymce',
                   'value' => '',
                   'init' => [
                     'attachment_settings' => []
                   ]
                 ],
-                'Trois/Tinymce.tinymce' => [
-                  'field' => 'body',
+                'body' => [
+                  'element' => 'Trois/Tinymce.tinymce',
                   'value' => '',
                   'init' => [
                     'attachment_settings' => []
@@ -71,24 +71,6 @@ use Cake\Core\Configure;
             <?= $this->Form->control('template',['class'=>'form-control']);?>
             <?= $this->Attachment->input('Attachments',[
               'label' => __('Medias'),
-              'types' =>[
-                'application/pdf',
-                'application/msword',
-                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                'application/vnd.ms-excel',
-                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                'image/jpeg',
-                'image/png',
-                'embed/youtube',
-                'embed/vimeo'
-              ],
-              'atags' => [],
-              'cols' => 'col-xs-6 col-md-6 col-lg-4',
-              'maxquantity' => -1,
-              'restrictions' => [
-                Trois\Attachment\View\Helper\AttachmentHelper::TAG_RESTRICTED,
-                Trois\Attachment\View\Helper\AttachmentHelper::TYPES_RESTRICTED
-                ],
               'attachments' => [],
             ]);?>
           </div>

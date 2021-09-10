@@ -3,6 +3,7 @@ return [
   'Trois/Cms' => [
     'Settings' => [
       'translate' => false,
+      'version' => false,
     ],
     'Models' => [
       'Articles' => 'Trois/Cms.Articles',

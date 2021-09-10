@@ -92,6 +92,9 @@ class PagesTable extends Table
     // transaltion is not handled as toDay
     $this->addBehavior(\Trois\Cms\Model\Behavior\PublishdateAutoBehavior::class);
     $this->addBehavior(\Trois\Cms\Model\Behavior\PageSlugBehavior::class,['translate' => Configure::read('Trois/Cms.Settings.translate')]);
+
+    // conditionals behaviors
+    if(Configure::read('Trois/Cms.Settings.translate')) $this->addBehavior('Trois\Utils\ORM\Behavior\TranslateBehavior', ['fields' => ['title','meta','header','body']]);
   }
 
   /**
