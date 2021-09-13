@@ -29,7 +29,7 @@ use Cake\Core\Configure;
             if(Configure::read('Trois/Cms.Settings.translate'))
             {
               echo $this->element('locale',['fields' => [
-                'name',
+                'title',
                 'meta',
                 'header' => [
                   'element' => 'Trois/Tinymce.tinymce',
