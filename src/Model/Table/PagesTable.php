@@ -94,7 +94,7 @@ class PagesTable extends Table
     $this->addBehavior(\Trois\Cms\Model\Behavior\PageSlugBehavior::class,['translate' => Configure::read('Trois/Cms.Settings.translate')]);
 
     // conditionals behaviors
-    if(Configure::read('Trois/Cms.Settings.translate')) $this->addBehavior('Trois\Utils\ORM\Behavior\TranslateBehavior', ['fields' => ['title','meta','header','body']]);
+    if(Configure::read('Trois/Cms.Settings.translate')) $this->addBehavior('Trois\Utils\ORM\Behavior\TranslateBehavior', ['fields' => ['title','meta','header','body','slug']]);
   }
 
   /**

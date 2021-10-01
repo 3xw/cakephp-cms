@@ -28,24 +28,28 @@ use Cake\Core\Configure;
             <?php
             if(Configure::read('Trois/Cms.Settings.translate'))
             {
-              echo $this->element('locale',['fields' => [
-                'title',
-                'meta',
-                'header' => [
-                  'element' => 'Trois/Tinymce.tinymce',
-                  'value' => '',
-                  'init' => [
-                    'attachment_settings' => []
-                  ]
+              echo $this->element('locale',[
+                'entity' => $page,
+                'fields' => [
+                  'title',
+                  'meta',
+                  'header' => [
+                    'element' => 'Trois/Tinymce.tinymce',
+                    'value' => '',
+                    'init' => [
+                      'attachment_settings' => []
+                    ]
+                  ],
+                  'body' => [
+                    'element' => 'Trois/Tinymce.tinymce',
+                    'value' => '',
+                    'init' => [
+                      'attachment_settings' => []
+                    ]
+                  ],
                 ],
-                'body' => [
-                  'element' => 'Trois/Tinymce.tinymce',
-                  'value' => '',
-                  'init' => [
-                    'attachment_settings' => []
-                  ]
-                ],
-              ], 'labels' => ['Title','Meta', 'Header','Body']]);
+                'labels' => ['Title','Meta', 'Header','Body']
+              ]);
             }
             else
             {
