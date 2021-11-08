@@ -129,9 +129,13 @@ class MenuItemsController extends AppController
         ])
         ->where(['ParentMenuItems.menu_id' => $menu_id]);
         $menus = $this->MenuItems->Menus->find('list', ['limit' => 200]);
-        $pages = $this->MenuItems->Pages->find('treeList', [
+
+        $this->loadModel('Pages');
+        $pages = $this->MenuItems->Pages->find(($this->Pages->behaviors()->Tree)? 'treeList' : 'list', [
             'keyPath' => 'slug',
             'valuePath' => 'title',
+            'keyField' => 'slug',
+            'valueField' => 'title',
             'spacer' => ' - '
         ]);
         $this->set(compact('menuItem', 'parentMenuItems', 'menus', 'pages', 'menu_id'));
@@ -169,9 +173,12 @@ class MenuItemsController extends AppController
         ])
         ->where(['ParentMenuItems.menu_id' => $menu_id]);
         $menus = $this->MenuItems->Menus->find('list', ['limit' => 200]);
-        $pages = $this->MenuItems->Pages->find('treeList', [
+        $this->loadModel('Pages');
+        $pages = $this->MenuItems->Pages->find(($this->Pages->behaviors()->Tree)? 'treeList' : 'list', [
             'keyPath' => 'slug',
             'valuePath' => 'title',
+            'keyField' => 'slug',
+            'valueField' => 'title',
             'spacer' => ' - '
         ]);
         $this->set(compact('menuItem', 'parentMenuItems', 'menus', 'pages', 'menu_id'));
