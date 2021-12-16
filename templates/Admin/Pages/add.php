@@ -1,8 +1,5 @@
 <?php
-/**
- * @var \App\View\AppView $this
- * @var \Cake\Datasource\EntityInterface $page
- */
+use Cake\Core\Configure;
 ?>
 <nav class="navbar navbar-expand-lg">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,44 +25,56 @@
       <div class="card-body">
         <div class="row">
           <div class="col-sm-8">
-            <?= $this->Form->control('title',['class'=>'form-control']);?>
+            <?php
+            if(Configure::read('Trois/Cms.Settings.translate'))
+            {
+              echo $this->element('locale',[
+                'entity' => $page,
+                'fields' => [
+                  'title',
+                  'meta',
+                  'header' => [
+                    'element' => 'Trois/Tinymce.tinymce',
+                    'value' => '',
+                    'init' => [
+                      'attachment_settings' => []
+                    ]
+                  ],
+                  'body' => [
+                    'element' => 'Trois/Tinymce.tinymce',
+                    'value' => '',
+                    'init' => [
+                      'attachment_settings' => []
+                    ]
+                  ],
+                ],
+                'labels' => ['Title','Meta', 'Header','Body']
+              ]);
+            }
+            else
+            {
+              echo $this->Form->control('title',['class'=>'form-control']);
+              echo $this->Form->control('meta',['class'=>'form-control']);
+              echo $this->element('Trois/Tinymce.tinymce',[
+                'field' => 'header',
+                'value' => '',
+                'init' => [
+                  'label' => __('Header')
+                ]
+              ]);
+              echo $this->element('Trois/Tinymce.tinymce',[
+                'field' => 'body',
+                'value' => '',
+                'init' => [
+                  'label' => __('Body')
+                ]
+              ]);
+            }
+            ?>
 
-            <?= $this->Form->control('meta',['class'=>'form-control']);?>
-            <?= $this->element('Trois/Tinymce.tinymce',[
-              'field' => 'header',
-              'value' => '',
-              'init' => [
-                'label' => __('Header')
-              ]
-            ]) ?>
-            <?= $this->element('Trois/Tinymce.tinymce',[
-              'field' => 'body',
-              'value' => '',
-              'init' => [
-                'label' => __('Body')
-              ]
-            ]) ?>
             <?= $this->Form->control('template',['class'=>'form-control']);?>
             <?= $this->Attachment->input('Attachments',[
               'label' => __('Medias'),
-              'types' =>[
-                'application/pdf',
-                'application/msword',
-                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                'application/vnd.ms-excel',
-                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                'image/jpeg',
-                'image/png',
-                'embed/youtube',
-                'embed/vimeo'
-              ],
-              'atags' => [],
-              'cols' => 'col-xs-6 col-md-6 col-lg-4',
-              'maxquantity' => -1,
-              'restrictions' => [
-                Trois\Attachment\View\Helper\AttachmentHelper::TAG_RESTRICTED,
-                Trois\Attachment\View\Helper\AttachmentHelper::TYPES_RESTRICTED
-                ],
               'attachments' => [],
             ]);?>
           </div>
