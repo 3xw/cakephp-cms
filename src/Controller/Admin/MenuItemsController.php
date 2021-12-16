@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Trois\Cms\Controller\Admin;
 
 use Cake\Core\Configure;
+use Cake\Cache\Cache;
 use Trois\Cms\Controller\AppController;
 
 /**
@@ -54,6 +55,7 @@ class MenuItemsController extends AppController
       }else{
         return $this->redirect(['action' => 'index']);
       }
+      Cache::delete('menus');
 
       return $this->redirect(['action' => 'index']);
     }
@@ -68,6 +70,7 @@ class MenuItemsController extends AppController
       }else{
         return $this->redirect(['action' => 'index']);
       }
+      Cache::delete('menus');
 
       return $this->redirect(['action' => 'index']);
     }
@@ -78,6 +81,7 @@ class MenuItemsController extends AppController
       $menuItems->active = !$menuItems->active;
 
       if($this->MenuItems->save($menuItems)){
+        Cache::delete('menus');
         if($menu_id){
           return $this->redirect(['controller' => 'Menus', 'action' => 'view', $menu_id]);
         }else{
@@ -87,7 +91,7 @@ class MenuItemsController extends AppController
     }
 
     /**
-     * View method
+     * View method 
      *
      * @param string|null $id Menu Item id.
      * @return \Cake\Http\Response|void
