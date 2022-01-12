@@ -43,7 +43,7 @@ class CmsHelper extends Helper
     return $this->cmsControls($page, 'page');
   }
 
-  public function sections($sections = [], $classes)
+  public function sections($sections = [], $classes = '')
   {
     $html = '';
 
@@ -71,7 +71,7 @@ class CmsHelper extends Helper
     return $this->getView()->Html->tag('cms-draggable', $html, $attributes);
   }
 
-  public function sectionItems($items = [], $classes)
+  public function sectionItems($items = [], $classes = '')
   {
     $html = '';
     $ids = [];
