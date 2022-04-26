@@ -17,10 +17,14 @@ class MetasController extends AppController
 {
   use \Crud\Controller\ControllerTrait;
 
+  public function fetchTable(?string $alias = null, array $options = []):\Cake\Orm\Table
+  {
+    return $this->loadModel(Configure::read('Trois/Cms.Models.Metas'));
+  }
+
   public function initialize():void
   {
     parent::initialize();
-    $this->loadModel(Configure::read('Trois/Cms.Models.Metas'));
     $this->loadComponent('Crud.Crud', [
       'actions' => [
         'index' => [

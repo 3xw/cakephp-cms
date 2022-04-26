@@ -17,10 +17,14 @@ class ArticlesController extends AppController
 {
   use \Crud\Controller\ControllerTrait;
 
+  public function fetchTable(?string $alias = null, array $options = []):\Cake\Orm\Table
+  {
+    return $this->loadModel(Configure::read('Trois/Cms.Models.Articles'));
+  }
+
   public function initialize():void
   {
     parent::initialize();
-    $this->loadModel(Configure::read('Trois/Cms.Models.Articles'));
     $this->loadComponent('Crud.Crud', [
       'actions' => [
         'index' => [
