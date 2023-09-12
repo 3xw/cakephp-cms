@@ -19,7 +19,7 @@
             <?= $this->Form->control('label',['class'=>'form-control menu-item__title']);?>
             <?= $this->Form->control('page', ['empty' => ' ', 'type' => 'select', 'options' => $pages, 'class'=>'form-control menu-item__page-select' , 'data-model' => 'Pages']);?>
             <?= $this->Form->control('model',['type' => 'hidden', 'class'=>'form-control menu-item__model']);?>
-            <? // $this->Form->control('foreign_key', ['type' => 'hidden', 'class'=>'menu-item__foreign_key']);?>
+            <?php // $this->Form->control('foreign_key', ['type' => 'hidden', 'class'=>'menu-item__foreign_key']);?>
             <?= $this->Form->control('url',['class'=>'form-control menu-item__page-url']);?>
             <?= $this->Form->control('target',['type' => 'select', 'empty' => false, 'options' => ['_self' => 'Défaut', '_blank' => 'Nouvelle page'], 'class'=>'form-control']);?>
           </div>

@@ -1,7 +1,7 @@
 <div class="col-md-6">
   <article class="article article--default">
 
-    <?
+    <?php
     if(!empty($article->attachments))
     {
         foreach($article->attachments as $a)

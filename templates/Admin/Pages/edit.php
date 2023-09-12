@@ -31,14 +31,14 @@
             <?= $this->Form->control('title',['class'=>'form-control']);?>
             <?= $this->Form->control('publish_date',['class'=>'form-control']);?>
             <?= $this->Form->control('meta',['class'=>'form-control']);?>
-            <? /* $this->element('Trois/Tinymce.tinymce',[
+            <?php /* $this->element('Trois/Tinymce.tinymce',[
               'field' => 'header',
               'value' => $page->header,
               'init' => [
                 'label' => __('Header')
               ]
             ])*/ ?>
-            <? /* $this->element('Trois/Tinymce.tinymce',[
+            <?php /* $this->element('Trois/Tinymce.tinymce',[
               'field' => 'body',
               'value' => $page->body,
               'init' => [
@@ -46,7 +46,7 @@
               ]
             ]) */ ?>
             <?= $this->Form->control('template',['class'=>'form-control']);?>
-            <? /* $this->Attachment->input('Attachments',[
+            <?php /* $this->Attachment->input('Attachments',[
               'label' => __('Medias'),
               'types' =>[
                 'application/pdf',
